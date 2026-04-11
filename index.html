@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albatross Bar & Grill — Layout Plan v7</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f2f5;color:#1a1a2e}
+.header{background:linear-gradient(135deg,#1a1a2e,#2c3e50);color:#fff;padding:32px 40px}
+.header h1{font-size:28px;font-weight:700;margin-bottom:4px}
+.header .sub{font-size:15px;opacity:.85}
+.container{max-width:1500px;margin:0 auto;padding:32px 24px}
+.tabs{display:flex;gap:3px;margin-bottom:0;flex-wrap:wrap}
+.tab{padding:10px 14px;background:#dde;border-radius:8px 8px 0 0;cursor:pointer;font-weight:600;font-size:12px;border:2px solid transparent;transition:all .2s;user-select:none;white-space:nowrap}
+.tab.active{background:#fff;border:2px solid #e0e0e0;border-bottom:2px solid #fff;color:#2c3e50}
+.tab:not(.active):hover{background:#ccd}
+.panel{display:none;background:#fff;border:2px solid #e0e0e0;border-radius:0 8px 8px 8px;padding:32px}
+.panel.active{display:block}
+.diagram-wrap{display:flex;justify-content:center;padding:20px 0;overflow-x:auto}
+.callout{background:#fefce8;border:1px solid #fbbf24;border-radius:8px;padding:16px 20px;margin-top:24px;font-size:14px;line-height:1.6}
+.callout strong{color:#92400e}
+.callout-blue{background:#eff6ff;border-color:#93c5fd}
+.callout-blue strong{color:#1e40af}
+.section-title{font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:16px}
+.view-subtitle{font-size:14px;color:#666;margin-bottom:8px}
+.appliance-flow{margin-top:16px}
+.flow-item{display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid #f0f0f0}
+.flow-item:last-child{border-bottom:none}
+.flow-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;flex-shrink:0}
+.flow-content h4{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px}
+.flow-content p{font-size:13px;color:#555;line-height:1.5}
+.flow-content .wall-tag{display:inline-block;font-size:11px;background:#f1f5f9;color:#475569;padding:2px 8px;border-radius:4px;margin-bottom:4px;font-weight:600}
+.n-green{background:#27ae60}.n-blue{background:#3498db}.n-red{background:#e74c3c}.n-orange{background:#f39c12}.n-purple{background:#8b5cf6}.n-teal{background:#0d9488}.n-amber{background:#d97706}
+.util-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:16px}
+.util-card{border:1px solid #e5e7eb;border-radius:8px;padding:16px}
+.util-card h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.util-card p{font-size:13px;color:#555;line-height:1.5}
+.app-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;margin-top:8px}
+.app-card p{margin:0;font-size:13px}
+.app-card .label{font-weight:700;margin-bottom:4px;display:block}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>Albatross Bar &amp; Grill — Layout Plan</h1>
+<p class="sub">Eddie's Outdoor Kitchen &bull; Layout v7 — New Appliance Lineup &bull; April 10, 2026</p>
+</div>
+<div class="container">
+<div class="tabs">
+<div class="tab active" onclick="showTab(this,'layout')">Floor plan</div>
+<div class="tab" onclick="showTab(this,'elev-west')">130" Window wall (west)</div>
+<div class="tab" onclick="showTab(this,'elev-north')">108" Fridge wall (north)</div>
+<div class="tab" onclick="showTab(this,'elev-east')">130" Cooking run (east)</div>
+<div class="tab" onclick="showTab(this,'elev-bar')">133" Bar peninsula</div>
+<div class="tab" onclick="showTab(this,'elev-45')">45" Wall (SW)</div>
+<div class="tab" onclick="showTab(this,'flow')">Appliance flow</div>
+<div class="tab" onclick="showTab(this,'utilities')">Utilities</div>
+</div>
+
+<!-- ============ TAB 1: FLOOR PLAN ============ -->
+<div class="panel active" id="panel-layout">
+<h2 class="section-title">Floor plan — top-down view</h2>
+<div class="diagram-wrap">
+<svg viewBox="0 0 1120 920" xmlns="http://www.w3.org/2000/svg" style="font-family:'Segoe UI',system-ui,sans-serif;width:1400px;max-width:none;height:auto;">
+<rect x="0" y="0" width="1120" height="920" fill="#f8fafc" rx="8"/>
+<g transform="translate(80,10) scale(1.3)">
+
+<!-- House walls -->
+<line x1="120" y1="60" x2="120" y2="123" stroke="#7c5c3c" stroke-width="7"/>
+<line x1="120" y1="123" x2="120" y2="320" stroke="#7c5c3c" stroke-width="4" stroke-dasharray="10,6" opacity="0.45"/>
+<line x1="120" y1="320" x2="120" y2="385" stroke="#7c5c3c" stroke-width="7"/>
+<line x1="120" y1="60" x2="257" y2="60" stroke="#7c5c3c" stroke-width="7"/>
+<line x1="257" y1="60" x2="425" y2="60" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,4"/>
+<line x1="120" y1="385" x2="232" y2="385" stroke="#7c5c3c" stroke-width="7"/>
+
+<!-- Open deck edges -->
+<line x1="425" y1="60" x2="425" y2="385" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+<!-- Deck fill -->
+<path d="M124,64 L421,64 L421,381 L232,385 L124,385Z" fill="#faf5ef" opacity="0.25"/>
+
+<!-- West wall counter (130") -->
+<rect x="124" y="64" width="63" height="317" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+
+<!-- Fridge wall overlap zone (~28") — north end -->
+<rect x="128" y="68" width="55" height="52" rx="2" fill="#cbd5e1"/>
+<text x="156" y="90" text-anchor="middle" font-size="6" fill="#475569">Fridge overlap</text>
+<text x="156" y="100" text-anchor="middle" font-size="6" fill="#94a3b8">~28"</text>
+
+<!-- Scotsman ice maker 15" -->
+<rect x="128" y="124" width="55" height="38" rx="3" fill="#a5f3fc" stroke="#0891b2" stroke-width="2"/>
+<text x="156" y="140" text-anchor="middle" font-size="7" fill="#155e75" font-weight="700">Scotsman</text>
+<text x="156" y="150" text-anchor="middle" font-size="6" fill="#155e75">15" ice</text>
+
+<!-- Gap ~3.7" -->
+<rect x="134" y="166" width="42" height="8" fill="#e2e8f0" rx="1"/>
+
+<!-- Ruvati 30" sink — centered on 79" window -->
+<rect x="128" y="178" width="55" height="75" rx="3" fill="#bbf7d0" stroke="#27ae60" stroke-width="2"/>
+<text x="156" y="210" text-anchor="middle" font-size="7" fill="#166534" font-weight="700">Ruvati</text>
+<text x="156" y="221" text-anchor="middle" font-size="7" fill="#166534" font-weight="700">30" SINK</text>
+
+<!-- Gap ~3.7" -->
+<rect x="134" y="257" width="42" height="8" fill="#e2e8f0" rx="1"/>
+
+<!-- Trash 18" -->
+<rect x="128" y="269" width="55" height="32" rx="2" fill="#fde68a" stroke="#f59e0b" stroke-width="1.5"/>
+<text x="156" y="283" text-anchor="middle" font-size="6" fill="#92400e" font-weight="700">Trash 18"</text>
+<text x="156" y="292" text-anchor="middle" font-size="5" fill="#92400e">BI-1824-1W</text>
+
+<!-- Gap ~3.7" -->
+<rect x="134" y="305" width="42" height="8" fill="#e2e8f0" rx="1"/>
+
+<!-- Coyote power burner — at south corner -->
+<rect x="128" y="317" width="55" height="60" rx="3" fill="#d1fae5" stroke="#0d9488" stroke-width="2"/>
+<text x="156" y="338" text-anchor="middle" font-size="7" fill="#085041" font-weight="700">Coyote</text>
+<text x="156" y="349" text-anchor="middle" font-size="6" fill="#0d9488">60K PB</text>
+<text x="156" y="360" text-anchor="middle" font-size="6" fill="#0d9488">+ CTEP</text>
+
+<!-- 79" window label -->
+<text x="255" y="225" text-anchor="middle" font-size="9" fill="#a0845c" font-weight="600">79" window ←</text>
+
+<!-- West wall description -->
+<text x="268" y="280" text-anchor="middle" font-size="10" fill="#166534" font-weight="600">Full 130" window wall counter</text>
+<text x="268" y="294" text-anchor="middle" font-size="9" fill="#166534" opacity="0.7">Sink, ice maker, trash,</text>
+<text x="268" y="306" text-anchor="middle" font-size="9" fill="#166534" opacity="0.7">power burner, prep space</text>
+
+<!-- 45" wall label -->
+<text x="176" y="400" text-anchor="middle" font-size="9" fill="#475569" font-weight="600">45" wall — dog door</text>
+
+<!-- 108" fridge wall counter -->
+<rect x="187" y="64" width="175" height="63" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="198" y="68" width="90" height="55" rx="3" fill="#bfdbfe" stroke="#3498db" stroke-width="2"/>
+<line x1="243" y1="70" x2="243" y2="121" stroke="#93c5fd" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="288" y="68" width="4" height="55" rx="1" fill="#cbd5e1"/>
+<rect x="292" y="68" width="60" height="55" rx="3" fill="#bfdbfe" stroke="#3498db" stroke-width="2"/>
+<text x="243" y="93" text-anchor="middle" font-size="8" fill="#1e40af" font-weight="700">KB 36"</text>
+<text x="322" y="93" text-anchor="middle" font-size="8" fill="#1e40af" font-weight="700">KB 24"</text>
+<text x="275" y="107" text-anchor="middle" font-size="7" fill="#155e75">Beverage coolers</text>
+<text x="210" y="52" text-anchor="middle" font-size="9" fill="#7c5c3c">55" wall</text>
+<rect x="200" y="60" width="20" height="4" rx="1" fill="#1e293b" stroke="#334155" stroke-width="0.8"/>
+<text x="210" y="58" text-anchor="middle" font-size="6" fill="#1e293b" font-weight="700">TV</text>
+<text x="340" y="52" text-anchor="middle" font-size="9" fill="#94a3b8">53" open</text>
+<text x="276" y="140" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="600">108" fridge wall (north)</text>
+<text x="200" y="38" text-anchor="middle" font-size="7" fill="#e74c3c" opacity="0.7">gas stub-out ↑</text>
+
+<!-- East wall cooking run counter -->
+<rect x="362" y="64" width="63" height="317" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+
+<!-- Fridge overlap zone — counter only, no appliance -->
+<rect x="366" y="68" width="55" height="42" rx="2" fill="#cbd5e1"/>
+<text x="394" y="85" text-anchor="middle" font-size="6" fill="#64748b">Fridge</text>
+<text x="394" y="95" text-anchor="middle" font-size="6" fill="#64748b">overlap</text>
+<text x="394" y="104" text-anchor="middle" font-size="5" fill="#94a3b8">22" counter</text>
+
+<text x="460" y="80" font-size="8" fill="#64748b">← fridge overlap</text>
+<text x="460" y="92" font-size="8" fill="#64748b">  22" counter only</text>
+
+<!-- 7.5" gap -->
+<rect x="372" y="114" width="42" height="14" fill="#e2e8f0" rx="1"/>
+<text x="394" y="124" text-anchor="middle" font-size="5" fill="#94a3b8">7.5"</text>
+
+<!-- Blackstone 28" XL -->
+<rect x="366" y="132" width="55" height="58" rx="3" fill="#fed7aa" stroke="#f39c12" stroke-width="2"/>
+<text x="394" y="155" text-anchor="middle" font-size="7" fill="#92400e" font-weight="700">Blkstone</text>
+<text x="394" y="165" text-anchor="middle" font-size="6" fill="#92400e">28" XL</text>
+<text x="394" y="175" text-anchor="middle" font-size="6" fill="#92400e">griddle</text>
+
+<text x="460" y="148" font-size="8" fill="#92400e">6332 — 585 sq in</text>
+<text x="460" y="160" font-size="8" fill="#92400e">25K BTU — 3 zone</text>
+
+<!-- 7.5" gap -->
+<rect x="372" y="194" width="42" height="14" fill="#e2e8f0" rx="1"/>
+<text x="394" y="204" text-anchor="middle" font-size="5" fill="#94a3b8">7.5"</text>
+
+<!-- Traeger Timberline -->
+<rect x="366" y="212" width="55" height="78" rx="3" fill="#fecaca" stroke="#e74c3c" stroke-width="2"/>
+<text x="394" y="237" text-anchor="middle" font-size="7" fill="#991b1b" font-weight="700">Traeger</text>
+<text x="394" y="248" text-anchor="middle" font-size="6" fill="#991b1b">Timberline</text>
+<text x="394" y="258" text-anchor="middle" font-size="6" fill="#991b1b">pellet</text>
+<text x="394" y="268" text-anchor="middle" font-size="5" fill="#991b1b">+ induction</text>
+
+<text x="460" y="232" font-size="8" fill="#991b1b">TBB86RLG — 880 sq in</text>
+<text x="460" y="244" font-size="8" fill="#991b1b">165-500°F — WiFi</text>
+<text x="460" y="256" font-size="8" fill="#991b1b">+ induction cooktop</text>
+
+<!-- 7.5" gap -->
+<rect x="372" y="294" width="42" height="14" fill="#e2e8f0" rx="1"/>
+<text x="394" y="304" text-anchor="middle" font-size="5" fill="#94a3b8">7.5"</text>
+
+<!-- Napoleon IR sear — matte black — south end -->
+<rect x="366" y="312" width="55" height="35" rx="3" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="2"/>
+<text x="394" y="326" text-anchor="middle" font-size="6" fill="#e5e5e5" font-weight="700">Napoleon IR</text>
+<text x="394" y="336" text-anchor="middle" font-size="5" fill="#b0b0b0">matte black</text>
+<text x="394" y="345" text-anchor="middle" font-size="5" fill="#b0b0b0">sear 1800°F</text>
+
+<text x="460" y="322" font-size="8" fill="#475569">BIB10IR — 13.5"W</text>
+<text x="460" y="334" font-size="8" fill="#475569">10K BTU — matte black</text>
+<text x="460" y="346" font-size="8" fill="#475569">Sear → plate → serve to bar</text>
+
+<!-- Cooking run label -->
+<text x="530" y="185" font-size="10" fill="#991b1b" font-weight="600">130" cooking run (east)</text>
+<text x="530" y="198" font-size="9" fill="#64748b">Fridge overlap (counter) →</text>
+<text x="530" y="210" font-size="9" fill="#64748b">Blackstone 28" → 7.5" gap</text>
+<text x="530" y="222" font-size="9" fill="#64748b">Traeger Timberline → 7.5" gap</text>
+<text x="530" y="234" font-size="9" fill="#64748b">Napoleon IR (matte black) → Post</text>
+
+<!-- Gas routing -->
+<line x1="250" y1="60" x2="394" y2="60" stroke="#e74c3c" stroke-width="1" stroke-dasharray="4,3" opacity="0.35"/>
+<line x1="394" y1="60" x2="394" y2="110" stroke="#e74c3c" stroke-width="1" stroke-dasharray="4,3" opacity="0.35"/>
+<text x="330" y="44" text-anchor="middle" font-size="7" fill="#e74c3c" opacity="0.6">gas routes under deck from 55" wall stub-out</text>
+
+<!-- POST at SW corner of east wall, 26" from deck edge -->
+<!-- Post is inset 26" from east deck edge (x=425). 26" = 65 SVG units at 2.5/in. Post at x=425-65=360 -->
+<!-- Post at south end of east wall counter, y=363 -->
+<rect x="356" y="363" width="22" height="22" rx="2" fill="#7c5c3c" stroke="#5c3d2e" stroke-width="2"/>
+<text x="367" y="378" text-anchor="middle" font-size="6" fill="white" font-weight="700">POST</text>
+
+<!-- Bar peninsula 133" running east from post -->
+<rect x="378" y="367" width="327" height="63" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="382" y="371" width="319" height="55" rx="2" fill="#fdf3e8" stroke="#f39c12" stroke-width="1.5"/>
+<text x="541" y="400" text-anchor="middle" font-size="11" fill="#b7791f" font-weight="700">BAR COUNTER</text>
+<text x="541" y="415" text-anchor="middle" font-size="8" fill="#b7791f">133" peninsula — cabinet build</text>
+
+<!-- Stools -->
+<circle cx="450" cy="450" r="12" fill="#f39c12" opacity="0.2" stroke="#e67e22" stroke-width="1.5"/>
+<circle cx="498" cy="450" r="12" fill="#f39c12" opacity="0.2" stroke="#e67e22" stroke-width="1.5"/>
+<circle cx="546" cy="450" r="12" fill="#f39c12" opacity="0.2" stroke="#e67e22" stroke-width="1.5"/>
+<circle cx="594" cy="450" r="12" fill="#f39c12" opacity="0.2" stroke="#e67e22" stroke-width="1.5"/>
+<circle cx="642" cy="450" r="12" fill="#f39c12" opacity="0.12" stroke="#e67e22" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="546" y="478" text-anchor="middle" font-size="9" fill="#b7791f">4-5 stools (guests face yard)</text>
+<text x="546" y="496" text-anchor="middle" font-size="9" fill="#b7791f" font-weight="600">133" bar peninsula — cabinet build + seating</text>
+
+<!-- Open deck label -->
+<text x="275" y="175" text-anchor="middle" font-size="18" fill="#e2e8f0" font-weight="700" opacity="0.5">OPEN</text>
+<text x="275" y="197" text-anchor="middle" font-size="18" fill="#e2e8f0" font-weight="700" opacity="0.5">DECK</text>
+
+<!-- Dimension lines -->
+<line x1="124" y1="28" x2="425" y2="28" stroke="#64748b" stroke-width="1"/>
+<line x1="124" y1="22" x2="124" y2="34" stroke="#64748b" stroke-width="1"/>
+<line x1="425" y1="22" x2="425" y2="34" stroke="#64748b" stroke-width="1"/>
+<text x="275" y="20" text-anchor="middle" font-size="12" fill="#334155" font-weight="700">108"</text>
+
+<line x1="50" y1="60" x2="50" y2="385" stroke="#64748b" stroke-width="1"/>
+<line x1="44" y1="60" x2="56" y2="60" stroke="#64748b" stroke-width="1"/>
+<line x1="44" y1="385" x2="56" y2="385" stroke="#64748b" stroke-width="1"/>
+<text x="38" y="222" text-anchor="middle" font-size="12" fill="#334155" font-weight="700" transform="rotate(-90,38,222)">130" house wall</text>
+
+<line x1="112" y1="123" x2="118" y2="123" stroke="#a0845c" stroke-width="1.5"/>
+<line x1="112" y1="320" x2="118" y2="320" stroke="#a0845c" stroke-width="1.5"/>
+
+<line x1="120" y1="410" x2="232" y2="410" stroke="#64748b" stroke-width="1"/>
+<line x1="120" y1="404" x2="120" y2="416" stroke="#64748b" stroke-width="1"/>
+<line x1="232" y1="404" x2="232" y2="416" stroke="#64748b" stroke-width="1"/>
+<text x="176" y="428" text-anchor="middle" font-size="10" fill="#334155" font-weight="600">45"</text>
+
+<line x1="455" y1="60" x2="455" y2="385" stroke="#64748b" stroke-width="1"/>
+<line x1="449" y1="60" x2="461" y2="60" stroke="#64748b" stroke-width="1"/>
+<line x1="449" y1="385" x2="461" y2="385" stroke="#64748b" stroke-width="1"/>
+<text x="440" y="222" text-anchor="middle" font-size="10" fill="#334155" font-weight="600" transform="rotate(90,440,222)">130" open deck edge</text>
+
+<line x1="378" y1="348" x2="705" y2="348" stroke="#64748b" stroke-width="1"/>
+<line x1="378" y1="342" x2="378" y2="354" stroke="#64748b" stroke-width="1"/>
+<line x1="705" y1="342" x2="705" y2="354" stroke="#64748b" stroke-width="1"/>
+<text x="541" y="343" text-anchor="middle" font-size="10" fill="#334155" font-weight="600">133" peninsula</text>
+
+</g>
+
+<!-- Legend -->
+<rect x="30" y="760" width="1060" height="140" rx="10" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+<text x="560" y="786" text-anchor="middle" font-size="14" fill="#334155" font-weight="700">Legend</text>
+<line x1="60" y1="808" x2="88" y2="808" stroke="#7c5c3c" stroke-width="5"/>
+<text x="96" y="812" font-size="11" fill="#444">House wall</text>
+<line x1="210" y1="808" x2="238" y2="808" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="246" y="812" font-size="11" fill="#444">Open deck edge</text>
+<line x1="390" y1="808" x2="418" y2="808" stroke="#7c5c3c" stroke-width="3" stroke-dasharray="8,5" opacity="0.45"/>
+<text x="426" y="812" font-size="11" fill="#444">Window opening</text>
+<rect x="570" y="801" width="22" height="12" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="600" y="812" font-size="11" fill="#444">Counter structure</text>
+<rect x="740" y="801" width="22" height="12" rx="3" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+<text x="770" y="812" font-size="11" fill="#444">Counter / prep surface</text>
+
+<rect x="60" y="830" width="16" height="11" rx="2" fill="#bbf7d0" stroke="#27ae60" stroke-width="1.5"/>
+<text x="84" y="840" font-size="11" fill="#444">Sink</text>
+<rect x="130" y="830" width="16" height="11" rx="2" fill="#bfdbfe" stroke="#3498db" stroke-width="1.5"/>
+<text x="154" y="840" font-size="11" fill="#444">Fridge (~64" max)</text>
+<rect x="260" y="830" width="16" height="11" rx="2" fill="#fecaca" stroke="#e74c3c" stroke-width="1.5"/>
+<text x="284" y="840" font-size="11" fill="#444">Pellet grill (Traeger)</text>
+<rect x="420" y="830" width="16" height="11" rx="2" fill="#fed7aa" stroke="#f39c12" stroke-width="1.5"/>
+<text x="444" y="840" font-size="11" fill="#444">Griddle (Blackstone)</text>
+<rect x="570" y="830" width="16" height="11" rx="2" fill="#d1fae5" stroke="#0d9488" stroke-width="1.5"/>
+<text x="594" y="840" font-size="11" fill="#444">Power burner (Coyote)</text>
+<rect x="740" y="830" width="16" height="11" rx="2" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="1.5"/>
+<text x="764" y="840" font-size="11" fill="#444">IR sear (Napoleon matte black)</text>
+<rect x="880" y="830" width="16" height="11" rx="2" fill="#a5f3fc" stroke="#0891b2" stroke-width="1.5"/>
+<text x="904" y="840" font-size="11" fill="#444">Ice maker</text>
+<rect x="970" y="830" width="16" height="11" rx="2" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+<text x="994" y="840" font-size="11" fill="#444">Dog door</text>
+
+<text x="560" y="875" text-anchor="middle" font-size="11" fill="#94a3b8">Counter ht: 40" | Bar ht: 42" | Counter depth: 25" | Post at SW corner of east wall, 26" from deck edge | Smoke vents east toward open yard</text>
+<text x="560" y="892" text-anchor="middle" font-size="11" fill="#94a3b8">LP east wall: 35K BTU (Blackstone 25K + Napoleon 10K) | LP west wall: 60K BTU (Coyote PB) | Traeger + induction = electric</text>
+</svg>
+</div>
+</div>
+
+<!-- ============ TAB 2: WEST WALL ============ -->
+<div class="panel" id="panel-elev-west">
+<h2 class="section-title">130" Window wall (west) — elevation view</h2>
+<p class="view-subtitle">Standing on deck, looking west toward the house. Left = 45" wall corner (south). Right = 108" wall corner (north). Coyote power burner added over dog door zone.</p>
+<div class="callout callout-blue">
+<strong>Updated for v7:</strong> The Coyote C3PBLP 60K BTU power burner with CTEP teppanyaki griddle is now on this wall, positioned above where the 45" wall dog door opens. This is Christine and Kennedy's smoke-free cooking station — right next to the sink and trash for a perfect prep workflow. LP gas fed from a separate propane drop on this wall.
+</div>
+<div class="callout">
+<strong>Layout (south to north):</strong> Coyote C3PBLP power burner (24"W) + CTEP teppanyaki griddle at south corner → ~3.7" gap → trash pull-out BI-1824-1W (18") → ~3.7" gap → Ruvati 30" sink (centered on 79" window) → ~3.7" gap → Scotsman 15" ice maker → fridge wall overlap (~28") → corner (~4"). Dog door is in the 45" SW wall — swings north and up. Even spacing between all appliances for clean workflow.
+</div>
+</div>
+
+<!-- ============ TAB 3: NORTH WALL ============ -->
+<div class="panel" id="panel-elev-north">
+<h2 class="section-title">108" Fridge wall (north) — elevation view</h2>
+<p class="view-subtitle">Standing on deck, looking north. Left = 130" window wall corner (west). Right = open deck corner (east). Unchanged from v6 except: no GMG smoker at corner.</p>
+<div class="callout callout-blue">
+<strong>Key features:</strong> KB 36" (KBU56ASD) + KB 24" (KBU55ASD) beverage coolers fill ~64" of the fridge zone. SunBrite Veranda 3 55" TV mounted on the 55" house wall above. Gas stub-out at deck level on 55" wall — routes under deck to east wall cooking run AND west wall power burner. The NE corner transition is counter/filler space — no appliance in the fridge overlap zone on the cooking run side.
+</div>
+</div>
+
+<!-- ============ TAB 4: EAST WALL ============ -->
+<div class="panel" id="panel-elev-east">
+<h2 class="section-title">130" Cooking run (east) — elevation view</h2>
+<p class="view-subtitle">Standing inside the kitchen, looking east toward the open deck. Left = fridge corner (north). Right = bar transition post (south).</p>
+<div class="callout callout-blue">
+<strong>New lineup (north to south):</strong> 22" fridge overlap zone (counter only, no appliance) → 7.5" gap → Blackstone 28" XL griddle (32.75"W, 585 sq in, 3-zone, LED + puddle lights, hood) → 7.5" gap → Traeger Timberline TBB86RLG pellet grill (39.3"W, 880 sq in, WiFi, induction cooktop, self-contained base cabinet) → 7.5" gap → Napoleon matte black BIB10IR 10" infrared sear station (13.5"W, 10K BTU, 1800°F, WAVE grate) → post at SW corner. Maximized spacing between appliances for plating, prep, and heat separation. LP demand on east wall: 35K BTU (Blackstone 25K + Napoleon 10K). Traeger is electric.
+</div>
+<div class="callout">
+<strong>Post position:</strong> The structural post sits at the SW corner of the east wall counter, 26" inset from the east deck edge. The cooking run counter is uninterrupted for the full 130". The 133" bar peninsula butts into the post from the south and runs east.
+</div>
+</div>
+
+<!-- ============ TAB 5: BAR ============ -->
+<div class="panel" id="panel-elev-bar">
+<h2 class="section-title">133" Bar peninsula — elevation</h2>
+<p class="view-subtitle">Bar runs east from the post at the SW corner of the east wall. Cabinet build with Napoleon SS doors on kitchen (north) side, stone cladding on guest (south) side.</p>
+<div class="callout callout-blue">
+<strong>Construction:</strong> Cabinet build (not post-and-rail). 14" deep cabinets with SS doors on kitchen side. 42" bar height, 25" deep countertop (14" cabinet + ~11" guest overhang). Hose bib in east-end cabinet. Bar butts into the structural post — post is at the west end of the bar, connecting to the cooking run.
+</div>
+</div>
+
+<!-- ============ TAB 6: 45" WALL ============ -->
+<div class="panel" id="panel-elev-45">
+<h2 class="section-title">45" Wall (southwest) — elevation view</h2>
+<p class="view-subtitle">Standing on deck, looking south toward the short house wall. The dog door is built into this wall.</p>
+<div class="callout callout-blue">
+<strong>Key features:</strong> The dog door is built into the 45" SW wall itself — it swings north (toward the fridge wall) and up. The 130" window wall counter terminates where it meets this wall. The Coyote power burner on the west wall sits above where the dog door opens to — the door opens below the power burner's counter position. No drawer above the dog door — the power burner replaces the BI-1808-1DR that was previously spec'd here.
+</div>
+</div>
+
+<!-- ============ TAB 7: APPLIANCE FLOW ============ -->
+<div class="panel" id="panel-flow">
+<h2 class="section-title">Appliance flow — new lineup April 2026</h2>
+<p style="font-size:14px;color:#666;margin-bottom:8px">Walking through the counter structure clockwise from the southwest corner.</p>
+
+<div class="appliance-flow">
+
+<div class="flow-item">
+<div class="flow-num n-amber">1</div>
+<div class="flow-content">
+<span class="wall-tag">45" SW wall</span>
+<h4>Dog door (built into wall)</h4>
+<p>The dog door is in the 45" wall itself. It swings north and up, opening below the Coyote power burner counter position on the adjacent west wall. Barkley has a clear path from inside the house out to the deck.</p>
+</div>
+</div>
+
+<div class="flow-item">
+<div class="flow-num n-teal">2</div>
+<div class="flow-content">
+<span class="wall-tag">130" west wall (window wall)</span>
+<h4>Coyote power burner → trash → sink → ice maker</h4>
+<p>South to north: Coyote C3PBLP 60K BTU power burner with CTEP teppanyaki griddle (smoke-free station for Christine and Kennedy) at the south corner → gap → Napoleon BI-1824-1W 18" trash pull-out → gap → Ruvati RVH8030 30" sink centered on 79" window → gap → Scotsman SCCG50MB1SS 15" ice maker → fridge wall overlap → corner. ~3.7" gaps between each appliance for even spacing and clean workflow. LP from a separate propane drop on this wall. Workflow: cook on CTEP → rinse in sink → toss waste in trash — all within 5 feet.</p>
+<div class="app-card" style="border-color:#0d9488">
+<span class="label" style="color:#0d9488">Coyote C3PBLP — 24"W, 60K BTU, dual-valve, wok ring, SS cover</span>
+<p>+ CTEP teppanyaki griddle accessory ($529) — 26" SS flat-top, drops onto power burner grate. Smoke-free cooking for chicken, breakfast, stir-fry.</p>
+</div>
+</div>
+</div>
+
+<div class="flow-item">
+<div class="flow-num n-blue">3</div>
+<div class="flow-content">
+<span class="wall-tag">108" north wall (fridge wall)</span>
+<h4>Kingsbottle 36" + 24" beverage coolers + TV</h4>
+<p>~64" of beverage cooler space. Combined ~352 cans. SunBrite 55" TV on house wall above. Gas stub-out at deck level routes under deck to both cooking run (east) and power burner (west).</p>
+</div>
+</div>
+
+<div class="flow-item">
+<div class="flow-num" style="background:#94a3b8">4</div>
+<div class="flow-content">
+<span class="wall-tag">130" east wall — fridge overlap zone</span>
+<h4>Fridge overlap — counter only (22")</h4>
+<p>The fridge wall counter depth (25") crosses into the cooking run at the NE corner. This 22" zone is counter/filler space only — no appliance. The Kingsbottle KBU56ASD sits below in the fridge wall. Above-counter space available for a prep board or staging.</p>
+</div>
+</div>
+
+<div class="flow-item">
+<div class="flow-num n-orange">5</div>
+<div class="flow-content">
+<span class="wall-tag">130" east wall — cooking run</span>
+<h4>Blackstone 28" XL griddle</h4>
+<p>32.75"W, 585 sq in, 3 independently controlled zones, 25K BTU, 304 SS, LED knobs, puddle lighting with dimmer, hood, front-access rear grease management, Omnivore griddle plate with wind guards. Requires 120V for ignition/LEDs and insulating jacket for treated lumber framing.</p>
+<div class="app-card" style="border-color:#f39c12">
+<span class="label" style="color:#92400e">Blackstone 6332 — $1,899 (BBQGuys)</span>
+<p>Overall: 32.75"W × 29.25"D × 13.25"H. Cutout: 33.3"W. LP. 120V required for electronic ignition + LED lighting.</p>
+</div>
+</div>
+</div>
+
+<div class="flow-item">
+<div class="flow-num n-red">6</div>
+<div class="flow-content">
+<span class="wall-tag">130" east wall — cooking run</span>
+<h4>Traeger Timberline TBB86RLG — pellet grill + induction</h4>
+<p>39.3" min cabinet width, 880 sq in cooking area, 165-500°F, WiFi + MEATER probes, Super Smoke, dual-wall insulated, 22 lb hopper. Self-contained base cabinet with trim kit BAC682 — no external below-counter cabinets needed. Induction cooktop installs into countertop (left shelf removed, 3" min from any edge). 18" min clearance from combustibles — Traeger bay must be framed with non-combustible materials.</p>
+<div class="app-card" style="border-color:#e74c3c">
+<span class="label" style="color:#991b1b">Traeger TBB86RLG — ~$3,500-3,800 + BAC682 trim kit ~$100</span>
+<p>Overall: 59"W × 25"D × 51"H (freestanding). Built-in: 39.3" min cabinet width. Electric only — no LP. Dedicated 120V GFCI. Induction needs separate 120V circuit.</p>
+</div>
+</div>
+</div>
+
+<div class="flow-item">
+<div class="flow-num" style="background:#1a1a1a">7</div>
+<div class="flow-content">
+<span class="wall-tag">130" east wall — south end</span>
+<h4>Napoleon matte black BIB10IR — infrared sear station → post → bar</h4>
+<p>13.5"W, 10K BTU, 95 sq in WAVE cooking grate, 1800°F ceramic IR burner in matte black finish. Positioned at the south end of the cooking run right before the bar handoff — sear a steak off the Traeger, plate it, serve it over the bar. JETFIRE ignition, SafetyGlow backlit knobs. Requires N370-1091-SER power supply kit (matte black series). 7.5" of counter space on each side provides plating room between every appliance. Post at SW corner, bar butts in from south and runs 133" east.</p>
+<div class="app-card" style="border-color:#1a1a1a">
+<span class="label" style="color:#1a1a1a">Napoleon BIB10IR matte black — Kickass Grills</span>
+<p>Overall: 13.5"W × 6.9"H × 22"D. Cutout: 10"W × 6"H × 18.75"D. LP 1/2" flare. 110V for SafetyGlow knobs. Power supply kit: N370-1091-SER.</p>
+</div>
+</div>
+</div>
+
+<div class="flow-item">
+<div class="flow-num n-orange">8</div>
+<div class="flow-content">
+<span class="wall-tag">133" bar peninsula</span>
+<h4>Bar counter — cabinet build, 4-5 stools</h4>
+<p>42" height, 25" deep. Cabinet build with Napoleon SS doors on kitchen side, stone cladding on guest side. Hose bib in east-end cabinet. Runs east from the post. Guests face south/yard.</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ============ TAB 8: UTILITIES ============ -->
+<div class="panel" id="panel-utilities">
+<h2 class="section-title">Utilities and structure</h2>
+
+<div class="util-grid">
+<div class="util-card">
+<h4>Propane (LP) — two drops</h4>
+<p><strong>East wall:</strong> Gas stub-out on 55" house wall → under deck → Blackstone 25K BTU + Napoleon IR 10K BTU = 35K BTU total. Much simpler than PRO 825 Pivot (was 200K BTU).<br><br><strong>West wall:</strong> Separate LP drop → Coyote C3PBLP power burner 60K BTU.<br><br><strong>Total kitchen LP demand: 95K BTU.</strong> Down from 200K in PRO 825 Pivot. Traeger is electric (pellet), induction is electric.</p>
+</div>
+<div class="util-card">
+<h4>Water / drain</h4>
+<p>Tie into indoor kitchen through west wall at window center. Hot/cold supply + drain for Ruvati sink. Scotsman ice maker tees off cold water line. Gravity drain for ice maker routes to sink drain. Hose bib on bar peninsula east end — tap from nearest outdoor hose bib or dedicated line.</p>
+</div>
+<div class="util-card">
+<h4>Electrical</h4>
+<p>Traeger Timberline: dedicated 120V GFCI. Traeger induction cooktop: dedicated 120V (separate circuit). Blackstone 28" XL: 120V for ignition + LEDs. Napoleon IR sear (matte black): 110V for SafetyGlow knobs (+ power supply kit N370-1091-SER for matte black series). KB 36": dedicated 20A. KB 24": dedicated 20A. Scotsman ice maker: dedicated 15A. SunBrite TV: outlet behind mount. GFCI outlets at each work zone per code. Coyote PB: 120V for ignition. LED strip lighting: GFCI shared circuit.</p>
+</div>
+<div class="util-card">
+<h4>Structure / framing</h4>
+<p>Treated lumber framing (not steel studs) — insulating jackets required for gas appliances. Exception: Traeger bay must be non-combustible (steel stud + cement board for that section, or 18" clearance to combustibles per Traeger contractor guide). 25" frame depth, 40" counter height, 42" bar height. Granite or porcelain countertop.</p>
+</div>
+<div class="util-card">
+<h4>Post position</h4>
+<p>Structural post at SW corner of east wall counter, 26" inset from east deck edge. Through-bolted to deck stringers. 133" bar peninsula butts into post from south side and runs east. Cooking run counter uninterrupted for full 130".</p>
+</div>
+<div class="util-card">
+<h4>Deck loading</h4>
+<p>Traeger Timberline: 252 lbs. Blackstone 28" XL: ~150 lbs. KB coolers: ~335 lbs loaded combined. Blocking under all bottom track runs. Sister joists under fridge wall (heaviest zone). Similar to PRO 825 Pivot assessment.</p>
+</div>
+</div>
+
+<div class="callout" style="margin-top:24px">
+<strong>Key changes from PRO 825 Pivot ($28,833):</strong><br><br>
+&bull; PRO 825 Napoleon grill → <strong>Traeger Timberline</strong> (pellet grill + induction cooktop)<br>
+&bull; Blackstone 36" → <strong>Blackstone 28" XL</strong> (saves 8" width, same premium features)<br>
+&bull; Coyote C3PBLP power burner moved from cooking run to <strong>window wall</strong> (over dog door)<br>
+&bull; Napoleon 700 Series 32" grill → <strong>Napoleon matte black BIB10IR sear station</strong> at south end of cooking run (bar handoff position)<br>
+&bull; <strong>No appliance in fridge overlap</strong> — just counter space<br>
+&bull; <strong>Coyote CTEP teppanyaki griddle</strong> added for smoke-free cooking on power burner<br>
+&bull; LP demand drops from 200K BTU to <strong>95K BTU</strong> (split across two walls)<br>
+&bull; Cooking run maximized with <strong>7.5" gaps</strong> between all appliances for plating and heat separation<br>
+&bull; No GMG smoker in layout (freestanding elsewhere or removed)
+</div>
+</div>
+
+</div>
+
+<script>
+function showTab(el,id){
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+el.classList.add('active');
+document.getElementById('panel-'+id).classList.add('active');
+}
+</script>
+</body>
+</html>
