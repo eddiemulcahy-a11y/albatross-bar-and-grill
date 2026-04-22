@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albatross Bar & Grill — Layout Plan v7.2</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f2f5;color:#1a1a2e}
+.header{background:linear-gradient(135deg,#1a1a2e,#2c3e50);color:#fff;padding:32px 40px}
+.header h1{font-size:28px;font-weight:700;margin-bottom:4px}
+.header .sub{font-size:15px;opacity:.85}
+.container{max-width:1500px;margin:0 auto;padding:32px 24px}
+.tabs{display:flex;gap:3px;margin-bottom:0;lex-wrap:wrap}
+.tab{padding:10px 14px;background:#dde;border-radius:8px 8px 0 0;cursor:pointer;font-weight:600;font-size:12px;border:2px solid transparent;transition:all .2s;user-select:none;white-space:nowrap}
+.tab.active{background:#fff;border:2px solid #e0e0e0;border-bottom:2px solid #fff;color:#2c3e50}
+.tab:not(.active):hover{background:#ccd}
+.tab.tab-money{background:#fef3c7;color:#92400e}.tab.tab-money.active{background:#fff;color:#92400e;border-bottom-color:#fff}
+.tab.tab-deck{background:#e8e0d4;color:#5c3d2e}.tab.tab-deck.active{background:#fff;color:#3d2b1f;border:2px solid #d4c4a8;border-bottom-color:#fff}
+.tab.tab-open{background:#fef2f2;color:#991b1b}.tab.tab-open.active{background:#fff;color:#991b1b;border:2px solid #fca5a5;border-bottom-color:#fff}
+.mat-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.mat-table th{text-align:left;font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.4px;padding:8px 10px;border-bottom:2px solid #e2e8f0;font-weight:700}
+.mat-table td{padding:8px 10px;border-bottom:1px solid #f1f5f9}
+.mat-table .r{text-align:right}
+.mat-table .tot td{font-weight:700;border-top:2px solid #3d2b1f;border-bottom:none;background:#faf5ef}
+.metric-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.metric-row .metric{background:#faf5ef;border:1px solid #d4c4a8}
+.panel{display:none;background:#fff;border:2px solid #e0e0e0;border-radius:0 8px 8px 8px;padding:32px}
+.panel.active{display:block}
+.diagram-wrap{display:flex;justify-content:center;padding:20px 0;overflow-x:auto}
+.callout{background:#fefce8;border:1px solid #fbbf24;border-radius:8px;padding:16px 20px;margin-top:24px;font-size:14px;line-height:1.6}
+.callout strong{color:#92400e}
+.callout-blue{background:#eff6ff;border-color:#93c5fd}
+.callout-blue strong{color:#1e40af}
+.callout-green{background:#f0fdf4;border-color:#86efac}
+.callout-green strong{color:#166534}
+.callout-red{background:#fef2f2;border-color:#fca5a5}
+.callout-red strong{color:#991b1b}
+.section-title{font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:16px}
+.view-subtitle{font-size:14px;color:#666;margin-bottom:8px}
+.appliance-flow{margin-top:16px}
+.flow-item{display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid #f0f0f0}
+.flow-item:last-child{border-bottom:none}
+.flow-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;flex-shrink:0}
+.flow-content h4{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px}
+.flow-content p{font-size:13px;color:#555;line-height:1.5}
+.flow-content .wall-tag{display:inline-block;font-size:11px;background:#f1f5f9;color:#475569;padding:2px 8px;border-radius:4px;margin-bottom:4px;font-weight:600}
+.n-green{background:#27ae60}.n-blue{background:#3498db}.n-red{background:#e74c3c}.n-orange{background:#f39c12}.n-purple{background:#8b5cf6}.n-teal{background:#0d9488}.n-amber{background:#d97706}
+.util-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:16px}
+.util-card{border:1px solid #e5e7eb;border-radius:8px;padding:16px}
+.util-card h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.util-card p{font-size:13px;color:#555;line-height:1.5}
+.app-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;margin-top:8px}
+.app-card p{margin:0;font-size:13px}
+.app-card .label{font-weight:700;margin-bottom:4px;display:block}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:24px}
+.metric{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px}
+.metric .lbl{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.metric .num{font-size:24px;font-weight:700;color:#1a1a2e}
+.metric .num.green{color:#16a34a}
+.metric .num.muted{color:#94a3b8}
+.budget-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.budget-table th{text-align:left;font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.4px;padding:8px 10px;border-bottom:2px solid #e2e8f0;font-weight:700}
+.budget-table td{padding:8px 10px;border-bottom:1px solid #f1f5f9}
+.budget-table .r{text-align:right}
+.budget-table .tot td{font-weight:700;border-top:2px solid #2c3e50;border-bottom:none;background:#f8fafc}
+.budget-table .strike{text-decoration:line-through;opacity:.4}
+.cab-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:16px}
+.cab-card{border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;display:grid;grid-template-columns:60px 1fr 90px;gap:16px;align-items:center}
+.cab-card .zone{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.4px;font-weight:700}
+.cab-card .above{font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:2px}
+.cab-card .below{font-size:12px;color:#555}
+.cab-card .cost{font-size:15px;font-weight:700;text-align:right}
+.open-list{list-style:none;margin:0;padding:0}
+.open-list li{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #f1f5f9;align-items:flex-start}
+.open-list li:last-child{border-bottom:none}
+.open-num{width:28px;height:28px;border-radius:50%;background:#fef3c7;color:#92400e;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.open-num.resolved{background:#d1fae5;color:#166534}
+.open-text{font-size:14px;line-height:1.5;color:#1a1a2e}
+.open-text .who{font-size:11px;color:#64748b;display:block;margin-top:2px}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>Albatross Bar &amp; Grill — Sandy Hook Master Plan</h1>
+<p class="sub">Outdoor Kitchen + Deck Resurface &bull; Layout v7.2 &bull; April 22, 2026</p>
+<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+<span style="font-size:11px;padding:4px 12px;border:1px solid #fca5a5;border-radius:16px;color:#fca5a5">June 1 Hard Deadline</span>
+<span style="font-size:11px;padding:4px 12px;border:1px solid #86efac;border-radius:16px;color:#86efac">Deck Ordered ✓</span>
+<span style="font-size:11px;padding:4px 12px;border:1px solid #fbbf24;border-radius:16px;color:#fbbf24">BBQGuys 15-item ordered #N219266020C</span>
+</div>
+</div>
+<div class="container">
+<div class="tabs">
+<div class="tab active" onclick="showTab(this,'layout')">Floor plan</div>
+<div class="tab" onclick="showTab(this,'elev-west')">130" Window wall</div>
+<div class="tab" onclick="showTab(this,'elev-north')">108" Fridge wall</div>
+<div class="tab" onclick="showTab(this,'elev-east')">130" Cooking run</div>
+<div class="tab" onclick="showTab(this,'elev-bar')">157" Bar (south)</div>
+<div class="tab" onclick="showTab(this,'flow')">Appliance flow</div>
+<div class="tab" onclick="showTab(this,'utilities')">Utilities</div>
+<div class="tab" onclick="showTab(this,'cabinets')">Cabinets</div>
+<div class="tab tab-deck" onclick="showTab(this,'deck-layout')">🔨 Deck layout</div>
+<div class="tab tab-deck" onclick="showTab(this,'deck-boards')">🔨 Board calc</div>
+<div class="tab" style="background:#dbeafe;color:#1e40af" onclick="showTab(this,'schedule')">Schedule</div>
+<div class="tab" style="background:#dbeafe;color:#1e40af" onclick="showTab(this,'gantt')">Gantt</div>
+<div class="tab tab-open" onclick="showTab(this,'open')">⚠ Open items</div>
+</div>
+
+<!-- ============ TAB 1: FLOOR PLAN ============ -->
+<div class="panel active" id="panel-layout">
+<h2 class="section-title">Floor plan — top-down view</h2>
+<div class="diagram-wrap">
+<svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg" style="font-family:'Segoe UI',system-ui,sans-serif;width:100%;height:auto;">
+<rect x="0" y="0" width="900" height="700" fill="#f8fafc" rx="8"/>
+<line x1="100" y1="55" x2="100" y2="110" stroke="#7c5c3c" stroke-width="6"/>
+<line x1="100" y1="110" x2="100" y2="290" stroke="#7c5c3c" stroke-width="3.5" stroke-dasharray="8,5" opacity="0.45"/>
+<line x1="100" y1="290" x2="100" y2="345" stroke="#7c5c3c" stroke-width="6"/>
+<line x1="100" y1="55" x2="220" y2="55" stroke="#7c5c3c" stroke-width="6"/>
+<text x="185" y="48" text-anchor="middle" font-size="8" fill="#a0845c">55" wall</text>
+<line x1="220" y1="55" x2="380" y2="55" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,3"/>
+<line x1="100" y1="345" x2="190" y2="345" stroke="#7c5c3c" stroke-width="6"/>
+<line x1="380" y1="55" x2="380" y2="345" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,3"/>
+<path d="M103,58 L377,58 L377,342 L190,345 L103,345Z" fill="#faf5ef" opacity="0.2"/>
+<rect x="103" y="58" width="52" height="284" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="107" y="62" width="44" height="57" rx="2" fill="#cbd5e1"/>
+<text x="129" y="93" text-anchor="middle" font-size="5" fill="#475569">Fridge overlap</text>
+<rect x="107" y="122" width="44" height="33" rx="2" fill="#a5f3fc" stroke="#0891b2" stroke-width="1.2"/>
+<text x="129" y="142" text-anchor="middle" font-size="6" fill="#155e75" font-weight="600">Ice 15"</text>
+<rect x="107" y="162" width="44" height="65" rx="2" fill="#bbf7d0" stroke="#27ae60" stroke-width="1.2"/>
+<text x="129" y="198" text-anchor="middle" font-size="7" fill="#166534" font-weight="700">Sink</text>
+<rect x="107" y="234" width="44" height="39" rx="2" fill="#fde68a" stroke="#f59e0b" stroke-width="1.2"/>
+<text x="129" y="257" text-anchor="middle" font-size="6" fill="#92400e" font-weight="600">Trash</text>
+<rect x="107" y="280" width="44" height="52" rx="2" fill="#d1fae5" stroke="#0d9488" stroke-width="1.2"/>
+<text x="129" y="305" text-anchor="middle" font-size="6" fill="#085041" font-weight="600">Coyote</text>
+<text x="129" y="316" text-anchor="middle" font-size="5" fill="#0d9488">C1SLV+C3PB</text>
+<text x="80" y="200" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600" transform="rotate(-90,80,200)">130" window wall</text>
+<rect x="155" y="58" width="158" height="52" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="165" y="63" width="75" height="42" rx="2" fill="#bfdbfe" stroke="#3498db" stroke-width="1.5"/>
+<text x="202" y="84" text-anchor="middle" font-size="7" fill="#1e40af" font-weight="600">KB 36"</text>
+<rect x="244" y="63" width="52" height="42" rx="2" fill="#bfdbfe" stroke="#3498db" stroke-width="1.5"/>
+<text x="270" y="84" text-anchor="middle" font-size="7" fill="#1e40af" font-weight="600">Summit 24"</text>
+<text x="240" y="35" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600">108" fridge wall</text>
+<rect x="264" y="56" width="16" height="3" rx="1" fill="#1e293b"/>
+<text x="272" y="53" text-anchor="middle" font-size="5" fill="#1e293b" font-weight="600">TV (east end)</text>
+<rect x="318" y="58" width="52" height="284" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="322" y="62" width="44" height="33" rx="2" fill="#cbd5e1"/>
+<text x="344" y="82" text-anchor="middle" font-size="5" fill="#475569">15" overlap</text>
+<rect x="322" y="106" width="44" height="71" rx="2" fill="#fed7aa" stroke="#f39c12" stroke-width="1.5"/>
+<text x="344" y="138" text-anchor="middle" font-size="6" fill="#92400e" font-weight="600">Blackstone</text>
+<text x="344" y="149" text-anchor="middle" font-size="5" fill="#92400e">28" XL</text>
+<rect x="322" y="188" width="44" height="86" rx="2" fill="#fecaca" stroke="#e74c3c" stroke-width="1.5"/>
+<text x="344" y="225" text-anchor="middle" font-size="7" fill="#991b1b" font-weight="700">Traeger</text>
+<text x="344" y="237" text-anchor="middle" font-size="5" fill="#991b1b">Timberline</text>
+<rect x="322" y="274" width="44" height="28" rx="2" fill="#fecaca" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="344" y="291" text-anchor="middle" font-size="5" fill="#991b1b">Induction</text>
+<rect x="322" y="309" width="44" height="29" rx="2" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="1.5"/>
+<text x="344" y="327" text-anchor="middle" font-size="5" fill="#e5e5e5" font-weight="600">Napoleon IR</text>
+<text x="400" y="200" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600" transform="rotate(90,400,200)">130" cooking run</text>
+<rect x="310" y="340" width="14" height="14" rx="1" fill="#7c5c3c" stroke="#5c3d2e" stroke-width="2"/>
+<text x="317" y="350" text-anchor="middle" font-size="4" fill="white" font-weight="700">6×6</text>
+<text x="200" y="368" text-anchor="middle" font-size="8" fill="#475569" font-weight="600">45" wall — dog door</text>
+<!-- BAR PENINSULA: 157" total. At ~2.62 px/in → 411 px. Start x=324, end x=735. Cabinets 25+30+30+30+18=133 + 24 ext. -->
+<rect x="324" y="345" width="411" height="24" rx="3" fill="#fdf3e8" stroke="#f39c12" stroke-width="2"/>
+<!-- Visual separator for east extension (last 63px = 24") -->
+<line x1="672" y1="345" x2="672" y2="369" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="498" y="358" text-anchor="middle" font-size="10" fill="#b7791f" font-weight="700">BAR COUNTER — 157"</text>
+<text x="498" y="368" text-anchor="middle" font-size="6" fill="#b7791f">25" deep · 3×30"+1×18" cabinets + 24" east extension · 42" bar height</text>
+<text x="703" y="364" text-anchor="middle" font-size="5" fill="#d97706" font-weight="600">24" ext</text>
+<circle cx="370" cy="392" r="11" fill="#f39c12" opacity="0.25" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="420" cy="392" r="11" fill="#f39c12" opacity="0.25" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="470" cy="392" r="11" fill="#f39c12" opacity="0.25" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="520" cy="392" r="11" fill="#f39c12" opacity="0.25" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="570" cy="392" r="11" fill="#f39c12" opacity="0.25" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="620" cy="392" r="11" fill="#f39c12" opacity="0.15" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="495" y="418" text-anchor="middle" font-size="8" fill="#b7791f" font-weight="600">5-6 stools (guests face yard)</text>
+<text x="250" y="155" text-anchor="middle" font-size="16" fill="#e2e8f0" font-weight="700" opacity="0.4">OPEN</text>
+<text x="250" y="175" text-anchor="middle" font-size="16" fill="#e2e8f0" font-weight="700" opacity="0.4">DECK</text>
+<line x1="103" y1="28" x2="380" y2="28" stroke="#64748b" stroke-width="1"/>
+<line x1="103" y1="22" x2="103" y2="34" stroke="#64748b" stroke-width="1"/>
+<line x1="380" y1="22" x2="380" y2="34" stroke="#64748b" stroke-width="1"/>
+<text x="241" y="22" text-anchor="middle" font-size="10" fill="#334155" font-weight="700">108"</text>
+<line x1="42" y1="55" x2="42" y2="345" stroke="#64748b" stroke-width="1"/>
+<line x1="36" y1="55" x2="48" y2="55" stroke="#64748b" stroke-width="1"/>
+<line x1="36" y1="345" x2="48" y2="345" stroke="#64748b" stroke-width="1"/>
+<text x="32" y="200" text-anchor="middle" font-size="9" fill="#334155" font-weight="700" transform="rotate(-90,32,200)">130"</text>
+<line x1="392" y1="55" x2="392" y2="345" stroke="#64748b" stroke-width="1"/>
+<line x1="386" y1="55" x2="398" y2="55" stroke="#64748b" stroke-width="1"/>
+<line x1="386" y1="345" x2="398" y2="345" stroke="#64748b" stroke-width="1"/>
+<text x="405" y="200" text-anchor="middle" font-size="8" fill="#334155" font-weight="600" transform="rotate(90,405,200)">130"</text>
+<line x1="100" y1="375" x2="190" y2="375" stroke="#64748b" stroke-width="0.8"/>
+<line x1="100" y1="370" x2="100" y2="380" stroke="#64748b" stroke-width="0.8"/>
+<line x1="190" y1="370" x2="190" y2="380" stroke="#64748b" stroke-width="0.8"/>
+<text x="145" y="385" text-anchor="middle" font-size="8" fill="#334155" font-weight="600">45"</text>
+<line x1="324" y1="434" x2="735" y2="434" stroke="#b7791f" stroke-width="0.8"/>
+<line x1="324" y1="428" x2="324" y2="440" stroke="#b7791f" stroke-width="0.8"/>
+<line x1="735" y1="428" x2="735" y2="440" stroke="#b7791f" stroke-width="0.8"/>
+<text x="530" y="450" text-anchor="middle" font-size="9" fill="#b7791f" font-weight="600">157" bar (133" cabinets + 24" east extension)</text>
+<line x1="745" y1="345" x2="745" y2="369" stroke="#b7791f" stroke-width="0.8"/>
+<line x1="739" y1="345" x2="751" y2="345" stroke="#b7791f" stroke-width="0.8"/>
+<line x1="739" y1="369" x2="751" y2="369" stroke="#b7791f" stroke-width="0.8"/>
+<text x="763" y="360" text-anchor="middle" font-size="7" fill="#b7791f" font-weight="600">25" deep</text>
+<rect x="30" y="460" width="840" height="80" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+<text x="450" y="478" text-anchor="middle" font-size="10" fill="#334155" font-weight="700">Legend</text>
+<line x1="50" y1="496" x2="72" y2="496" stroke="#7c5c3c" stroke-width="4"/>
+<text x="78" y="500" font-size="9" fill="#444">House wall</text>
+<line x1="145" y1="496" x2="167" y2="496" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,2"/>
+<text x="173" y="500" font-size="9" fill="#444">Deck edge</text>
+<rect x="240" y="491" width="14" height="9" rx="2" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+<text x="260" y="500" font-size="9" fill="#444">Counter</text>
+<rect x="310" y="491" width="14" height="9" rx="2" fill="#fdf3e8" stroke="#f39c12" stroke-width="1"/>
+<text x="330" y="500" font-size="9" fill="#444">Bar cabinet</text>
+<rect x="390" y="491" width="14" height="9" rx="2" fill="#bfdbfe" stroke="#3498db" stroke-width="1"/>
+<text x="410" y="500" font-size="9" fill="#444">Fridge</text>
+<rect x="450" y="491" width="14" height="9" rx="2" fill="#fed7aa" stroke="#f39c12" stroke-width="1"/>
+<text x="470" y="500" font-size="9" fill="#444">Griddle</text>
+<rect x="520" y="491" width="14" height="9" rx="2" fill="#fecaca" stroke="#e74c3c" stroke-width="1"/>
+<text x="540" y="500" font-size="9" fill="#444">Pellet grill</text>
+<rect x="600" y="491" width="14" height="9" rx="2" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="1"/>
+<text x="620" y="500" font-size="9" fill="#444">IR sear</text>
+<rect x="670" y="491" width="14" height="9" rx="2" fill="#d1fae5" stroke="#0d9488" stroke-width="1"/>
+<text x="690" y="500" font-size="9" fill="#444">Power burner + C1SLV</text>
+<rect x="790" y="491" width="14" height="9" rx="2" fill="#7c5c3c" stroke="#5c3d2e" stroke-width="1"/>
+<text x="810" y="500" font-size="9" fill="#444">6×6 post</text>
+<text x="450" y="530" text-anchor="middle" font-size="9" fill="#94a3b8">Counter: 40" ht, 25" deep | Bar: 42" ht, 157" total with 24" east extension | LP: 95K BTU (two 100-gal tanks) | Smoke vents east</text>
+</svg>
+</div>
+</div>
+
+<!-- ============ TAB 2: WEST WALL ELEVATION ============ -->
+<div class="panel" id="panel-elev-west">
+<h2 class="section-title">130" Window wall (west) — elevation view</h2>
+<p class="view-subtitle">Standing on deck, looking west toward the house. Left = 45" wall corner (south). Right = 108" wall corner (north). Showing above-counter appliances and below-counter cabinets/access.</p>
+
+<div class="diagram-wrap">
+<svg viewBox="0 0 1060 560" xmlns="http://www.w3.org/2000/svg" style="font-family:'Segoe UI',system-ui,sans-serif;width:1060px;max-width:none;height:auto;">
+<rect x="0" y="0" width="1060" height="560" fill="#f8fafc" rx="8"/>
+<text x="515" y="28" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="700">130" Window Wall (West) — Elevation View</text>
+<text x="515" y="44" text-anchor="middle" font-size="11" fill="#64748b">Looking west toward house | Left = south (45" wall) | Right = north (fridge wall)</text>
+<rect x="60" y="56" width="910" height="18" rx="2" fill="#d4c4a8" stroke="#7c5c3c" stroke-width="1.5"/>
+<text x="515" y="68" text-anchor="middle" font-size="8" fill="#5c3d2e" font-weight="600">HOUSE WALL</text>
+<rect x="239" y="57" width="553" height="15" rx="1" fill="#bfdbfe" stroke="#60a5fa" stroke-width="1"/>
+<text x="515" y="67" text-anchor="middle" font-size="7" fill="#1e40af" font-weight="600">79" WINDOW</text>
+<rect x="60" y="248" width="910" height="9" rx="2" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
+<text x="40" y="255" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600">40"</text>
+<rect x="60" y="420" width="910" height="5" rx="1" fill="#d4c4a8" stroke="#a0845c" stroke-width="1"/>
+<text x="40" y="425" text-anchor="middle" font-size="8" fill="#a0845c" font-weight="600">0"</text>
+<rect x="60" y="257" width="910" height="163" rx="0" fill="#f5f0e8" stroke="none"/>
+<rect x="110" y="163" width="68" height="14" rx="7" fill="#0d9488" opacity="0.85"/>
+<text x="144" y="173" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 1</text>
+<rect x="62" y="178" width="164" height="70" rx="4" fill="#d1fae5" stroke="#0d9488" stroke-width="2"/>
+<text x="144" y="198" text-anchor="middle" font-size="10" fill="#085041" font-weight="700">Coyote C3PBLP</text>
+<text x="144" y="211" text-anchor="middle" font-size="8" fill="#0d9488">60K BTU Gen 3</text>
+<text x="144" y="224" text-anchor="middle" font-size="8" fill="#0d9488">in C1SLV insert sleeve</text>
+<text x="144" y="237" text-anchor="middle" font-size="7" fill="#e74c3c" font-weight="600">LP 60K (west drop)</text>
+<rect x="62" y="259" width="164" height="75" rx="3" fill="#d1fae5" stroke="#0d9488" stroke-width="1.5"/>
+<text x="144" y="278" text-anchor="middle" font-size="8" fill="#085041" font-weight="700">C1SLV sleeve</text>
+<text x="144" y="292" text-anchor="middle" font-size="7" fill="#0d9488">27.25"W × 29.6"H × 25.2"D</text>
+<text x="144" y="304" text-anchor="middle" font-size="7" fill="#0d9488">cutout: 26.25"W × 29.5"H × 24"D</text>
+<text x="144" y="316" text-anchor="middle" font-size="6" fill="#0d9488">304 SS · $849</text>
+<text x="144" y="328" text-anchor="middle" font-size="6" fill="#166534" font-weight="600">built-in storage drawer</text>
+<rect x="62" y="335" width="164" height="85" rx="3" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="144" y="368" text-anchor="middle" font-size="9" fill="#92400e" font-weight="600">DOG DOOR</text>
+<text x="144" y="383" text-anchor="middle" font-size="8" fill="#92400e">on adjacent 45" SW wall</text>
+<text x="144" y="397" text-anchor="middle" font-size="7" fill="#92400e">swings N + up</text>
+<text x="144" y="440" text-anchor="middle" font-size="8" fill="#0d9488" font-weight="600">24"</text>
+<rect x="228" y="257" width="26" height="163" fill="#faf8f4" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="4,3"/>
+<text x="241" y="345" text-anchor="middle" font-size="6" fill="#94a3b8" transform="rotate(-90,241,345)">~2.5"</text>
+<rect x="283" y="245" width="68" height="14" rx="7" fill="#f59e0b" opacity="0.85"/>
+<text x="317" y="255" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 2</text>
+<rect x="256" y="259" width="122" height="161" rx="3" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+<text x="317" y="300" text-anchor="middle" font-size="10" fill="#92400e" font-weight="700">TRASH</text>
+<text x="317" y="315" text-anchor="middle" font-size="9" fill="#92400e">BI-1824-1W</text>
+<text x="317" y="332" text-anchor="middle" font-size="8" fill="#92400e">dual bins + 8"</text>
+<text x="317" y="345" text-anchor="middle" font-size="8" fill="#92400e">paper towel drawer</text>
+<text x="317" y="365" text-anchor="middle" font-size="7" fill="#64748b">19.75"W × 21.5"D</text>
+<text x="317" y="378" text-anchor="middle" font-size="7" fill="#64748b">full height pull-out</text>
+<text x="317" y="440" text-anchor="middle" font-size="8" fill="#f59e0b" font-weight="600">18"</text>
+<rect x="380" y="257" width="26" height="163" fill="#faf8f4" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="4,3"/>
+<text x="393" y="345" text-anchor="middle" font-size="6" fill="#94a3b8" transform="rotate(-90,393,345)">~2.5"</text>
+<rect x="477" y="191" width="68" height="14" rx="7" fill="#27ae60" opacity="0.85"/>
+<text x="511" y="201" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 3</text>
+<rect x="408" y="205" width="206" height="43" rx="4" fill="#bbf7d0" stroke="#27ae60" stroke-width="2"/>
+<rect x="418" y="212" width="186" height="28" rx="8" fill="#a7f3d0" stroke="#16a34a" stroke-width="1"/>
+<text x="511" y="226" text-anchor="middle" font-size="9" fill="#166534" font-weight="700">Ruvati RVH8310</text>
+<text x="511" y="238" text-anchor="middle" font-size="8" fill="#166534">30" Roma workstation</text>
+<line x1="511" y1="205" x2="511" y2="182" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>
+<line x1="511" y1="182" x2="524" y2="182" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>
+<line x1="524" y1="182" x2="524" y2="190" stroke="#64748b" stroke-width="2" stroke-linecap="round"/>
+<text x="511" y="176" text-anchor="middle" font-size="7" fill="#64748b">KRAUS Bolden</text>
+<line x1="511" y1="76" x2="511" y2="172" stroke="#60a5fa" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.5"/>
+<text x="511" y="88" text-anchor="middle" font-size="7" fill="#3b82f6" font-weight="600">centered on window</text>
+<rect x="408" y="259" width="206" height="161" rx="3" fill="#e8e0d4" stroke="#94a3b8" stroke-width="2"/>
+<line x1="511" y1="263" x2="511" y2="416" stroke="#94a3b8" stroke-width="1"/>
+<rect x="414" y="265" width="93" height="149" rx="2" fill="none" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.5"/>
+<rect x="515" y="265" width="93" height="149" rx="2" fill="none" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.5"/>
+<circle cx="505" cy="340" r="3" fill="#94a3b8" opacity="0.5"/>
+<circle cx="518" cy="340" r="3" fill="#94a3b8" opacity="0.5"/>
+<text x="511" y="300" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">BI-3024-2D</text>
+<text x="511" y="314" text-anchor="middle" font-size="8" fill="#475569">30" double door</text>
+<text x="511" y="332" text-anchor="middle" font-size="7" fill="#64748b">plumbing access</text>
+<text x="511" y="346" text-anchor="middle" font-size="7" fill="#64748b">behind doors</text>
+<text x="511" y="365" text-anchor="middle" font-size="7" fill="#64748b">hot/cold + drain</text>
+<text x="511" y="379" text-anchor="middle" font-size="7" fill="#64748b">ice maker tee off cold</text>
+<text x="511" y="398" text-anchor="middle" font-size="7" fill="#94a3b8">plumbing access</text>
+<text x="511" y="440" text-anchor="middle" font-size="8" fill="#27ae60" font-weight="600">30"</text>
+<rect x="616" y="257" width="26" height="163" fill="#faf8f4" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="4,3"/>
+<text x="629" y="345" text-anchor="middle" font-size="6" fill="#94a3b8" transform="rotate(-90,629,345)">~2.5"</text>
+<rect x="661" y="248" width="68" height="14" rx="7" fill="#0891b2" opacity="0.85"/>
+<text x="695" y="258" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 4</text>
+<rect x="644" y="262" width="101" height="155" rx="4" fill="#a5f3fc" stroke="#0891b2" stroke-width="2"/>
+<rect x="654" y="270" width="81" height="110" rx="2" fill="none" stroke="#0891b2" stroke-width="1" stroke-dasharray="4,2" opacity="0.5"/>
+<circle cx="728" cy="325" r="3" fill="#0891b2" opacity="0.5"/>
+<text x="695" y="290" text-anchor="middle" font-size="10" fill="#155e75" font-weight="700">Scotsman</text>
+<text x="695" y="304" text-anchor="middle" font-size="8" fill="#155e75">SRCG065A-1SS</text>
+<text x="695" y="318" text-anchor="middle" font-size="8" fill="#155e75">15" gourmet ice</text>
+<text x="695" y="335" text-anchor="middle" font-size="7" fill="#0891b2">65 lbs/day, 26 lbs bin</text>
+<text x="695" y="349" text-anchor="middle" font-size="7" fill="#64748b">14.875"W × 33.375"H</text>
+<text x="695" y="365" text-anchor="middle" font-size="7" fill="#64748b">front-vent, gravity drain</text>
+<text x="695" y="382" text-anchor="middle" font-size="7" fill="#94a3b8">15A dedicated circuit</text>
+<text x="695" y="440" text-anchor="middle" font-size="8" fill="#0891b2" font-weight="600">15"</text>
+<rect x="825" y="245" width="68" height="14" rx="7" fill="#94a3b8" opacity="0.85"/>
+<text x="859" y="255" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 5</text>
+<rect x="749" y="259" width="219" height="161" rx="3" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="859" y="315" text-anchor="middle" font-size="10" fill="#475569" font-weight="700">FRIDGE WALL</text>
+<text x="859" y="330" text-anchor="middle" font-size="10" fill="#475569" font-weight="700">OVERLAP</text>
+<text x="859" y="350" text-anchor="middle" font-size="8" fill="#64748b">~28" + 4" corner = ~32"</text>
+<text x="859" y="364" text-anchor="middle" font-size="8" fill="#64748b">108" wall counter depth</text>
+<text x="859" y="378" text-anchor="middle" font-size="8" fill="#64748b">crosses here — blocked</text>
+<text x="859" y="395" text-anchor="middle" font-size="7" fill="#94a3b8">no doors / no drawers</text>
+<rect x="749" y="248" width="219" height="9" rx="2" fill="#94a3b8" stroke="#64748b" stroke-width="1" opacity="0.6"/>
+<text x="859" y="440" text-anchor="middle" font-size="8" fill="#94a3b8" font-weight="600">~32" (blocked)</text>
+<line x1="60" y1="458" x2="970" y2="458" stroke="#64748b" stroke-width="1"/>
+<line x1="60" y1="452" x2="60" y2="464" stroke="#64748b" stroke-width="1"/>
+<line x1="970" y1="452" x2="970" y2="464" stroke="#64748b" stroke-width="1"/>
+<text x="515" y="476" text-anchor="middle" font-size="12" fill="#334155" font-weight="700">130" total</text>
+<line x1="48" y1="253" x2="48" y2="420" stroke="#64748b" stroke-width="1"/>
+<line x1="42" y1="253" x2="54" y2="253" stroke="#64748b" stroke-width="1"/>
+<line x1="42" y1="420" x2="54" y2="420" stroke="#64748b" stroke-width="1"/>
+<text x="34" y="342" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600" transform="rotate(-90,34,342)">40" counter ht</text>
+<line x1="239" y1="94" x2="792" y2="94" stroke="#60a5fa" stroke-width="0.8"/>
+<line x1="239" y1="90" x2="239" y2="98" stroke="#60a5fa" stroke-width="0.8"/>
+<line x1="792" y1="90" x2="792" y2="98" stroke="#60a5fa" stroke-width="0.8"/>
+<text x="515" y="107" text-anchor="middle" font-size="9" fill="#3b82f6" font-weight="600">79" window</text>
+<rect x="60" y="492" width="910" height="52" rx="6" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+<text x="515" y="508" text-anchor="middle" font-size="10" fill="#64748b" font-weight="600">South → North | Coyote in C1SLV sleeve (27.25"W) · ~2.5" compressed gaps | Sink centered on window | CJAKTC1PB jacket CANCELLED</text>
+<rect x="80" y="520" width="12" height="10" rx="2" fill="#d1fae5" stroke="#0d9488" stroke-width="1"/>
+<text x="100" y="529" font-size="9" fill="#444">Power burner + C1SLV</text>
+<rect x="220" y="520" width="12" height="10" rx="2" fill="#fde68a" stroke="#f59e0b" stroke-width="1"/>
+<text x="240" y="529" font-size="9" fill="#444">Trash</text>
+<rect x="285" y="520" width="12" height="10" rx="2" fill="#bbf7d0" stroke="#27ae60" stroke-width="1"/>
+<text x="305" y="529" font-size="9" fill="#444">Sink</text>
+<rect x="340" y="520" width="12" height="10" rx="2" fill="#a5f3fc" stroke="#0891b2" stroke-width="1"/>
+<text x="360" y="529" font-size="9" fill="#444">Ice maker</text>
+<rect x="425" y="520" width="12" height="10" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+<text x="445" y="529" font-size="9" fill="#444">Overlap</text>
+<rect x="505" y="520" width="12" height="10" rx="2" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+<text x="525" y="529" font-size="9" fill="#444">Dog door</text>
+<rect x="585" y="520" width="12" height="10" rx="2" fill="#e8e0d4" stroke="#94a3b8" stroke-width="1"/>
+<text x="605" y="529" font-size="9" fill="#444">Cabinet door</text>
+</svg>
+</div>
+
+<div class="callout callout-red" style="margin-top:16px">
+<strong>⚠ BBQGuys ACTION:</strong> Cancel Coyote CJAKTC1PB jacket line item from order #N219266020C via 877-743-2269. The C1SLV insert sleeve supersedes the separate jacket — complete 304 SS enclosure with integrated storage drawer. $449 recovery.
+</div>
+
+<div class="callout callout-green" style="margin-top:16px">
+<strong>Pre-install checklist — window wall:</strong><br><br>
+&#9744; Verify 79" window center point — sink must align<br>
+&#9744; Tristan to verify dog door arc clears C1SLV base during Phase 4 framing (dog door already installed on 45" wall)<br>
+&#9744; Run LP gas line to south corner (separate west wall drop, 60K BTU, 3/8" flare)<br>
+&#9744; Run hot/cold water + drain through house wall at sink position<br>
+&#9744; Run 1/4" copper tee for ice maker off cold water line<br>
+&#9744; Run 3/4" OD drain for ice maker — min 1/4"/ft slope, tie downstream of P-trap, freeze-protected via insulated wall cavity<br>
+&#9744; Install inline water filter on ice maker supply<br>
+&#9744; Wire dedicated 15A/115V for Scotsman (behind unit)<br>
+&#9744; Wire 120V for Coyote PB ignition<br>
+&#9744; Wire GFCI outlets at each work zone per code<br>
+&#9744; Install blocking under all bottom track runs<br>
+&#9744; Moisture barrier at all house wall contact points<br>
+&#9744; Template countertop after all rough-ins complete
+</div>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 16px">Appliance install notes — zone by zone (south to north)</h3>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #0d9488">
+<span class="label" style="color:#0d9488">Zone 1: Coyote C3PBLP power burner (24"W) in C1SLV insert sleeve</span>
+<p><a href="https://assets.ajmadison.com/ajmadison/itemdocs/coyote-burner-C3PBLP-use.pdf" target="_blank" style="color:#0d9488;font-size:12px">C3PBLP Use &amp; care manual</a> &nbsp;|&nbsp; <a href="https://cdn.shocho.co/sc-specsheets/C3PB-Install-Guide.pdf" target="_blank" style="color:#0d9488;font-size:12px">C3PB install guide</a> &nbsp;|&nbsp; <a href="https://brandster.com/coyote-asado-power-burner-insert-sleeve-with-storage-drawer-c1slv/" target="_blank" style="color:#0d9488;font-size:12px">C1SLV sleeve product page</a><br>
+<strong>Design intent:</strong> Power burner for crab boils, stock pots, and high-heat cooking. Positioned next to the sink and trash for a clean prep-cook-clean workflow. Sits above the dog door clearance zone at the south corner of the wall.<br>
+<strong>Gas:</strong> LP 3/8" flare fitting with individual shutoff valve. Separate LP drop on this wall — do NOT tee from east wall cooking run supply. 60K BTU demand.<br>
+<strong>Electrical:</strong> 120V outlet for electronic ignition.<br>
+<strong>Enclosure:</strong> <span style="color:#991b1b;font-weight:600">CJAKTC1PB jacket CANCELLED — superseded by C1SLV insert sleeve.</span> C1SLV is 304 SS complete enclosure with integrated soft-close storage drawer. Overall 27.25"W × 29.6"H × 25.2"D. Cutout 26.25"W × 29.5"H × 24"D. $849. Install sleeve per Coyote spec, then drop C3PBLP into sleeve cutout.<br>
+<strong>Framing:</strong> Tristan to verify west wall south corner framing accommodates C1SLV cutout (~3" wider than original jacket). Gaps compressed from ~3.7" to ~2.5" to absorb width increase.<br>
+<strong>Dog door clearance:</strong> Dog door is already installed on the adjacent 45" SW wall (swings N + up). Tristan to physically verify door arc clears C1SLV sleeve base and storage drawer during Phase 4 framing (May 2-9).</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #f59e0b">
+<span class="label" style="color:#92400e">Zone 2: Napoleon BI-1824-1W trash pull-out (18"W)</span>
+<p><a href="https://napoleonproducts.com/outdoor-kitchen-components" target="_blank" style="color:#92400e;font-size:12px">Napoleon outdoor kitchen components</a><br>
+<strong>Utilities:</strong> None — no gas, no electrical, no water.<br>
+<strong>Install:</strong> Full-height pull-out (19.75"W × 21.5"D × ~24"H). Mount per Napoleon spec with included hardware. Frame opening to 19.75"W. Soft-close mechanism is built in. Dual waste bins below + 8" paper towel drawer on top — all part of the single pull-out unit.<br>
+<strong>Note:</strong> Ensure pull-out slides clear the countertop overhang when fully extended.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #27ae60">
+<span class="label" style="color:#166534">Zone 3: Ruvati RVH8310 sink (30"W) + KRAUS Bolden faucet + BI-3024-2D door</span>
+<p><a href="https://www.rfruvati.com" target="_blank" style="color:#166534;font-size:12px">Ruvati product page</a> &nbsp;|&nbsp; <a href="https://napoleonproducts.com/outdoor-kitchen-components" target="_blank" style="color:#166534;font-size:12px">Napoleon BI-3024-2D</a><br>
+<strong>Sink:</strong> RVH8310 — Roma workstation undermount, 30"W. Cutout: 29"W × 21"D. Centered on 79" window — verify center alignment with window before cutting countertop.<br>
+<strong>Faucet:</strong> KRAUS Bolden KPF-1610SFS — single hole, mount through countertop behind sink basin. Requires 1-3/8" hole.<br>
+<strong>Plumbing:</strong> Hot and cold water supply through house wall — tie into indoor kitchen lines. Standard residential drain through house wall. All supply lines need accessible shutoff valves behind the BI-3024-2D doors. Ice maker water supply: 1/4" OD copper tube, tee off the cold water line with a dedicated shutoff valve. Install inline water filter (1/4") on the ice maker supply line.<br>
+<strong>Winterization:</strong> All outdoor supply lines must have low-point drain valves for winter blowout. Install drain petcocks on both hot and cold lines behind the BI-3024-2D doors. Ice maker supply line needs its own drain valve at the low point. Before first freeze each year: shut off supply valves inside the house, open drain petcocks, blow out lines with compressed air.<br>
+<strong>Ice maker drain:</strong> 3/4" OD flexible tubing, minimum 1/4" per foot slope, tie in downstream of sink P-trap. Freeze-protected via routing through insulated house wall cavity (Whidbey Island freeze concern).<br>
+<strong>Below-counter door:</strong> Napoleon BI-3024-2D 30" double door. Provides clean access to all plumbing connections, shutoff valves, and water filter behind doors.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #0891b2">
+<span class="label" style="color:#155e75">Zone 4: Scotsman SRCG065A-1SS ice maker (15"W)</span>
+<p><a href="https://www.scotsman-ice.com/service/User%20Manuals/17319103.pdf" target="_blank" style="color:#155e75;font-size:12px">Install &amp; user manual</a><br>
+<strong>Electrical:</strong> Dedicated 15A / 115V outlet behind unit. Max 126V. GFCI protected per code.<br>
+<strong>Water supply:</strong> 1/4" OD copper tube with accessible shutoff valve. Tees from sink cold water line. Inline water filter BEFORE the unit.<br>
+<strong>Drain:</strong> 3/4" OD flexible tubing, minimum 1/4" per foot slope. Routes through insulated wall cavity to sink drain downstream of P-trap. Freeze-protected. Gravity drain only — no drain pump.<br>
+<strong>Clearances:</strong> Front-venting / air-cooled — can be fully enclosed on sides and rear with 0" clearance.<br>
+<strong>Install:</strong> Slides into 15" wide cabinet opening. Self-closing field-reversible door. Unit is 33.375"H + 1.625" handle = 35"H total.<br>
+<strong>Weight:</strong> ~115 lbs empty. Ensure blocking under this zone.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #94a3b8">
+<span class="label" style="color:#475569">Zone 5: Fridge wall overlap + corner (~32")</span>
+<p><strong>Construction:</strong> Dead space — the 108" fridge wall counter depth (25") crosses into this zone at the NE corner. No appliances, no doors, no drawers. Frame and clad this zone to match the rest of the wall but do not cut any openings.<br>
+<strong>Corner transition:</strong> ~4" radius/filler at the NE corner where the window wall meets the fridge wall. Stone veneer wraps the corner — miter or bullnose the stone at the junction.</p>
+</div>
+</div>
+
+</div>
+
+<!-- ============ TAB 3: NORTH WALL ELEVATION ============ -->
+<div class="panel" id="panel-elev-north">
+<h2 class="section-title">108" Fridge wall (north) — elevation view</h2>
+<p class="view-subtitle">Standing on deck, looking north toward house. Left = window wall corner (west). Right = open deck corner (east). 55" house wall on left, 53" open/railing on right.</p>
+
+<div class="diagram-wrap">
+<svg viewBox="0 0 920 560" xmlns="http://www.w3.org/2000/svg" style="font-family:'Segoe UI',system-ui,sans-serif;width:920px;max-width:none;height:auto;">
+<rect x="0" y="0" width="920" height="560" fill="#f8fafc" rx="8"/>
+<text x="438" y="28" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="700">108" Fridge Wall (North) — Elevation View</text>
+<text x="438" y="44" text-anchor="middle" font-size="11" fill="#64748b">Looking north toward house | Left = west (window wall) | Right = east (open deck)</text>
+<rect x="60" y="56" width="385" height="18" rx="2" fill="#d4c4a8" stroke="#7c5c3c" stroke-width="1.5"/>
+<text x="253" y="68" text-anchor="middle" font-size="8" fill="#5c3d2e" font-weight="600">55" HOUSE WALL</text>
+<rect x="445" y="56" width="371" height="18" rx="2" fill="#e8f4f8" stroke="#94a3b8" stroke-width="1"/>
+<text x="631" y="68" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600">53" OPEN / RAILING</text>
+<line x1="445" y1="56" x2="445" y2="74" stroke="#64748b" stroke-width="1.5"/>
+<!-- TV now at EAST end of 55" wall, articulating mount -->
+<rect x="330" y="90" width="110" height="50" rx="3" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+<rect x="335" y="95" width="100" height="40" rx="2" fill="#334155"/>
+<text x="385" y="112" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">SunBrite Veranda 3</text>
+<text x="385" y="126" text-anchor="middle" font-size="7" fill="#94a3b8">55" TV — east end of wall</text>
+<!-- Articulating arm visualization -->
+<line x1="420" y1="115" x2="435" y2="115" stroke="#64748b" stroke-width="2"/>
+<circle cx="435" cy="115" r="3" fill="#64748b"/>
+<line x1="435" y1="115" x2="440" y2="115" stroke="#64748b" stroke-width="2"/>
+<text x="385" y="155" text-anchor="middle" font-size="7" fill="#64748b">SB-WM-ART2-L-BL articulating · 30" ext · 180° swivel</text>
+<text x="385" y="168" text-anchor="middle" font-size="6" fill="#94a3b8">base center 60" AFF · plywood backer · recessed outlet behind stowed TV</text>
+<rect x="60" y="248" width="756" height="9" rx="2" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
+<text x="40" y="255" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600">40"</text>
+<rect x="60" y="420" width="756" height="5" rx="1" fill="#d4c4a8" stroke="#a0845c" stroke-width="1"/>
+<text x="40" y="425" text-anchor="middle" font-size="8" fill="#a0845c" font-weight="600">0"</text>
+<rect x="60" y="257" width="756" height="163" rx="0" fill="#f5f0e8" stroke="none"/>
+<rect x="112" y="245" width="68" height="14" rx="7" fill="#94a3b8" opacity="0.85"/>
+<text x="146" y="255" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 1</text>
+<rect x="62" y="259" width="168" height="161" rx="3" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="146" y="318" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">WINDOW</text>
+<text x="146" y="333" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">WALL</text>
+<text x="146" y="348" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">OVERLAP</text>
+<text x="146" y="370" text-anchor="middle" font-size="7" fill="#64748b">counter depth crosses</text>
+<text x="146" y="384" text-anchor="middle" font-size="7" fill="#94a3b8">no doors/drawers</text>
+<rect x="62" y="248" width="168" height="9" rx="2" fill="#94a3b8" stroke="#64748b" stroke-width="1" opacity="0.6"/>
+<text x="146" y="440" text-anchor="middle" font-size="7" fill="#94a3b8" font-weight="600">~24.6"</text>
+<rect x="322" y="245" width="68" height="14" rx="7" fill="#3498db" opacity="0.85"/>
+<text x="356" y="255" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 2</text>
+<rect x="234" y="259" width="244" height="161" rx="4" fill="#bfdbfe" stroke="#3498db" stroke-width="2"/>
+<line x1="356" y1="263" x2="356" y2="416" stroke="#93c5fd" stroke-width="1"/>
+<circle cx="350" cy="340" r="3" fill="#3498db" opacity="0.5"/>
+<circle cx="363" cy="340" r="3" fill="#3498db" opacity="0.5"/>
+<text x="356" y="300" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="700">Kingsbottle</text>
+<text x="356" y="316" text-anchor="middle" font-size="9" fill="#1e40af">KBU56ASD</text>
+<text x="356" y="332" text-anchor="middle" font-size="9" fill="#1e40af">36" beverage cooler</text>
+<text x="356" y="352" text-anchor="middle" font-size="7" fill="#155e75">35.4"W × 23.63"D × 34"H</text>
+<text x="356" y="368" text-anchor="middle" font-size="7" fill="#64748b">20A dedicated circuit</text>
+<text x="356" y="440" text-anchor="middle" font-size="8" fill="#3498db" font-weight="600">35.4"</text>
+<rect x="478" y="259" width="7" height="161" rx="0" fill="#e2e8f0" stroke="#94a3b8" stroke-width="0.5"/>
+<rect x="534" y="245" width="68" height="14" rx="7" fill="#3498db" opacity="0.85"/>
+<text x="568" y="255" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 3</text>
+<rect x="487" y="259" width="162" height="161" rx="4" fill="#bfdbfe" stroke="#3498db" stroke-width="2"/>
+<circle cx="568" cy="340" r="3" fill="#3498db" opacity="0.5"/>
+<text x="568" y="300" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="700">Summit</text>
+<text x="568" y="316" text-anchor="middle" font-size="9" fill="#1e40af">SPFF51OS2D</text>
+<text x="568" y="332" text-anchor="middle" font-size="9" fill="#1e40af">24" freezer drawers</text>
+<text x="568" y="352" text-anchor="middle" font-size="7" fill="#155e75">23.63"W × 22.4"D × 33.5"H</text>
+<text x="568" y="368" text-anchor="middle" font-size="7" fill="#64748b">20A dedicated circuit</text>
+<text x="568" y="440" text-anchor="middle" font-size="8" fill="#3498db" font-weight="600">23.4"</text>
+<rect x="696" y="245" width="68" height="14" rx="7" fill="#94a3b8" opacity="0.85"/>
+<text x="730" y="255" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 4</text>
+<rect x="646" y="259" width="168" height="161" rx="3" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="730" y="318" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">COOKING</text>
+<text x="730" y="333" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">RUN</text>
+<text x="730" y="348" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">OVERLAP</text>
+<text x="730" y="370" text-anchor="middle" font-size="7" fill="#64748b">counter depth crosses</text>
+<text x="730" y="384" text-anchor="middle" font-size="7" fill="#94a3b8">no doors/drawers</text>
+<rect x="646" y="248" width="168" height="9" rx="2" fill="#94a3b8" stroke="#64748b" stroke-width="1" opacity="0.6"/>
+<text x="730" y="440" text-anchor="middle" font-size="7" fill="#94a3b8" font-weight="600">~24.6"</text>
+<rect x="80" y="400" width="90" height="20" rx="3" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+<text x="125" y="413" text-anchor="middle" font-size="7" fill="#991b1b" font-weight="600">LP STUB-OUT</text>
+<line x1="125" y1="420" x2="125" y2="425" stroke="#e74c3c" stroke-width="1.5"/>
+<text x="125" y="435" text-anchor="middle" font-size="6" fill="#e74c3c">2× 100-gal LP tanks</text>
+<text x="125" y="445" text-anchor="middle" font-size="6" fill="#e74c3c">3/4" black iron main</text>
+<text x="125" y="455" text-anchor="middle" font-size="6" fill="#e74c3c">West 60K + East 35K = 95K BTU</text>
+<line x1="60" y1="470" x2="816" y2="470" stroke="#64748b" stroke-width="1"/>
+<line x1="60" y1="464" x2="60" y2="476" stroke="#64748b" stroke-width="1"/>
+<line x1="816" y1="464" x2="816" y2="476" stroke="#64748b" stroke-width="1"/>
+<text x="438" y="488" text-anchor="middle" font-size="12" fill="#334155" font-weight="700">108" total</text>
+<line x1="48" y1="253" x2="48" y2="420" stroke="#64748b" stroke-width="1"/>
+<line x1="42" y1="253" x2="54" y2="253" stroke="#64748b" stroke-width="1"/>
+<line x1="42" y1="420" x2="54" y2="420" stroke="#64748b" stroke-width="1"/>
+<text x="34" y="342" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600" transform="rotate(-90,34,342)">40" counter ht</text>
+<rect x="60" y="500" width="756" height="48" rx="6" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+<text x="438" y="516" text-anchor="middle" font-size="10" fill="#64748b" font-weight="600">West → East | TV on articulating mount at EAST end of 55" wall | LP from two 100-gal tanks via 3/4" black iron</text>
+<rect x="80" y="528" width="12" height="10" rx="2" fill="#bfdbfe" stroke="#3498db" stroke-width="1"/>
+<text x="100" y="537" font-size="9" fill="#444">Beverage cooler</text>
+<rect x="200" y="528" width="12" height="10" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+<text x="220" y="537" font-size="9" fill="#444">Blocked overlap</text>
+<rect x="320" y="528" width="12" height="10" rx="2" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+<text x="340" y="537" font-size="9" fill="#444">TV (articulating)</text>
+<rect x="430" y="528" width="12" height="10" rx="2" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+<text x="450" y="537" font-size="9" fill="#444">LP stub-out</text>
+</svg>
+</div>
+
+<div class="callout callout-green" style="margin-top:16px">
+<strong>Pre-install checklist — fridge wall:</strong><br><br>
+&#9744; Wire dedicated 20A circuit for KBU56ASD 36" cooler<br>
+&#9744; Wire 115V outlet for Summit SPFF51OS2D freezer (GFCI built-in)<br>
+&#9744; Install 2×6 plywood backer block at EAST end of 55" wall for articulating TV mount (Phase 4 framing)<br>
+&#9744; Install recessed outlet box at east end of 55" wall, 6" from edge, 60" AFF — concealed behind stowed TV<br>
+&#9744; Run TV data/HDMI via in-wall cable management along articulating arm path<br>
+&#9744; LP stub-out at deck level on 55" house wall from two 100-gal tanks via 3/4" black iron main<br>
+&#9744; Install blocking under fridge wall — heaviest sustained load (~335 lbs combined coolers)<br>
+&#9744; Sister 2-3 joists under fridge wall<br>
+&#9744; Template countertop after framing complete
+</div>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 16px">Appliance install notes — zone by zone (west to east)</h3>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #94a3b8">
+<span class="label" style="color:#475569">Zone 1: Window wall overlap (~24.6"W)</span>
+<p><strong>Construction:</strong> Dead space — the window wall counter depth (25") crosses into this zone at the NW corner. Frame and clad to match. No cutouts, no doors, no drawers.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #3498db">
+<span class="label" style="color:#1e40af">Zone 2: Kingsbottle KBU56ASD 36" beverage cooler (35.4"W)</span>
+<p><a href="https://www.kingsbottle.com" target="_blank" style="color:#1e40af;font-size:12px">Kingsbottle product page</a><br>
+<strong>Design intent:</strong> Primary beverage cooler — dual zone, ~185 lbs fully loaded. 1" filler strip between this unit and Summit freezer.<br>
+<strong>Electrical:</strong> Dedicated 20A circuit. Outlet behind unit.<br>
+<strong>Clearances:</strong> Front-venting — 0" side clearance to overlap zone. 1" filler strip to Summit on right side for airflow.<br>
+<strong>Install:</strong> Slides into framed opening. 35.4"W × 22.4"D × 33.5"H. Fits within 40" counter height.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #3498db">
+<span class="label" style="color:#1e40af">Zone 3: Summit SPFF51OS2D 24" outdoor freezer drawers (23.63"W)</span>
+<p><strong>Design intent:</strong> Outdoor freezer drawers — frozen meats, ice cream, frozen prep — 140 lbs.<br>
+<strong>Electrical:</strong> Dedicated 20A circuit. Outlet behind unit.<br>
+<strong>Clearances:</strong> Front-venting, 0" side clearance. Same height as KB 36" — clean visual line.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #1e293b">
+<span class="label" style="color:#1e293b">SunBrite Veranda 3 55" TV — articulating mount, EAST end of 55" wall</span>
+<p><strong>Mount:</strong> <span style="font-weight:600">SunBriteTV SB-WM-ART2-L-BL</span> — dual-arm full-motion outdoor weatherproof mount, 30" extension, 180° swivel, 150-lb capacity.<br>
+<strong>Location:</strong> EAST end of 55" house wall (not centered). Base center 60" AFF. Swings south/west toward cooking run and bar for viewing from cook's position and bar stools. When stowed, mount sits flush against the wall concealing the recessed outlet.<br>
+<strong>Framing prep:</strong> Tristan to install 2×6 plywood backer block at mount location during Phase 4 framing — confirms lag-bolt anchor into solid backing.<br>
+<strong>Electrical:</strong> Recessed outlet box at east end, 6" inset from edge, 60" AFF — concealed behind stowed TV. NOT surface-mount (TV must sit flush when folded).<br>
+<strong>Cable management:</strong> Integrated cable management along articulating arm brings data/HDMI from house interior through the arm to the TV.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #e74c3c">
+<span class="label" style="color:#991b1b">LP stub-out — two 100-gal tanks via 3/4" black iron main</span>
+<p><strong>Tanks:</strong> Two 100-gallon LP tanks feed 3/4" black iron main line to the deck stub-out.<br>
+<strong>Sizing:</strong> 95K BTU total load is well under 3/4" pipe capacity at any practical run length. No sizing concerns.<br>
+<strong>Routing:</strong> Stub-out at deck level on 55" house wall → tee under deck → west branch (3/8" flare to Coyote, 60K BTU) + east branch (to Blackstone 25K + Napoleon IR 10K = 35K BTU).<br>
+<strong>Shutoff:</strong> Accessible shutoff valve at the stub-out location, plus individual shutoffs at each appliance.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #94a3b8">
+<span class="label" style="color:#475569">Zone 4: Cooking run overlap (~24.6"W)</span>
+<p><strong>Construction:</strong> Dead space — the cooking run counter depth (25") crosses into this zone at the NE corner. Frame and clad to match. No cutouts, no doors, no drawers.</p>
+</div>
+</div>
+
+</div>
+
+<!-- ============ TAB 4: EAST WALL ELEVATION ============ -->
+<div class="panel" id="panel-elev-east">
+<h2 class="section-title">130" Cooking run (east) — elevation view</h2>
+<p class="view-subtitle">Standing inside the kitchen, looking east toward open deck/yard. Left = fridge corner (north). Right = bar post (south). Showing above-counter appliances and below-counter cabinets.</p>
+
+<div class="diagram-wrap">
+<svg viewBox="0 0 1060 580" xmlns="http://www.w3.org/2000/svg" style="font-family:'Segoe UI',system-ui,sans-serif;width:1060px;max-width:none;height:auto;">
+<rect x="0" y="0" width="1060" height="580" fill="#f8fafc" rx="8"/>
+<text x="515" y="28" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="700">130" Cooking Run (East) — Elevation View</text>
+<text x="515" y="44" text-anchor="middle" font-size="11" fill="#64748b">Looking east toward yard | Left = north (fridge wall) | Right = south (bar post)</text>
+<rect x="60" y="56" width="910" height="18" rx="2" fill="#e8f4f8" stroke="#94a3b8" stroke-width="1"/>
+<text x="515" y="68" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600">OPEN DECK EDGE — smoke vents east toward yard</text>
+<rect x="60" y="248" width="910" height="9" rx="2" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
+<text x="40" y="255" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600">40"</text>
+<rect x="60" y="420" width="910" height="5" rx="1" fill="#d4c4a8" stroke="#a0845c" stroke-width="1"/>
+<text x="40" y="425" text-anchor="middle" font-size="8" fill="#a0845c" font-weight="600">0"</text>
+<rect x="60" y="257" width="910" height="163" rx="0" fill="#f5f0e8" stroke="none"/>
+<!-- Non-combustible assembly banner -->
+<rect x="415" y="82" width="500" height="32" rx="4" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+<text x="665" y="95" text-anchor="middle" font-size="8" fill="#166534" font-weight="600">✓ Traeger bay + IR zone: metal studs + cement board non-combustible assembly</text>
+<text x="665" y="107" text-anchor="middle" font-size="7" fill="#166534">Napoleon 700 Series: 9" side / 17" rear clearance BTU-independent — ZERO clearance required with assembly</text>
+<rect x="79" y="245" width="68" height="14" rx="7" fill="#94a3b8" opacity="0.85"/>
+<text x="113" y="255" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 1</text>
+<rect x="62" y="259" width="101" height="161" rx="3" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="113" y="315" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">FRIDGE</text>
+<text x="113" y="330" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">OVERLAP</text>
+<text x="113" y="350" text-anchor="middle" font-size="7" fill="#64748b">~15" counter</text>
+<text x="113" y="364" text-anchor="middle" font-size="7" fill="#64748b">KBU56ASD below</text>
+<text x="113" y="382" text-anchor="middle" font-size="6" fill="#166534" font-weight="600">CONFIRMED</text>
+<text x="113" y="393" text-anchor="middle" font-size="6" fill="#166534">by Tristan</text>
+<rect x="62" y="248" width="101" height="9" rx="2" fill="#94a3b8" stroke="#64748b" stroke-width="1" opacity="0.6"/>
+<text x="113" y="440" text-anchor="middle" font-size="7" fill="#166534" font-weight="600">15" ✓</text>
+<rect x="165" y="257" width="35" height="163" fill="#faf8f4" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="4,3"/>
+<text x="183" y="345" text-anchor="middle" font-size="6" fill="#94a3b8" transform="rotate(-90,183,345)">5" gap</text>
+<rect x="281" y="146" width="68" height="14" rx="7" fill="#f39c12" opacity="0.85"/>
+<text x="315" y="156" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 2</text>
+<rect x="202" y="160" width="225" height="88" rx="4" fill="#fed7aa" stroke="#f39c12" stroke-width="2"/>
+<rect x="212" y="165" width="205" height="35" rx="6" fill="#f9e4c0" stroke="#f39c12" stroke-width="1"/>
+<text x="315" y="186" text-anchor="middle" font-size="8" fill="#92400e" font-weight="600">integrated hood</text>
+<text x="315" y="210" text-anchor="middle" font-size="10" fill="#92400e" font-weight="700">Blackstone 28" XL</text>
+<text x="315" y="224" text-anchor="middle" font-size="8" fill="#92400e">6332 — 585 sq in, 3-zone</text>
+<text x="315" y="237" text-anchor="middle" font-size="7" fill="#92400e">25K BTU LP · 3/8" flare @ 11" WC</text>
+<rect x="202" y="259" width="225" height="50" rx="3" fill="#fef3c7" stroke="#f39c12" stroke-width="1.5" opacity="0.7"/>
+<text x="315" y="279" text-anchor="middle" font-size="8" fill="#92400e" font-weight="600">Blackstone 6228 insulating jacket</text>
+<text x="315" y="293" text-anchor="middle" font-size="7" fill="#92400e">35.4"W × 9.16"H × 26.09"D — 304 SS</text>
+<rect x="202" y="313" width="225" height="107" rx="3" fill="#e8e0d4" stroke="#94a3b8" stroke-width="2"/>
+<line x1="315" y1="317" x2="315" y2="416" stroke="#94a3b8" stroke-width="1"/>
+<circle cx="309" cy="367" r="3" fill="#94a3b8" opacity="0.5"/>
+<circle cx="322" cy="367" r="3" fill="#94a3b8" opacity="0.5"/>
+<text x="315" y="350" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">BI-3624-2D</text>
+<text x="315" y="365" text-anchor="middle" font-size="8" fill="#475569">36" double door</text>
+<text x="315" y="385" text-anchor="middle" font-size="7" fill="#64748b">storage access</text>
+<text x="315" y="440" text-anchor="middle" font-size="8" fill="#f39c12" font-weight="600">32.75"</text>
+<rect x="429" y="257" width="35" height="163" fill="#faf8f4" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="4,3"/>
+<text x="447" y="345" text-anchor="middle" font-size="6" fill="#94a3b8" transform="rotate(-90,447,345)">5" gap</text>
+<rect x="568" y="126" width="68" height="14" rx="7" fill="#e74c3c" opacity="0.85"/>
+<text x="602" y="136" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 3</text>
+<rect x="466" y="140" width="271" height="280" rx="5" fill="#fecaca" stroke="#e74c3c" stroke-width="2"/>
+<rect x="474" y="146" width="255" height="115" rx="4" fill="#fca5a5" stroke="#dc2626" stroke-width="1"/>
+<text x="602" y="180" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="700">Traeger Timberline</text>
+<text x="602" y="195" text-anchor="middle" font-size="8" fill="#991b1b">TBB86RLG — 880 sq in</text>
+<text x="602" y="209" text-anchor="middle" font-size="8" fill="#991b1b">WiFi + MEATER | Super Smoke</text>
+<text x="602" y="223" text-anchor="middle" font-size="8" fill="#991b1b">165-500°F pellet grill</text>
+<text x="602" y="237" text-anchor="middle" font-size="7" fill="#991b1b">ELECTRIC — no LP · powers induction via rear strip</text>
+<rect x="474" y="279" width="255" height="70" rx="3" fill="#fee2e2" stroke="#dc2626" stroke-width="1" stroke-dasharray="4,2"/>
+<text x="602" y="305" text-anchor="middle" font-size="9" fill="#991b1b" font-weight="600">SELF-CONTAINED BASE</text>
+<text x="602" y="320" text-anchor="middle" font-size="8" fill="#991b1b">built-in storage doors</text>
+<text x="602" y="334" text-anchor="middle" font-size="7" fill="#64748b">no external cabinet needed</text>
+<rect x="474" y="355" width="255" height="25" rx="2" fill="#fecdd3" stroke="#dc2626" stroke-width="1"/>
+<text x="602" y="371" text-anchor="middle" font-size="7" fill="#991b1b">BAC682 trim kit — kickplate + leveling feet</text>
+<rect x="474" y="383" width="255" height="37" rx="2" fill="#fee2e2" stroke="#dc2626" stroke-width="0.8"/>
+<text x="602" y="400" text-anchor="middle" font-size="7" fill="#991b1b">pellet hopper + EZ-Clean ash keg</text>
+<text x="602" y="412" text-anchor="middle" font-size="7" fill="#64748b">access from front</text>
+<text x="602" y="440" text-anchor="middle" font-size="8" fill="#e74c3c" font-weight="600">39.3"</text>
+<!-- Grommet pass-through callout -->
+<circle cx="737" cy="220" r="6" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+<text x="737" y="223" text-anchor="middle" font-size="5" fill="#dc2626" font-weight="600">⊙</text>
+<text x="737" y="200" text-anchor="middle" font-size="5" fill="#dc2626">2" grommet</text>
+<text x="737" y="212" text-anchor="middle" font-size="5" fill="#dc2626">cord pass-through</text>
+<!-- ZONE 4 — IR sear with induction cooktop above -->
+<rect x="751" y="191" width="68" height="14" rx="7" fill="#dc2626" opacity="0.85"/>
+<text x="785" y="201" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 4</text>
+<rect x="741" y="215" width="87" height="33" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+<circle cx="785" cy="231" r="12" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+<circle cx="785" cy="231" r="6" fill="none" stroke="#dc2626" stroke-width="0.8" opacity="0.5"/>
+<text x="785" y="205" text-anchor="middle" font-size="8" fill="#991b1b" font-weight="700">Induction</text>
+<text x="785" y="245" text-anchor="middle" font-size="6" fill="#991b1b">Traeger cooktop</text>
+<rect x="741" y="259" width="87" height="161" rx="3" fill="#fee2e2" stroke="#dc2626" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="785" y="305" text-anchor="middle" font-size="8" fill="#991b1b" font-weight="600">Induction</text>
+<text x="785" y="320" text-anchor="middle" font-size="8" fill="#991b1b" font-weight="600">below-counter</text>
+<text x="785" y="340" text-anchor="middle" font-size="7" fill="#64748b">Powered from</text>
+<text x="785" y="354" text-anchor="middle" font-size="7" fill="#64748b">Traeger rear</text>
+<text x="785" y="368" text-anchor="middle" font-size="7" fill="#64748b">power strip</text>
+<text x="785" y="385" text-anchor="middle" font-size="6" fill="#166534" font-weight="600">(NOT separate outlet)</text>
+<text x="785" y="402" text-anchor="middle" font-size="7" fill="#94a3b8">open bay — no door</text>
+<text x="785" y="440" text-anchor="middle" font-size="8" fill="#e74c3c" font-weight="600">~13"</text>
+<line x1="737" y1="231" x2="741" y2="231" stroke="#dc2626" stroke-width="1.5"/>
+<text x="739" y="260" text-anchor="middle" font-size="5" fill="#dc2626">1"</text>
+<rect x="830" y="257" width="21" height="163" fill="#faf8f4" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="4,3"/>
+<text x="841" y="345" text-anchor="middle" font-size="5" fill="#94a3b8" transform="rotate(-90,841,345)">3"</text>
+<rect x="865" y="196" width="68" height="14" rx="7" fill="#1a1a1a" opacity="0.85"/>
+<text x="899" y="206" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 5</text>
+<rect x="853" y="210" width="91" height="38" rx="3" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="2"/>
+<text x="899" y="226" text-anchor="middle" font-size="7" fill="#e5e5e5" font-weight="700">Napoleon IR</text>
+<text x="899" y="237" text-anchor="middle" font-size="6" fill="#b0b0b0">BIB10IRPMK</text>
+<text x="899" y="246" text-anchor="middle" font-size="5" fill="#b0b0b0">1800°F sear</text>
+<rect x="853" y="259" width="91" height="38" rx="3" fill="#e8e0d4" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="899" y="272" text-anchor="middle" font-size="6" fill="#475569" font-weight="600">BI-1808-1DR</text>
+<text x="899" y="284" text-anchor="middle" font-size="6" fill="#64748b">8"H drawer</text>
+<rect x="853" y="301" width="91" height="119" rx="3" fill="#e8e0d4" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="899" y="330" text-anchor="middle" font-size="6" fill="#475569" font-weight="600">BI-1816-2DR</text>
+<text x="899" y="345" text-anchor="middle" font-size="6" fill="#64748b">16"H double</text>
+<text x="899" y="358" text-anchor="middle" font-size="6" fill="#64748b">drawer</text>
+<text x="899" y="440" text-anchor="middle" font-size="8" fill="#475569" font-weight="600">13.5"</text>
+<rect x="946" y="248" width="22" height="177" rx="2" fill="#7c5c3c" stroke="#5c3d2e" stroke-width="1.5"/>
+<text x="957" y="330" text-anchor="middle" font-size="5" fill="white" font-weight="700" transform="rotate(-90,957,330)">6×6 POST</text>
+<line x1="60" y1="458" x2="970" y2="458" stroke="#64748b" stroke-width="1"/>
+<line x1="60" y1="452" x2="60" y2="464" stroke="#64748b" stroke-width="1"/>
+<line x1="970" y1="452" x2="970" y2="464" stroke="#64748b" stroke-width="1"/>
+<text x="515" y="476" text-anchor="middle" font-size="12" fill="#334155" font-weight="700">130" total</text>
+<line x1="48" y1="253" x2="48" y2="420" stroke="#64748b" stroke-width="1"/>
+<line x1="42" y1="253" x2="54" y2="253" stroke="#64748b" stroke-width="1"/>
+<line x1="42" y1="420" x2="54" y2="420" stroke="#64748b" stroke-width="1"/>
+<text x="34" y="342" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600" transform="rotate(-90,34,342)">40" counter ht</text>
+<rect x="60" y="492" width="910" height="72" rx="6" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+<text x="515" y="508" text-anchor="middle" font-size="10" fill="#64748b" font-weight="600">North → South | Induction powers from Traeger rear strip (not separate circuit) | Non-combustible assembly eliminates clearance concerns</text>
+<rect x="80" y="520" width="12" height="10" rx="2" fill="#fed7aa" stroke="#f39c12" stroke-width="1"/>
+<text x="100" y="529" font-size="9" fill="#444">Griddle</text>
+<rect x="155" y="520" width="12" height="10" rx="2" fill="#fecaca" stroke="#e74c3c" stroke-width="1"/>
+<text x="175" y="529" font-size="9" fill="#444">Pellet grill + induction</text>
+<rect x="290" y="520" width="12" height="10" rx="2" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="1"/>
+<text x="310" y="529" font-size="9" fill="#444">IR sear</text>
+<rect x="370" y="520" width="12" height="10" rx="2" fill="#e8e0d4" stroke="#94a3b8" stroke-width="1"/>
+<text x="390" y="529" font-size="9" fill="#444">Cabinet</text>
+<rect x="445" y="520" width="12" height="10" rx="2" fill="#fef3c7" stroke="#f39c12" stroke-width="1"/>
+<text x="465" y="529" font-size="9" fill="#444">Jacket</text>
+<rect x="510" y="520" width="12" height="10" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+<text x="530" y="529" font-size="9" fill="#444">Overlap</text>
+<rect x="585" y="520" width="12" height="10" rx="2" fill="#7c5c3c" stroke="#5c3d2e" stroke-width="1"/>
+<text x="605" y="529" font-size="9" fill="#444">Post</text>
+<text x="515" y="550" text-anchor="middle" font-size="9" fill="#166534">✓ Traeger + IR bay: non-combustible steel stud + cement board assembly — zero clearance required</text>
+</svg>
+</div>
+
+<div class="callout callout-green" style="margin-top:16px">
+<strong>Major simplifications applied in v7.2:</strong><br><br>
+• <strong>Traeger induction:</strong> Plugs into Traeger grill's rear power strip — no separate outlet, no separate circuit. Cord passes through 2" hole saw cut + 1.5" ID non-adhesive rubber grommet between induction bay and Traeger bay.<br>
+• <strong>Napoleon IR heat shield:</strong> Metal studs + cement board non-combustible assembly extending from Traeger bay south covers the IR sear zone. Per Napoleon 700 Series manual: 9" side / 17" rear clearance to combustibles is BTU-independent and eliminated by non-combustible assembly.<br>
+• <strong>Blackstone LP fitting:</strong> 3/8" male flare @ 11" WC at stub. Plumber provides outdoor-rated built-in flex line from stub to factory inlet. Factory QCC cord is tank-configured and NOT used in built-in installs.
+</div>
+
+<div class="callout callout-green" style="margin-top:16px">
+<strong>Pre-install checklist — cooking run:</strong><br><br>
+&#9745; <strong style="color:#166534">CONFIRMED: Fridge overlap compresses to 15" — Tristan verified</strong><br>
+&#9744; Run LP gas from 55" house wall stub-out under deck to Blackstone and Napoleon IR zones (35K BTU, separate shutoffs)<br>
+&#9744; Build non-combustible steel-stud + cement board assembly from Traeger bay extending south to cover IR zone<br>
+&#9744; Wire dedicated 120V GFCI for Traeger pellet grill (induction plugs into Traeger's rear strip — no separate circuit)<br>
+&#9744; Cut 2" hole saw through Traeger/induction bay divider, install 1.5" ID rubber grommet, route induction cord<br>
+&#9744; Wire 120V for Blackstone ignition + LED knobs + puddle light<br>
+&#9744; Wire 110V for Napoleon IR SafetyGlow knobs (via N370-1091-SER power supply kit)<br>
+&#9744; Wire GFCI outlets at each work zone per code<br>
+&#9744; Install Blackstone 6228 insulating jacket before griddle drop-in<br>
+&#9744; Install island ventilation panels — propane vents go LOW<br>
+&#9744; Install blocking under all bottom track runs — heaviest zone is Traeger (252 lbs)<br>
+&#9744; Confirm post location: 6×6 wood, north face at 130" line, east face 26" from east deck edge<br>
+&#9744; Template countertop after all rough-ins and jacket install complete
+</div>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 16px">Appliance install notes — zone by zone (north to south)</h3>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #94a3b8">
+<span class="label" style="color:#475569">Zone 1: Fridge overlap (15"W) — CONFIRMED</span>
+<p><strong>Construction:</strong> Counter surface only — no appliance above or below. KBU56ASD 36" cooler sits on the fridge wall side below.<br>
+<strong>Confirmed:</strong> Tristan verified the 15" overlap dimension in the field. Framing can proceed.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #f39c12">
+<span class="label" style="color:#92400e">Zone 2: Blackstone 28" XL griddle (32.75"W)</span>
+<p><a href="https://manuals.plus/blackstone/6029-28-inch-xl-griddle-drop-in-with-hood-and-insulating-jacket-manual" target="_blank" style="color:#92400e;font-size:12px">Blackstone 28" XL owner's manual</a><br>
+<strong>Gas:</strong> LP from east wall drop. <strong>Fitting: 3/8" male flare @ 11" WC at the stub.</strong> Plumber provides outdoor-rated built-in flex line from stub to factory inlet. Factory QCC cord is tank-configured and NOT used in built-in installs. If flex line kit available, contact Blackstone Support at 1-435-252-3030.<br>
+<strong>Electrical:</strong> 120V 3-prong outlet for electronic ignition + LED knobs + dimmable puddle lighting.<br>
+<strong>Jacket:</strong> Blackstone 6228 insulating jacket REQUIRED. 304 SS, water drainage, cable routing port, countertop flange. Cavity min: 38.75"W × 27.5"D × 8"H.<br>
+<strong>Hood clearance:</strong> Do NOT leave hood closed for more than 10 minutes while cooking.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #e74c3c">
+<span class="label" style="color:#991b1b">Zone 3: Traeger Timberline TBB86RLG (39.3"W)</span>
+<p><a href="https://support.traeger.com/hc/en-us/articles/7650399651355-Timberline-Built-In-Trim-Kit-for-Outdoor-Kitchens" target="_blank" style="color:#991b1b;font-size:12px">Traeger built-in trim kit instructions</a><br>
+<strong>Gas:</strong> NONE — 100% electric (pellet). No LP connection.<br>
+<strong>Electrical:</strong> Dedicated 120V GFCI for the pellet grill. <strong>Note: Traeger's rear power strip also powers the induction cooktop (next zone) — no separate induction circuit needed.</strong><br>
+<strong>Self-contained base:</strong> Built-in double-wall storage doors, pellet hopper, EZ-Clean ash keg. NO external Napoleon cabinets needed. BAC682 trim kit for built-in placement.<br>
+<strong>Clearances:</strong> Non-combustible assembly in this bay (steel studs + cement board) — extends south to cover IR zone.<br>
+<strong>Weight:</strong> 252 lbs. Blocking and sistered joists required.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #dc2626">
+<span class="label" style="color:#991b1b">Zone 4: Traeger induction cooktop (~13"W) — flush right of Traeger</span>
+<p><a href="https://support.traeger.com/hc/en-us/articles/6586488724891-Induction-Cooktop" target="_blank" style="color:#991b1b;font-size:12px">Traeger induction cooktop guide</a><br>
+<strong>Design intent:</strong> Counter-mounted induction flush against Traeger's right side. Trim kit includes a 6' extension cord.<br>
+<strong>Electrical (SIMPLIFIED in v7.2):</strong> Cord plugs into Traeger's rear power strip — NOT a separate outlet and NOT a separate circuit. Induction + grill share Traeger's dedicated 120V GFCI.<br>
+<strong>Cord pass-through:</strong> Cut 2" hole through the divider between induction bay and Traeger bay using a 2" hole saw. Install 1.5" ID non-adhesive rubber grommet to protect the cord. Route the induction extension cord through the grommet to the Traeger's rear power strip.<br>
+<strong>Below-counter clearance:</strong> 4.5" minimum below cooktop. Open bay with ventilation — no cabinet door needed.<br>
+<strong>Cookware:</strong> Cast iron, iron, or ferrous stainless steel only. Flat base, 5.5" min diameter.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #1a1a1a">
+<span class="label" style="color:#1a1a1a">Zone 5: Napoleon BIB10IRPMK matte black IR sear (13.5"W)</span>
+<p><a href="https://napoleonproducts.com/outdoor-kitchen-components" target="_blank" style="color:#1a1a1a;font-size:12px">Napoleon 700 Series components</a><br>
+<strong>Gas:</strong> LP 3/8" flare with individual shutoff. 10K BTU from east wall drop.<br>
+<strong>Electrical:</strong> 110V for SafetyGlow knobs via N370-1091-SER power supply kit.<br>
+<strong>Heat shield:</strong> <strong>Non-combustible assembly</strong> — metal studs + cement board framing extending from Traeger bay south to cover IR sear zone. Zero clearance to combustibles required per Napoleon 700 Series manual (clearance requirements are BTU-independent and eliminated by non-combustible assembly).<br>
+<strong>Below-counter:</strong> BI-1808-1DR 8"H (top) + BI-1816-2DR 16"H (bottom) stacked pair. 18" Napoleon width with ~2.25" filler each side.<br>
+<strong>Post:</strong> 6×6 wood post at SW corner. North face flush with south end of cooking run (130" line). Bar's west end butts into post's east face.</p>
+</div>
+</div>
+
+</div>
+
+<!-- ============ TAB 5: BAR ELEVATION (REBUILT FOR 157") ============ -->
+<div class="panel" id="panel-elev-bar">
+<h2 class="section-title">157" Bar peninsula (south) — elevation view</h2>
+<p class="view-subtitle">Standing inside the kitchen, looking south at the bar's kitchen side. Left = post/cooking run corner (west). Right = open deck end (east). Guest side faces south toward yard. Total 157" = 25" cooking-run overlap + 108" cabinets + 24" east extension.</p>
+
+<div class="diagram-wrap">
+<svg viewBox="0 0 1180 520" xmlns="http://www.w3.org/2000/svg" style="font-family:'Segoe UI',system-ui,sans-serif;width:1180px;max-width:none;height:auto;">
+<rect x="0" y="0" width="1180" height="520" fill="#f8fafc" rx="8"/>
+<text x="590" y="28" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="700">157" Bar Peninsula — Kitchen Side Elevation</text>
+<text x="590" y="44" text-anchor="middle" font-size="11" fill="#64748b">Looking south at kitchen side | Left = post (west) | Right = open deck end (east)</text>
+<!-- Scale: (1040 - 60) / 157 = ~6.24 px/in (actually use 6.4 for cleaner ratios).
+     Span: x=60 to x=60+157*6.24=1040.
+     Widths in px: 25"→156, 30"→187, 30"→187, 30"→187, 18"→112, 24"→150. Sum=979 (~980 matches).
+-->
+<rect x="60" y="228" width="980" height="9" rx="2" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
+<text x="40" y="235" text-anchor="middle" font-size="7" fill="#64748b" font-weight="600">40"</text>
+<rect x="60" y="400" width="980" height="5" rx="1" fill="#d4c4a8" stroke="#a0845c" stroke-width="1"/>
+<text x="40" y="405" text-anchor="middle" font-size="7" fill="#a0845c" font-weight="600">0"</text>
+<rect x="60" y="237" width="980" height="163" rx="0" fill="#f5f0e8" stroke="none"/>
+<!-- POST — 6×6 wood (at west edge, partial) -->
+<rect x="56" y="219" width="30" height="186" rx="2" fill="#7c5c3c" stroke="#5c3d2e" stroke-width="1.5"/>
+<text x="71" y="315" text-anchor="middle" font-size="5" fill="white" font-weight="700" transform="rotate(-90,71,315)">6×6 POST</text>
+<!-- Zone 1: West overlap (25") x=60 to x=216 -->
+<rect x="108" y="225" width="60" height="14" rx="7" fill="#94a3b8" opacity="0.85"/>
+<text x="138" y="235" text-anchor="middle" font-size="7" fill="white" font-weight="700">ZONE 1</text>
+<rect x="86" y="239" width="130" height="161" rx="3" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="151" y="290" text-anchor="middle" font-size="8" fill="#475569" font-weight="700">WEST OVERLAP</text>
+<text x="151" y="310" text-anchor="middle" font-size="7" fill="#64748b">Cooking run post</text>
+<text x="151" y="324" text-anchor="middle" font-size="7" fill="#64748b">corner — counter only</text>
+<text x="151" y="344" text-anchor="middle" font-size="6" fill="#94a3b8">(blocked, no doors)</text>
+<text x="151" y="420" text-anchor="middle" font-size="7" fill="#94a3b8" font-weight="600">25"</text>
+<!-- Zone 2: Cabinet 1 (30") x=216 to x=403 -->
+<rect x="278" y="225" width="62" height="14" rx="7" fill="#b7791f" opacity="0.85"/>
+<text x="309" y="235" text-anchor="middle" font-size="7" fill="white" font-weight="700">ZONE 2</text>
+<rect x="216" y="239" width="187" height="161" rx="3" fill="#e8e0d4" stroke="#94a3b8" stroke-width="2"/>
+<line x1="309" y1="243" x2="309" y2="396" stroke="#94a3b8" stroke-width="1"/>
+<rect x="222" y="247" width="82" height="143" rx="2" fill="none" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.5"/>
+<rect x="313" y="247" width="82" height="143" rx="2" fill="none" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.5"/>
+<circle cx="303" cy="320" r="3" fill="#94a3b8" opacity="0.5"/>
+<circle cx="315" cy="320" r="3" fill="#94a3b8" opacity="0.5"/>
+<text x="309" y="290" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">BI-3024-2D</text>
+<text x="309" y="306" text-anchor="middle" font-size="8" fill="#475569">30" double door</text>
+<text x="309" y="340" text-anchor="middle" font-size="7" fill="#64748b">Cabinet 1 — dry storage</text>
+<text x="309" y="420" text-anchor="middle" font-size="7" fill="#94a3b8" font-weight="600">30"</text>
+<!-- Zone 3: Cabinet 2 (30") x=403 to x=590 -->
+<rect x="465" y="225" width="62" height="14" rx="7" fill="#b7791f" opacity="0.85"/>
+<text x="496" y="235" text-anchor="middle" font-size="7" fill="white" font-weight="700">ZONE 3</text>
+<rect x="403" y="239" width="187" height="161" rx="3" fill="#e8e0d4" stroke="#94a3b8" stroke-width="2"/>
+<line x1="496" y1="243" x2="496" y2="396" stroke="#94a3b8" stroke-width="1"/>
+<rect x="409" y="247" width="82" height="143" rx="2" fill="none" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.5"/>
+<rect x="500" y="247" width="82" height="143" rx="2" fill="none" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.5"/>
+<circle cx="490" cy="320" r="3" fill="#94a3b8" opacity="0.5"/>
+<circle cx="502" cy="320" r="3" fill="#94a3b8" opacity="0.5"/>
+<text x="496" y="290" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">BI-3024-2D</text>
+<text x="496" y="306" text-anchor="middle" font-size="8" fill="#475569">30" double door</text>
+<text x="496" y="340" text-anchor="middle" font-size="7" fill="#64748b">Cabinet 2 — bottles, mixers</text>
+<text x="496" y="420" text-anchor="middle" font-size="7" fill="#94a3b8" font-weight="600">30"</text>
+<!-- Zone 4: Cabinet 3 (30") x=590 to x=777 -->
+<rect x="652" y="225" width="62" height="14" rx="7" fill="#b7791f" opacity="0.85"/>
+<text x="683" y="235" text-anchor="middle" font-size="7" fill="white" font-weight="700">ZONE 4</text>
+<rect x="590" y="239" width="187" height="161" rx="3" fill="#e8e0d4" stroke="#94a3b8" stroke-width="2"/>
+<line x1="683" y1="243" x2="683" y2="396" stroke="#94a3b8" stroke-width="1"/>
+<rect x="596" y="247" width="82" height="143" rx="2" fill="none" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.5"/>
+<rect x="687" y="247" width="82" height="143" rx="2" fill="none" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.5"/>
+<circle cx="677" cy="320" r="3" fill="#94a3b8" opacity="0.5"/>
+<circle cx="689" cy="320" r="3" fill="#94a3b8" opacity="0.5"/>
+<text x="683" y="290" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">BI-3024-2D</text>
+<text x="683" y="306" text-anchor="middle" font-size="8" fill="#475569">30" double door</text>
+<text x="683" y="340" text-anchor="middle" font-size="7" fill="#64748b">Cabinet 3 — cleaning</text>
+<text x="683" y="420" text-anchor="middle" font-size="7" fill="#94a3b8" font-weight="600">30"</text>
+<!-- Zone 5: Cabinet 4 BI-1824-1D hose bib (18") x=777 to x=889 -->
+<rect x="805" y="225" width="60" height="14" rx="7" fill="#16a34a" opacity="0.85"/>
+<text x="835" y="235" text-anchor="middle" font-size="7" fill="white" font-weight="700">ZONE 5</text>
+<rect x="777" y="239" width="112" height="161" rx="3" fill="#d1fae5" stroke="#16a34a" stroke-width="2"/>
+<rect x="783" y="247" width="100" height="143" rx="2" fill="none" stroke="#16a34a" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.5"/>
+<circle cx="833" cy="320" r="3" fill="#16a34a" opacity="0.5"/>
+<text x="833" y="285" text-anchor="middle" font-size="8" fill="#166534" font-weight="700">BI-1824-1D</text>
+<text x="833" y="300" text-anchor="middle" font-size="7" fill="#166534">18" single door</text>
+<text x="833" y="320" text-anchor="middle" font-size="6" fill="#166534">Cabinet 4</text>
+<text x="833" y="345" text-anchor="middle" font-size="7" fill="#16a34a" font-weight="600">HOSE BIB</text>
+<text x="833" y="360" text-anchor="middle" font-size="6" fill="#64748b">inside cabinet</text>
+<text x="833" y="373" text-anchor="middle" font-size="6" fill="#64748b">+ shutoff + petcock</text>
+<text x="833" y="420" text-anchor="middle" font-size="7" fill="#16a34a" font-weight="600">18"</text>
+<!-- Zone 6: East extension (24") x=889 to x=1040 — open counter, no cabinet -->
+<rect x="935" y="225" width="68" height="14" rx="7" fill="#d97706" opacity="0.85"/>
+<text x="969" y="235" text-anchor="middle" font-size="7" fill="white" font-weight="700">ZONE 6</text>
+<rect x="889" y="239" width="151" height="161" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="2" stroke-dasharray="5,3"/>
+<text x="964" y="290" text-anchor="middle" font-size="9" fill="#92400e" font-weight="700">EAST EXTENSION</text>
+<text x="964" y="308" text-anchor="middle" font-size="7" fill="#92400e">Open counter</text>
+<text x="964" y="322" text-anchor="middle" font-size="7" fill="#92400e">no cabinet below</text>
+<text x="964" y="345" text-anchor="middle" font-size="6" fill="#b7791f" font-style="italic">counter extends past</text>
+<text x="964" y="358" text-anchor="middle" font-size="6" fill="#b7791f" font-style="italic">Cabinet 4 toward</text>
+<text x="964" y="371" text-anchor="middle" font-size="6" fill="#b7791f" font-style="italic">east deck edge</text>
+<text x="964" y="420" text-anchor="middle" font-size="7" fill="#d97706" font-weight="600">24"</text>
+<!-- Dimensions -->
+<line x1="60" y1="438" x2="1040" y2="438" stroke="#64748b" stroke-width="1"/>
+<line x1="60" y1="432" x2="60" y2="444" stroke="#64748b" stroke-width="1"/>
+<line x1="1040" y1="432" x2="1040" y2="444" stroke="#64748b" stroke-width="1"/>
+<text x="550" y="456" text-anchor="middle" font-size="12" fill="#334155" font-weight="700">157" total</text>
+<line x1="48" y1="233" x2="48" y2="400" stroke="#64748b" stroke-width="1"/>
+<line x1="42" y1="233" x2="54" y2="233" stroke="#64748b" stroke-width="1"/>
+<line x1="42" y1="400" x2="54" y2="400" stroke="#64748b" stroke-width="1"/>
+<text x="34" y="322" text-anchor="middle" font-size="7" fill="#64748b" font-weight="600" transform="rotate(-90,34,322)">40" counter ht</text>
+<text x="550" y="200" text-anchor="middle" font-size="9" fill="#64748b">14" deep cabinet | 25" counter (14" cab + ~11" guest overhang) | 40" counter (same as all walls) | 42" bar top (guest side)</text>
+<!-- Math explainer -->
+<text x="550" y="180" text-anchor="middle" font-size="10" fill="#2c3e50" font-weight="700">25" overlap + 30" + 30" + 30" + 18" + 24" = 157"</text>
+<!-- Legend -->
+<rect x="60" y="472" width="980" height="40" rx="6" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+<text x="550" y="488" text-anchor="middle" font-size="10" fill="#64748b" font-weight="600">West → East | 3× 30" double door + 1× 18" hose bib cabinet = 108" usable + 25" overlap + 24" east extension = 157" total</text>
+<rect x="80" y="498" width="12" height="8" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+<text x="100" y="506" font-size="8" fill="#444">Overlap (post)</text>
+<rect x="180" y="498" width="12" height="8" rx="2" fill="#e8e0d4" stroke="#94a3b8" stroke-width="1"/>
+<text x="200" y="506" font-size="8" fill="#444">Napoleon 30" double door</text>
+<rect x="330" y="498" width="12" height="8" rx="2" fill="#d1fae5" stroke="#16a34a" stroke-width="1"/>
+<text x="350" y="506" font-size="8" fill="#444">Hose bib cabinet</text>
+<rect x="460" y="498" width="12" height="8" rx="2" fill="#fef3c7" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="480" y="506" font-size="8" fill="#444">East extension (open counter)</text>
+<rect x="640" y="498" width="12" height="8" rx="2" fill="#7c5c3c" stroke="#5c3d2e" stroke-width="1"/>
+<text x="660" y="506" font-size="8" fill="#444">6×6 post</text>
+</svg>
+</div>
+
+<div class="callout callout-green" style="margin-top:16px">
+<strong>Pre-install checklist — bar peninsula:</strong><br><br>
+&#9744; Confirm post location and bar attachment point (bar west end butts into post's east face)<br>
+&#9744; Frame bar cabinets: 14" deep, 40" counter height, treated lumber — 25" overlap + 108" cabinets + 24" east extension = 157" total<br>
+&#9744; Frame 24" east extension as open structure (no cabinet, open framing with steel stud or treated lumber bracing)<br>
+&#9744; Run hose bib supply to Cabinet 4 — cold water only, standard garden hose connection<br>
+&#9744; Install hose bib shutoff valve + drain petcock inside Cabinet 4 for winterization<br>
+&#9744; Wire under-counter LED strip (61 linear ft total · ~270W): Armacost RibbonFlex Pro 24VDC IP65 outdoor warm-white + 2× Magnitude M150L24DC-AR TRIAC-dimmable 24V/150W IP67 drivers + Lutron Caséta PD-6WCL dimmer at W4<br>
+&#9744; Stone cladding on guest (south) side — scratch coat + thinset on cement board<br>
+&#9744; Countertop: 25" total (14" cabinet + ~11" guest overhang). Brackets for 11" cantilever<br>
+&#9744; Bar top height: 42" on guest side (standard bar height for bar stools)<br>
+&#9744; Winterization: drain petcock on hose bib supply inside cabinet 4 (same blowout procedure as sink)
+</div>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 16px">Zone-by-zone notes (west to east)</h3>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #94a3b8">
+<span class="label" style="color:#475569">Zone 1: West overlap (25"W) — 6×6 post corner</span>
+<p><strong>Construction:</strong> Dead space at the post end. 6×6 wood post sits at the corner with its north face flush to the cooking run's south end and east face at 26" from deck edge. Bar's west end butts into post's east face. No cutouts, no doors, no drawers.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #94a3b8">
+<span class="label" style="color:#475569">Zones 2–4: Napoleon BI-3024-2D 30" double doors (3×)</span>
+<p><a href="https://napoleonproducts.com/outdoor-kitchen-components" target="_blank" style="color:#475569;font-size:12px">Napoleon outdoor kitchen components</a><br>
+<strong>Design intent:</strong> General storage — grilling tools, serving ware, bar supplies. Three identical 30" double-door cabinets fill 90" of the bar between the overlap and hose bib cabinet.<br>
+<strong>Utilities:</strong> None — no gas, no electrical, no water.<br>
+<strong>Install:</strong> SS doors on kitchen (north) side only — guest (south) side is stone cladding.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #16a34a">
+<span class="label" style="color:#166534">Zone 5: Cabinet 4 — Napoleon BI-1824-1D 18" single door — hose bib</span>
+<p><strong>Design intent:</strong> East-end cabinet houses the hose bib for deck washdown.<br>
+<strong>Plumbing:</strong> Cold water supply only. Standard garden hose thread fitting. Accessible shutoff valve inside cabinet. Drain petcock for winter blowout.<br>
+<strong>Winterization:</strong> Before first freeze each year — shut off house-side supply valve, open petcock, disconnect garden hose, blow out line with compressed air.<br>
+<strong>Install:</strong> 18"W single door. Hose bib fitting mounted inside at accessible height.</p>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<div class="app-card" style="border-left:3px solid #d97706">
+<span class="label" style="color:#92400e">Zone 6: East extension (24"W) — open counter</span>
+<p><strong>Design intent:</strong> Counter extends 24" past Cabinet 4 toward the east deck edge. Open counter, no cabinet below. Provides additional bar-top surface and a final seat position on the guest side.<br>
+<strong>Construction:</strong> Open framing with steel stud bracing or treated lumber cross-bracing. No doors, no drawers. Counter and stone cladding continue seamlessly from Cabinet 4.<br>
+<strong>Stool placement:</strong> The additional 24" accommodates a 5th bar stool on the guest side — bringing total bar seating from 4 to 5-6 stools.</p>
+</div>
+</div>
+
+</div>
+
+<!-- ============ TAB 6: APPLIANCE FLOW ============ -->
+<div class="panel" id="panel-flow">
+<h2 class="section-title">Appliance flow — v7.2 lineup April 2026</h2>
+<p style="font-size:14px;color:#666;margin-bottom:8px">Walking through the counter structure clockwise from the southwest corner.</p>
+<div class="appliance-flow">
+<div class="flow-item"><div class="flow-num n-amber">1</div><div class="flow-content"><span class="wall-tag">45" SW wall</span><h4>Dog door (existing, built into wall)</h4><p>Already installed. Swings north and up. Barkley's path from house to deck. Tristan to verify door arc clears C1SLV sleeve base during Phase 4 framing.</p></div></div>
+<div class="flow-item"><div class="flow-num n-teal">2</div><div class="flow-content"><span class="wall-tag">130" west wall</span><h4>Coyote C3PBLP + C1SLV sleeve → trash → sink → ice maker</h4><p>S→N: Coyote C3PBLP 60K BTU in C1SLV 304 SS insert sleeve → gap → Napoleon BI-1824-1W trash → gap → Ruvati RVH8310 30" Roma workstation sink (centered on 79" window, BI-3024-2D under sink) → gap → Scotsman 15" ice → fridge overlap. ~2.5" gaps (compressed from 3.7" to absorb C1SLV width).</p>
+<div class="app-card" style="border-color:#0d9488"><span class="label" style="color:#0d9488">Coyote C3PBLP in C1SLV — 24"W burner, 27.25"W sleeve</span><p>CJAKTC1PB jacket CANCELLED — superseded by C1SLV integrated enclosure + storage drawer. $849 sleeve replaces $449 jacket.</p></div></div></div>
+<div class="flow-item"><div class="flow-num n-blue">3</div><div class="flow-content"><span class="wall-tag">108" north wall</span><h4>KB 36" cooler + Summit freezer + TV (articulating, east end)</h4><p>36" beverage cooler + 24" freezer drawers. SunBrite 55" TV on articulating mount at EAST end (not centered). LP stub-out at deck level from two 100-gal tanks via 3/4" black iron main (west 60K + east 35K = 95K BTU).</p></div></div>
+<div class="flow-item"><div class="flow-num" style="background:#94a3b8">4</div><div class="flow-content"><span class="wall-tag">130" east wall — overlap</span><h4>Fridge overlap — counter only (15")</h4><p>Counter/filler space. KBU56ASD below on fridge wall side. <strong style="color:#166534">✓ 15" confirmed by Tristan.</strong></p></div></div>
+<div class="flow-item"><div class="flow-num n-orange">5</div><div class="flow-content"><span class="wall-tag">130" east wall</span><h4>Blackstone 28" XL griddle</h4><p>32.75"W, 585 sq in, 3 independent zones, 25K BTU, 3/8" flare @ 11" WC, hood, LED knobs, puddle lighting. Insulating jacket 6228 required.</p></div></div>
+<div class="flow-item"><div class="flow-num n-red">6</div><div class="flow-content"><span class="wall-tag">130" east wall</span><h4>Traeger Timberline TBB86RLG + induction cooktop (shared circuit)</h4><p>Pellet grill on dedicated 120V GFCI. Induction cooktop plugs into Traeger's rear power strip via 2" grommet pass-through — NO separate circuit. Non-combustible steel-stud + cement board assembly in this bay extends south to cover IR zone.</p></div></div>
+<div class="flow-item"><div class="flow-num" style="background:#1a1a1a">7</div><div class="flow-content"><span class="wall-tag">130" east wall — south end</span><h4>Napoleon matte black BIB10IRPMK — sear → serve to bar</h4><p>13.5"W, 10K BTU, 1800°F ceramic IR. Zero clearance to combustibles per Napoleon manual (eliminated by non-combustible assembly).</p></div></div>
+<div class="flow-item"><div class="flow-num n-orange">8</div><div class="flow-content"><span class="wall-tag">157" bar peninsula</span><h4>Bar counter — 157" total with 24" east extension, 5-6 stools</h4><p>42" height on guest side, 25" deep total. <strong>157" = 25" overlap + 3× 30" cabinets + 18" hose bib + 24" east extension.</strong> Napoleon SS doors kitchen side, stone cladding guest side. 5th stool on extension.</p></div></div>
+</div>
+</div>
+
+<!-- ============ TAB 7: UTILITIES (UPDATED) ============ -->
+<div class="panel" id="panel-utilities">
+<h2 class="section-title">Utilities and structure</h2>
+<div class="util-grid">
+<div class="util-card"><h4>Propane (LP) — 95K BTU, 3/4" black iron from two 100-gal tanks</h4><p><strong>Tanks:</strong> Two 100-gallon LP tanks feed a 3/4" black iron main line to the deck stub-out.<br><br><strong>Sizing:</strong> 95K BTU total is well under 3/4" pipe capacity at any practical run length — no sizing concerns.<br><br><strong>East branch:</strong> Blackstone 25K + Napoleon IR 10K = 35K BTU.<br><strong>West branch:</strong> Coyote C3PBLP 60K BTU (separate west wall drop).<br><br>Traeger + induction = electric.</p></div>
+<div class="util-card"><h4>Water / drain</h4><p>Through west wall at window center. Hot/cold + drain for Ruvati RVH8310 sink. Scotsman tees off cold with inline filter. Ice maker drain: 3/4" OD flexible tubing, min 1/4"/ft slope, tie downstream of P-trap, freeze-protected via insulated wall cavity routing. Hose bib on bar east end (cold only, Cabinet 4).</p></div>
+<div class="util-card"><h4>Electrical — 4 dedicated circuits</h4><p>1. KB 36" — 20A ded. 2. Summit freezer — 20A ded. 3. Scotsman — 15A ded. 4. Traeger grill — 120V GFCI ded (induction shares via rear power strip).<br><br><strong>Shared/non-dedicated:</strong> Blackstone — 120V. Napoleon IR — 110V. TV outlet (recessed, east end). GFCI work zones. LED strips (CKT on W4 with Caséta dimmer).</p></div>
+<div class="util-card"><h4>Framing</h4><p>All treated lumber EXCEPT Traeger bay + IR zone: <strong>non-combustible steel stud + cement board assembly</strong> extending from Traeger bay south through IR zone. Blackstone 6228 jacket required. Coyote C1SLV insert sleeve (CJAKTC1PB jacket CANCELLED). Induction bay: open, no door.</p></div>
+<div class="util-card"><h4>LED under-bar lighting</h4><p><strong>Strip:</strong> Armacost RibbonFlex Pro 24VDC IP65 outdoor warm-white. 61 linear ft total (all counter overhangs incl. 157" bar × 2 sides).<br><strong>Drivers:</strong> 2× Magnitude M150L24DC-AR TRIAC-dimmable 24V/150W IP67 (300W combined, 10% headroom vs 270W load).<br><strong>Dimmer:</strong> Lutron Caséta PD-6WCL at W4 device location.</p></div>
+<div class="util-card"><h4>Post position</h4><p>6×6 wood post at SW corner of cooking run. North face at 130" (flush with south end of counter). East face 26" from east deck edge. Post extends 1" past the counter's 25" back edge. Through-bolted to stringers. Bar's west end butts into post's east face.</p></div>
+<div class="util-card"><h4>Deck loading</h4><p>Traeger: 252 lbs. Blackstone: ~150 lbs. KB 36": ~185 lbs + Summit freezer: 140 lbs. Blocking under all bottom tracks. Sister joists under fridge wall + griddle zone + Traeger zone.</p></div>
+<div class="util-card"><h4>TV mount (articulating)</h4><p>SunBriteTV SB-WM-ART2-L-BL — dual-arm, 30" extension, 180° swivel, 150-lb capacity. EAST end of 55" house wall. Base center 60" AFF. 2×6 plywood backer block required. Recessed outlet box behind stowed TV position.</p></div>
+</div>
+</div>
+
+<!-- ============ TAB 8: CABINETS (UPDATED) ============ -->
+<div class="panel" id="panel-cabinets">
+<h2 class="section-title">Below-counter cabinet plan — all walls</h2>
+<p class="view-subtitle">Updated April 22, 2026 (v7.2). CJAKTC1PB cancelled → C1SLV insert sleeve. 157" bar with 24" east extension. Traeger/induction shared circuit.</p>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin-bottom:12px">Window wall (west) — below-counter</h3>
+<div class="cab-grid">
+<div class="cab-card" style="border-color:#0d9488">
+<div><div class="zone">24"</div></div>
+<div><div class="above">Coyote C3PBLP power burner in C1SLV sleeve</div><div class="below"><strong>C1SLV insert sleeve</strong> (27.25"W × 29.6"H × 25.2"D overall · cutout 26.25"W × 29.5"H × 24"D · $849 · 304 SS · integrated storage drawer). <span style="color:#991b1b;font-weight:600">CJAKTC1PB jacket CANCELLED — superseded.</span></div></div>
+<div class="cost" style="color:#0d9488">$849</div>
+</div>
+<div class="cab-card" style="border-color:#f59e0b">
+<div><div class="zone">18"</div></div>
+<div><div class="above">Trash pull-out</div><div class="below"><strong>BI-1824-1W</strong> — full-height pull-out. Dual bins + paper towel drawer.</div></div>
+<div class="cost"></div>
+</div>
+<div class="cab-card" style="border-color:#27ae60">
+<div><div class="zone">30"</div></div>
+<div><div class="above">Ruvati RVH8310 Roma workstation sink</div><div class="below"><strong>BI-3024-2D</strong> — 30" double door. Plumbing access.</div></div>
+<div class="cost"></div>
+</div>
+<div class="cab-card" style="border-color:#0891b2">
+<div><div class="zone">15"</div></div>
+<div><div class="above">Scotsman SRCG065A-1SS</div><div class="below">Self-closing unit door. 15" opening. No additional cabinet door.</div></div>
+<div class="cost" style="color:#94a3b8">—</div>
+</div>
+</div>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 12px">Cooking run (east) — below-counter</h3>
+<div class="cab-grid">
+<div class="cab-card" style="border-color:#cbd5e1">
+<div><div class="zone">15"</div></div>
+<div><div class="above">Fridge overlap — counter only</div><div class="below">Blocked. KBU56ASD on fridge wall below. <span style="color:#166534;font-weight:600">15" confirmed by Tristan.</span></div></div>
+<div class="cost" style="color:#94a3b8">—</div>
+</div>
+<div class="cab-card" style="border-color:#f39c12">
+<div><div class="zone">32.75"</div></div>
+<div><div class="above">Blackstone 28" XL griddle (6332)</div><div class="below"><strong>BI-3624-2D</strong> — 36" double door.</div></div>
+<div class="cost"></div>
+</div>
+<div class="cab-card" style="border-color:#e74c3c">
+<div><div class="zone">39.3"</div></div>
+<div><div class="above">Traeger Timberline TBB86RLG</div><div class="below"><strong>Self-contained base</strong> + BAC682 trim kit. No Napoleon doors needed.</div></div>
+<div class="cost"></div>
+</div>
+<div class="cab-card" style="border-color:#dc2626">
+<div><div class="zone">~13"</div></div>
+<div><div class="above">Traeger induction cooktop</div><div class="below"><strong>Open bay</strong> — no cabinet door. Cord passes through 2" grommet to Traeger's rear power strip (shared circuit).</div></div>
+<div class="cost"></div>
+</div>
+<div class="cab-card" style="border-color:#1a1a1a">
+<div><div class="zone">13.5"</div></div>
+<div><div class="above">Napoleon IR sear BIB10IRPMK</div><div class="below"><strong>BI-1808-1DR</strong> 8"H (top) + <strong>BI-1816-2DR</strong> 16"H (bottom). Non-combustible assembly.</div></div>
+<div class="cost"></div>
+</div>
+</div>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 12px">Bar peninsula (south) — below-counter (157" total)</h3>
+<div class="cab-grid">
+<div class="cab-card" style="border-color:#94a3b8">
+<div><div class="zone">25"</div></div>
+<div><div class="above">West overlap (post corner)</div><div class="below">Counter only. 6×6 post at west edge. No doors/drawers.</div></div>
+<div class="cost" style="color:#94a3b8">—</div>
+</div>
+<div class="cab-card" style="border-color:#94a3b8">
+<div><div class="zone">3×30"</div></div>
+<div><div class="above">Cabinets 1-3</div><div class="below"><strong>BI-3024-2D</strong> ×3 — 30" double doors. General storage.</div></div>
+<div class="cost"></div>
+</div>
+<div class="cab-card" style="border-color:#16a34a">
+<div><div class="zone">18"</div></div>
+<div><div class="above">Cabinet 4 (east end)</div><div class="below"><strong>BI-1824-1D</strong> — 18" single door. Hose bib + shutoff + petcock.</div></div>
+<div class="cost"></div>
+</div>
+<div class="cab-card" style="border-color:#d97706">
+<div><div class="zone">24"</div></div>
+<div><div class="above">East extension</div><div class="below">Open counter, no cabinet below. Open framing.</div></div>
+<div class="cost" style="color:#94a3b8">—</div>
+</div>
+</div>
+
+<div class="callout callout-green" style="margin-top:24px"><strong>v7.2 framing:</strong> All treated lumber EXCEPT Traeger bay + IR zone (non-combustible steel stud + cement board assembly). Blackstone 6228 jacket confirmed. Coyote C1SLV insert sleeve replaces CJAKTC1PB jacket. Induction bay left open for ventilation.</div>
+</div>
+
+<!-- ============ TAB: SCHEDULE ============ -->
+<div class="panel" id="panel-schedule">
+<h2 class="section-title">Combined build schedule — June 1 hard deadline</h2>
+<p class="view-subtitle">Albatross outdoor kitchen + Sandy Hook deck resurfacing. 7 weeks from April 14. No permits needed.</p>
+
+<div class="callout callout-red" style="margin-bottom:24px"><strong>Critical path:</strong> Orders complete → deck tear-off April 21 → framing + deck resurfacing run parallel May 2-16 → countertop template May 12 → appliance install May 23 → June 1 OPEN. Countertop templating is the long pole.</div>
+
+<style>
+.sched-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.sched-table th{text-align:left;font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.4px;padding:10px 12px;border-bottom:2px solid #e2e8f0;font-weight:700}
+.sched-table td{padding:10px 12px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+.sched-table .phase{font-weight:700;color:#1e40af;background:#eff6ff;border-left:3px solid #3b82f6}
+.sched-table .phase-deck{font-weight:700;color:#92400e;background:#fef3c7;border-left:3px solid #d97706}
+.sched-table .phase td{border-bottom:2px solid #bfdbfe}
+.sched-table .phase-deck td{border-bottom:2px solid #fde68a}
+.sched-table .owner{font-size:11px;color:#64748b;display:block;margin-top:2px}
+.sched-table .done{opacity:0.4;text-decoration:line-through}
+.sched-table .crit{color:#991b1b;font-weight:600}
+.sched-week{display:inline-block;font-size:10px;background:#f1f5f9;color:#475569;padding:2px 8px;border-radius:4px;font-weight:600;white-space:nowrap}
+.sched-week.now{background:#fef3c7;color:#92400e}
+.sched-week.crit{background:#fef2f2;color:#991b1b}
+.sched-week.deck{background:#fef3c7;color:#92400e}
+</style>
+
+<table class="sched-table">
+<tr><th style="width:140px">When</th><th style="width:340px">Action</th><th>Owner</th><th style="width:140px">Depends on</th></tr>
+<tr class="phase"><td colspan="4">Phase 1 — Orders (COMPLETE)</td></tr>
+<tr><td><span class="sched-week done">Apr 14–18</span></td><td><strong style="color:#166534">✓ COMPLETE:</strong> Major BBQGuys order #N219266020C, Blackstone, Traeger, Home Depot deck + kitchen, SunBrite TV + articulating mount, Kingsbottle, LED system (Armacost + Magnitude + Lutron Caséta)</td><td>Eddie</td><td>DONE</td></tr>
+<tr><td><span class="sched-week crit">By Apr 25</span></td><td class="crit">🛑 CANCEL CJAKTC1PB jacket via BBQGuys 877-743-2269 ($449 recovery)</td><td>Eddie</td><td>—</td></tr>
+<tr class="phase-deck"><td colspan="4">Phase 2 — Deck Tear-Off (April 21–25) 🔨 DECK</td></tr>
+<tr><td><span class="sched-week deck">Apr 21–23</span></td><td><strong>Remove all existing deck boards</strong> — full tear-off<span class="owner">Save any reusable fasteners</span></td><td>Tristan</td><td>Materials delivered</td></tr>
+<tr><td><span class="sched-week deck">Apr 23–25</span></td><td><strong>Inspect joists.</strong> Verify 16" o.c. across all sections. Flag any repairs.</td><td>Tristan</td><td>Tear-off complete</td></tr>
+<tr class="phase"><td colspan="4">Phase 3 — Joist Prep &amp; Blocking (April 25 – May 2)</td></tr>
+<tr><td><span class="sched-week">Apr 25–28</span></td><td>Install blocking under all kitchen bottom tracks. Sister 2-3 joists under fridge wall + griddle zone.</td><td>Tristan</td><td>Inspection complete</td></tr>
+<tr><td><span class="sched-week">Apr 28–May 2</span></td><td>Any joist repairs identified during inspection</td><td>Tristan</td><td>Blocking complete</td></tr>
+<tr class="phase"><td colspan="4">Phase 4 — Kitchen Framing (May 2–9)</td></tr>
+<tr><td><span class="sched-week">May 2–9</span></td><td>Frame all 5 walls. 157" bar with 24" east extension. Non-combustible assembly in Traeger + IR zone.<span class="owner">Treated lumber + cement board sheathing. Steel studs + cement board in Traeger/IR bay.</span></td><td>Tristan</td><td>Blocking complete</td></tr>
+<tr><td><span class="sched-week">During framing</span></td><td>Install Blackstone 6228 jacket. Install C1SLV insert sleeve in Coyote cutout. Build non-combustible assembly in Traeger + IR zone. Install 2×6 plywood backer for TV articulating mount.</td><td>Tristan</td><td>Jackets + C1SLV delivered</td></tr>
+<tr><td><span class="sched-week">During framing</span></td><td>Set 6×6 post + verify dog door arc clearance against C1SLV sleeve base</td><td>Tristan</td><td>—</td></tr>
+<tr class="phase-deck"><td colspan="4">Phase 5 — Deck Resurfacing (May 5–16) 🔨 DECK — parallel</td></tr>
+<tr><td><span class="sched-week deck">May 5–7</span></td><td>Zone 5 (hot tub wing) — 22 field boards N-S + picture frame</td><td>Tristan (helper)</td><td>Trex delivered</td></tr>
+<tr><td><span class="sched-week deck">May 7–9</span></td><td>Walkway — 51 field boards E-W</td><td>Tristan (helper)</td><td>Zone 5 complete</td></tr>
+<tr><td><span class="sched-week deck">May 9–12</span></td><td>S + N Seating — 25 + 20 boards E-W</td><td>Tristan (helper)</td><td>Walkway complete</td></tr>
+<tr><td><span class="sched-week deck">May 12–14</span></td><td>Zone 1 (kitchen) — 9 field boards N-S</td><td>Tristan</td><td>Kitchen framing far enough</td></tr>
+<tr><td><span class="sched-week deck">May 14–16</span></td><td>Stairs — 10 tread boards + risers + nosing</td><td>Tristan</td><td>Adjacent zones complete</td></tr>
+<tr class="phase"><td colspan="4">Phase 6 — Rough-In: Plumbing &amp; Electrical (May 5–12)</td></tr>
+<tr><td><span class="sched-week">May 5–7</span></td><td>Plumbing: hot/cold + drain through west wall. Hose bib to bar Cabinet 4. Ice maker drain through insulated wall cavity.</td><td>Tristan / Marcelino</td><td>Framing complete (west)</td></tr>
+<tr><td><span class="sched-week">May 5–7</span></td><td>LP gas: from two 100-gal tanks via 3/4" black iron main → stub-out → tee to east (35K) + west (60K) branches</td><td>Tristan / Marcelino</td><td>Framing complete</td></tr>
+<tr><td><span class="sched-week">May 5–9</span></td><td>Electrical: 4 dedicated circuits + GFCI + TV recessed outlet (east end of 55" wall). Cut 2" grommet pass-through for induction cord.</td><td>Ryder</td><td>Framing complete</td></tr>
+<tr class="phase"><td colspan="4">Phase 7 — Countertop &amp; Stone (May 12–23)</td></tr>
+<tr><td><span class="sched-week crit">May 12–13</span></td><td class="crit">Countertop template — all walls + 157" bar</td><td>Marcelino / vendor</td><td>All rough-in complete</td></tr>
+<tr><td><span class="sched-week">May 14–21</span></td><td>Countertop fabrication (porcelain / Dekton) — 7-10 business days</td><td>Vendor</td><td>Template complete</td></tr>
+<tr><td><span class="sched-week">May 12–19</span></td><td>Stone veneer cladding on all exposed faces (parallel with fab)</td><td>Marcelino</td><td>Framing + cement board complete</td></tr>
+<tr><td><span class="sched-week">May 22–23</span></td><td>Countertop install</td><td>Marcelino / vendor</td><td>Fab + stone complete</td></tr>
+<tr class="phase"><td colspan="4">Phase 8 — Appliance Install &amp; Finish (May 23–30)</td></tr>
+<tr><td><span class="sched-week">May 23–24</span></td><td>Drop in all appliances + undercounter units + sink/faucet</td><td>Tristan / Eddie</td><td>Countertop installed</td></tr>
+<tr><td><span class="sched-week">May 24–25</span></td><td>Install Napoleon doors, drawers, trash pull-out</td><td>Tristan</td><td>Countertop installed</td></tr>
+<tr><td><span class="sched-week">May 25–26</span></td><td>Connect LP, electrical, water</td><td>Tristan / Marcelino / Ryder</td><td>Appliances in place</td></tr>
+<tr><td><span class="sched-week">May 26–27</span></td><td>TV mount (articulating, east end), LED strips + Lutron dimmer at W4</td><td>Ryder</td><td>Appliances in place</td></tr>
+<tr class="phase"><td colspan="4">Phase 9 — Testing &amp; Punch List (May 28–31)</td></tr>
+<tr><td><span class="sched-week">May 28</span></td><td>Fire test all gas. Test Traeger + induction (confirm rear-strip power). Test ice maker, coolers.</td><td>Eddie / Tristan</td><td>All connections complete</td></tr>
+<tr><td><span class="sched-week">May 28–29</span></td><td>Punch list: touch-up cladding, adjust doors/drawers, verify clearances</td><td>Tristan</td><td>Testing complete</td></tr>
+<tr><td><span class="sched-week">May 30</span></td><td>Final clean + install bar stools (5-6 on 157" bar)</td><td>Eddie</td><td>Punch list complete</td></tr>
+<tr><td><span class="sched-week" style="background:#d1fae5;color:#166534">Jun 1</span></td><td style="color:#166534;font-weight:700">ALBATROSS BAR &amp; GRILL + DECK — OPEN</td><td>Eddie</td><td>Everything</td></tr>
+</table>
+
+<div class="callout callout-blue" style="margin-top:24px"><strong>Order Status Tracker (v7.2):</strong><br>
+<table class="budget-table" style="margin-top:8px">
+<tr><th>Supplier</th><th>Key Items</th><th>Status</th></tr>
+<tr><td>BBQGuys</td><td>15 items incl Napoleon, Coyote C3PBLP + C1SLV sleeve, Blackstone, Summit, Scotsman</td><td style="color:#166534;font-weight:600">✓ ORDERED #N219266020C</td></tr>
+<tr><td>BBQGuys</td><td>CJAKTC1PB jacket</td><td style="color:#991b1b;font-weight:600">🛑 CANCEL — $449 recovery</td></tr>
+<tr><td>Kingsbottle</td><td>KBU56ASD 36" cooler</td><td style="color:#166534;font-weight:600">✓ ORDERED — $3,334 pre-order</td></tr>
+<tr><td>Home Depot (Deck)</td><td>151 Trex boards + Hideaway fasteners</td><td style="color:#166534;font-weight:600">✓ DELIVERED Apr 14</td></tr>
+<tr><td>Home Depot (Kitchen)</td><td>Ruvati RVH8310 + KRAUS faucet</td><td style="color:#166534;font-weight:600">✓ ORDERED</td></tr>
+<tr><td>Traeger</td><td>TBB86RLG + BAC682 trim kit</td><td style="color:#166534;font-weight:600">✓ ORDERED — Amazon</td></tr>
+<tr><td>SunBrite</td><td>55" Veranda 3 TV + SB-WM-ART2-L-BL articulating mount</td><td style="color:#166534;font-weight:600">✓ ORDERED</td></tr>
+<tr><td>Armacost / Magnitude / Lutron</td><td>LED system: RibbonFlex Pro 61 lf + 2× M150L24DC-AR drivers + PD-6WCL dimmer</td><td style="color:#166534;font-weight:600">✓ ORDERED</td></tr>
+</table></div>
+</div>
+
+<!-- ============ TAB: GANTT ============ -->
+<div class="panel" id="panel-gantt">
+<h2 class="section-title">Build timeline — Gantt view</h2>
+<p class="view-subtitle">April 14 – June 1, 2026 (7 weeks). See Schedule tab for detailed week-by-week table with all v7.2 updates.</p>
+<div class="callout callout-blue">
+<strong>Gantt summary:</strong> Phase 1 Orders (Apr 14–18, complete) → Phase 2 Deck Tear-off (Apr 21–25) → Phase 3 Joist Prep (Apr 25–May 2) → Phase 4 Framing (May 2–9) parallel with Phase 5 Deck Resurfacing (May 5–16) and Phase 6 Rough-in (May 5–12) → Phase 7 Countertop + Stone (May 12–23, critical path template by May 13) → Phase 8 Appliance Install (May 23–30) → Phase 9 Testing + Punch (May 28–31) → <strong style="color:#166534">Jun 1: OPEN</strong>.<br><br>
+Christine + Kennedy depart for Italy May 27 — must be functional before they leave.
+</div>
+</div>
+
+<!-- ============ DECK TAB 1: LAYOUT ============ -->
+<div class="panel" id="panel-deck-layout">
+<h2 class="section-title">Deck layout — 6 framed zones with directional contrast</h2>
+<p style="font-size:14px;color:#666;margin-bottom:12px">52' along house. Full tear-off, joists staying. Trex Enhance Naturals Rocky Harbor 1×6 grooved edge with Hideaway hidden fasteners. Bar runs 157" (north edge) with 24" east extension.</p>
+
+<div class="diagram-wrap">
+<svg viewBox="0 0 1100 650" xmlns="http://www.w3.org/2000/svg" style="font-family:'Segoe UI',system-ui,sans-serif;width:1100px;max-width:none;height:auto;">
+<rect x="0" y="0" width="1100" height="650" fill="#f8fafc" rx="8"/>
+<rect x="30" y="454" width="936" height="66" rx="3" fill="#d4c4a8" stroke="#7c5c3c" stroke-width="2"/>
+<text x="498" y="494" text-anchor="middle" font-size="14" fill="#5c3d2e" font-weight="700">HOUSE</text>
+<rect x="30" y="328" width="198" height="162" rx="4" fill="#d1fae5" stroke="#0d9488" stroke-width="2.5"/>
+<path d="M30,328 L228,328 L228,490 L30,490 L30,328 Z M68,366 L68,452 L228,452 L228,366 Z" fill="#c9956a" opacity="0.55" stroke="#7c5c3c" stroke-width="2" fill-rule="evenodd"/>
+<text x="129" y="352" text-anchor="middle" font-size="6" fill="#5c3d2e" font-weight="600">COOKING RUN 130" (east)</text>
+<text x="129" y="476" text-anchor="middle" font-size="6" fill="#5c3d2e" font-weight="600">WINDOW WALL 130" (west)</text>
+<text x="49" y="415" text-anchor="middle" font-size="6" fill="#5c3d2e" font-weight="600" transform="rotate(-90,49,415)">FRIDGE 108"</text>
+<rect x="68" y="366" width="160" height="86" rx="1" fill="none" stroke="#0d9488" stroke-width="2.5"/>
+<text x="140" y="405" text-anchor="middle" font-size="10" fill="#0d9488" font-weight="700">ZONE 1</text>
+<text x="140" y="420" text-anchor="middle" font-size="9" fill="#0d9488">Kitchen 11'×9'</text>
+<rect x="228" y="382" width="450" height="72" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+<text x="453" y="413" text-anchor="middle" font-size="12" fill="#92400e" font-weight="700">WALKWAY</text>
+<text x="453" y="427" text-anchor="middle" font-size="9" fill="#92400e">25'×4' — E-W boards</text>
+<rect x="228" y="130" width="225" height="252" rx="4" fill="#bfdbfe" stroke="#3498db" stroke-width="2.5"/>
+<text x="360" y="250" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="700">NORTH SEATING</text>
+<text x="360" y="265" text-anchor="middle" font-size="9" fill="#1e40af">12.5'×14' — E-W</text>
+<!-- Bar runs 157" along north edge. Was 235" high (133" scaled), now scale to 157". 
+     Original drawing: x=228, width=38 — represents bar's SOUTH face depth (24" wide in plan view). 
+     Height y=130 to y=365 was 235px for 133". 157/133 = 1.18, so new height = 278px (235 * 1.18). -->
+<rect x="228" y="130" width="38" height="278" rx="2" fill="#c9956a" opacity="0.55" stroke="#7c5c3c" stroke-width="2"/>
+<text x="247" y="269" text-anchor="middle" font-size="7" fill="#3d2b1f" font-weight="700" transform="rotate(-90,247,269)">BAR 157"</text>
+<!-- Show the 24" east extension portion of bar with lighter shading -->
+<rect x="228" y="365" width="38" height="43" rx="1" fill="#fef3c7" opacity="0.7" stroke="#d97706" stroke-width="1.5" stroke-dasharray="3,2"/>
+<text x="247" y="390" text-anchor="middle" font-size="5" fill="#92400e" font-weight="700" transform="rotate(-90,247,390)">24" ext</text>
+<circle cx="276" cy="160" r="6" fill="#d97706" opacity="0.25" stroke="#92400e" stroke-width="1"/>
+<circle cx="276" cy="200" r="6" fill="#d97706" opacity="0.25" stroke="#92400e" stroke-width="1"/>
+<circle cx="276" cy="240" r="6" fill="#d97706" opacity="0.25" stroke="#92400e" stroke-width="1"/>
+<circle cx="276" cy="280" r="6" fill="#d97706" opacity="0.25" stroke="#92400e" stroke-width="1"/>
+<circle cx="276" cy="320" r="6" fill="#d97706" opacity="0.25" stroke="#92400e" stroke-width="1"/>
+<circle cx="276" cy="380" r="6" fill="#d97706" opacity="0.15" stroke="#92400e" stroke-width="1" stroke-dasharray="2,2"/>
+<rect x="453" y="130" width="225" height="252" rx="4" fill="#e0e7ff" stroke="#6366f1" stroke-width="2.5"/>
+<text x="565" y="250" text-anchor="middle" font-size="11" fill="#4338ca" font-weight="700">SOUTH SEATING</text>
+<text x="565" y="265" text-anchor="middle" font-size="9" fill="#4338ca">12.5'×14' — E-W</text>
+<rect x="318" y="94" width="288" height="36" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="462" y="116" text-anchor="middle" font-size="9" fill="#475569">16' stair span — 5 treads</text>
+<rect x="678" y="292" width="288" height="198" rx="4" fill="#fecaca" stroke="#e74c3c" stroke-width="2.5"/>
+<rect x="705" y="140" width="234" height="144" rx="8" fill="rgba(100,160,220,0.12)" stroke="#1e40af" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="822" y="205" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="700" opacity="0.5">HOT TUB</text>
+<text x="822" y="220" text-anchor="middle" font-size="9" fill="#1e40af" opacity="0.4">(off-deck)</text>
+<text x="822" y="400" text-anchor="middle" font-size="13" fill="#991b1b" font-weight="700">ZONE 5</text>
+<text x="822" y="415" text-anchor="middle" font-size="10" fill="#991b1b">16'×11' — N-S</text>
+<line x1="30" y1="540" x2="966" y2="540" stroke="#64748b" stroke-width="1"/>
+<line x1="30" y1="534" x2="30" y2="546" stroke="#64748b" stroke-width="1"/>
+<line x1="966" y1="534" x2="966" y2="546" stroke="#64748b" stroke-width="1"/>
+<text x="498" y="558" text-anchor="middle" font-size="12" fill="#334155" font-weight="700">52' total along house</text>
+<g transform="translate(1030,70)">
+<circle cx="0" cy="0" r="40" fill="white" stroke="#7c5c3c" stroke-width="1.5"/>
+<circle cx="0" cy="0" r="4" fill="#7c5c3c"/>
+<line x1="0" y1="0" x2="0" y2="-32" stroke="#991b1b" stroke-width="2"/>
+<polygon points="0,-35 -4,-27 4,-27" fill="#991b1b"/>
+<text x="0" y="-18" text-anchor="middle" font-size="10" fill="#991b1b" font-weight="700">E</text>
+<text x="0" y="28" text-anchor="middle" font-size="9" fill="#64748b" font-weight="600">W</text>
+<text x="-22" y="-5" text-anchor="middle" font-size="9" fill="#64748b" font-weight="600">N</text>
+<text x="22" y="-5" text-anchor="middle" font-size="9" fill="#64748b" font-weight="600">S</text>
+</g>
+</svg>
+</div>
+
+<div class="metric-row">
+<div class="metric"><div class="lbl">Deckable area</div><div class="num">~665 sq ft</div></div>
+<div class="metric"><div class="lbl">Zones</div><div class="num">5 + walkway</div></div>
+<div class="metric"><div class="lbl">Fastener system</div><div class="num">Hideaway hidden</div></div>
+<div class="metric"><div class="lbl">Boards ordered</div><div class="num" style="color:#16a34a">151 ✓</div></div>
+</div>
+
+<div class="callout callout-blue"><strong>Zone breakdown:</strong> Zone 1 Kitchen (11'×9', N-S, ~39 sq ft inside counters) · Walkway (25'×4', E-W) · North Seating (12.5'×14', E-W, <strong>bar 157" on north edge with 24" east extension</strong>) · South Seating (12.5'×14', E-W) · Zone 5 Hot Tub (16'×11', N-S) · Stairs (16' span, 5 treads × 2 boards).</div>
+</div>
+
+<!-- ============ DECK TAB 2: BOARD CALCULATIONS ============ -->
+<div class="panel" id="panel-deck-boards">
+<h2 class="section-title">Board calculations — actual order vs plan</h2>
+<p style="font-size:14px;color:#666;margin-bottom:16px">Coverage per board: 5.75" (5.5" board + 0.25" gap). Grooved edge with Trex Hideaway hidden fasteners.</p>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin-bottom:12px">Zone board requirements</h3>
+<table class="mat-table">
+<tr><th>Zone</th><th>Field area</th><th>Board dir.</th><th>Board length</th><th class="r">Boards</th><th>Stock</th></tr>
+<tr><td style="color:#0d9488;font-weight:600">Zone 1 — Kitchen</td><td>96"×47"</td><td>N-S</td><td>96" (8')</td><td class="r">9</td><td>12'</td></tr>
+<tr><td style="color:#92400e;font-weight:600">Walkway</td><td>289"×37"</td><td>E-W</td><td>37" (3.1')</td><td class="r">51</td><td>8' cuts</td></tr>
+<tr><td style="color:#1e40af;font-weight:600">North Seating</td><td>114"×157"</td><td>E-W</td><td>157" (13.1')</td><td class="r">20</td><td>16'</td></tr>
+<tr><td style="color:#4338ca;font-weight:600">South Seating</td><td>139"×157"</td><td>E-W</td><td>157" (13.1')</td><td class="r">25</td><td>16'</td></tr>
+<tr><td style="color:#991b1b;font-weight:600">Zone 5 — Hot Tub</td><td>181"×121"</td><td>N-S</td><td>181" (15.1')</td><td class="r">22</td><td>16'</td></tr>
+<tr><td style="color:#475569;font-weight:600">Stairs (5 treads)</td><td>192"×~11"</td><td>N-S</td><td>192" (16')</td><td class="r">10</td><td>16'</td></tr>
+<tr class="tot"><td colspan="4">Total field + stairs</td><td class="r">137</td><td></td></tr>
+</table>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:24px 0 12px">Actual order vs. original plan</h3>
+<table class="mat-table">
+<tr><th>Length</th><th class="r">Planned</th><th class="r">Ordered</th><th class="r">Delta</th><th>Notes</th></tr>
+<tr><td><strong>8'</strong></td><td class="r">29</td><td class="r">0</td><td class="r">-29</td><td>Cut from 16' stock instead</td></tr>
+<tr><td><strong>12'</strong></td><td class="r">19</td><td class="r">25</td><td class="r">+6</td><td>Extra for Zone 1</td></tr>
+<tr><td><strong>16'</strong></td><td class="r">102</td><td class="r">126</td><td class="r">+24</td><td>Replaces 8' + 20' needs</td></tr>
+<tr><td><strong>20'</strong></td><td class="r">4</td><td class="r">0</td><td class="r">-4</td><td>25' frames spliced from 16'</td></tr>
+<tr class="tot"><td>Total</td><td class="r">154</td><td class="r">151</td><td class="r">-3</td><td>Extra length compensates</td></tr>
+</table>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:24px 0 12px">Fastener coverage</h3>
+<div class="metrics">
+<div class="metric"><div class="lbl">Ordered</div><div class="num">250 sq ft</div></div>
+<div class="metric"><div class="lbl">Deck area</div><div class="num">~550 sq ft</div></div>
+<div class="metric"><div class="lbl">Shortfall</div><div class="num" style="color:#d97706">~300 sq ft</div></div>
+<div class="metric"><div class="lbl">Packs needed</div><div class="num" style="color:#d97706">5-6 more</div></div>
+</div>
+<div class="callout"><strong>Action:</strong> Trex Hideaway UNIVCOMBOCLIP01 covers 50 sq ft/pack at 16" o.c. Spec: 1 clip per joist (joists 16" o.c.) = ~9 clips per 12' board, ~12 clips per 16' board. Order 5-6 more packs before May 1.</div>
+</div>
+
+<!-- ============ OPEN ITEMS (v7.2 UPDATES) ============ -->
+<div class="panel" id="panel-open">
+<h2 class="section-title">⚠ Open Items</h2>
+<p class="view-subtitle">Updated April 22, 2026 (v7.2). Resolved items removed. Closed as of v7.2: Traeger clearance (non-combustible assembly), Napoleon IR heat shield (non-combustible assembly), Blackstone LP fitting (3/8" flare confirmed), LP supply (two 100-gal tanks + 3/4" black iron), ice maker drain spec, LED dimmer chain, TV mount (SunBrite articulating), Traeger induction circuit (shared via rear strip).</p>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:0 0 12px">🔥 Albatross Kitchen — v7.2 open items</h3>
+<ul class="open-list">
+<li><div class="open-num" style="background:#fef2f2;color:#991b1b">1</div><div class="open-text"><strong>C1SLV sleeve framing cutout — Tristan physical confirmation</strong><br>Sleeve requires 26.25"W × 29.5"H × 24"D cutout in west wall south corner (~1.4" wider than original CJAKTC1PB jacket cutout). Layout math: gaps compressed 3.7"→2.5" to absorb. Tristan to physically verify joist positions during Phase 3 walkthrough.<br><span class="who" style="color:#991b1b;font-weight:600">→ TRISTAN — during Phase 3/4 framing walkthrough</span></div></li>
+<li><div class="open-num" style="background:#fef2f2;color:#991b1b">2</div><div class="open-text"><strong>CJAKTC1PB jacket cancellation</strong><br><span style="color:#991b1b;font-weight:600">DECISION: CANCEL.</span> C1SLV insert sleeve is a complete replacement. Contact BBQGuys 877-743-2269 to cancel jacket line item from order #N219266020C. $449 recovery.<br><span class="who" style="color:#991b1b;font-weight:600">→ EDDIE — call BBQGuys this week</span></div></li>
+<li><div class="open-num">3</div><div class="open-text"><strong>Dog door arc clearance — physical verification</strong><br>Dog door is already installed on the existing 45" SW wall (swings north and up). Tristan to verify door arc clears C1SLV sleeve base and storage drawer during Phase 4 framing. Physical verification only — no design change needed.<br><span class="who" style="font-weight:600">→ TRISTAN — Phase 4 framing (May 2-9)</span></div></li>
+<li><div class="open-num">4</div><div class="open-text"><strong>Countertop vendor — porcelain slab / Dekton</strong><br>Visit Bayview Design Center. Template must happen by May 12-13 for June 1 deadline (7-10 day fabrication).<br><span class="who" style="font-weight:600">→ EDDIE — schedule visit this week</span></div></li>
+</ul>
+
+<h3 style="font-size:16px;font-weight:700;color:#5c3d2e;margin:28px 0 12px">🔨 Deck Resurface — v7.2 open items</h3>
+<ul class="open-list">
+<li><div class="open-num">1</div><div class="open-text"><strong>Order 5-6 more Hideaway fastener packs by May 1</strong><br>250 sq ft ordered vs ~550 sq ft needed. HD SKU: 513114. Or screw-down under kitchen counters where fasteners won't show.<br><span class="who" style="font-weight:600">→ EDDIE — order by May 1</span></div></li>
+<li><div class="open-num">2</div><div class="open-text"><strong>Measure fascia perimeter during tear-off</strong><br>Wood fascia qty TBD. Measure all exposed deck edges during tear-off.<br><span class="who" style="font-weight:600">→ TRISTAN — during Phase 2 tear-off (Apr 21-25)</span></div></li>
+<li><div class="open-num">3</div><div class="open-text"><strong>Confirm stair tread count + joist spacing 16" o.c.</strong><br>Verify during tear-off inspection. Affects Hideaway fastener spacing calculation.<br><span class="who" style="font-weight:600">→ TRISTAN — during Phase 2 tear-off</span></div></li>
+<li><div class="open-num">4</div><div class="open-text"><strong>Screw-down vs hidden fastener under kitchen counters</strong><br>Areas under counter footprint won't show fasteners. Screw-down saves Hideaway packs. Decide during install.<br><span class="who" style="font-weight:600">→ EDDIE + TRISTAN — during Phase 5</span></div></li>
+</ul>
+
+<div class="callout callout-green" style="margin-top:24px"><strong>v7.2 resolution log:</strong> 7 blocking gaps closed since v7.1: (1) Blackstone LP fitting spec; (2) Napoleon IR heat shield via non-combustible assembly; (3) LED dimmer chain spec'd; (4) Ice maker drain with freeze protection; (5) Traeger induction wired via rear power strip (no separate circuit); (6) TV articulating mount + east-end recessed outlet; (7) LP supply confirmed (two 100-gal tanks + 3/4" black iron). Mid-document CJAKTC1PB → C1SLV transition completed.</div>
+</div>
+
+</div>
+
+<script>
+function showTab(el,id){
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+el.classList.add('active');
+document.getElementById('panel-'+id).classList.add('active');
+}
+</script>
+</body>
+</html>
