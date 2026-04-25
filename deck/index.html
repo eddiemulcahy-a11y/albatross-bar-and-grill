@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandy Hook Deck — Contractor Package</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f2f5;color:#1a1a2e}
+.header{background:linear-gradient(135deg,#1a1a2e,#2c3e50);color:#fff;padding:18px 24px}
+.header h1{font-size:22px;font-weight:700;margin-bottom:2px;line-height:1.25}
+.header .sub{font-size:13px;opacity:.85}
+@media (min-width:641px){
+  .header{padding:22px 40px}
+  .header h1{font-size:26px}
+  .header .sub{font-size:14px}
+}
+.container{max-width:1500px;margin:0 auto;padding:32px 24px}
+
+/* ==================== DOCX-STYLE SPEC TABLES ==================== */
+.spec-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 20px;background:#fff}
+.spec-table caption{caption-side:top;text-align:left;font-size:14px;font-weight:700;color:#2c3e50;padding:0 0 8px;letter-spacing:.2px}
+.spec-table th,.spec-table td{padding:10px 12px;border:1px solid #cbd5e1;vertical-align:top;text-align:left;line-height:1.45}
+.spec-table th{background:#f1f5f9;font-weight:700;color:#1e293b;font-size:12.5px;text-transform:uppercase;letter-spacing:.4px}
+.spec-table td strong{color:#0f172a}
+.spec-table tbody tr:nth-child(even) td{background:#fafbfc}
+.spec-table tr.section-row td{background:#e2e8f0;font-weight:700;color:#1e293b;text-transform:uppercase;letter-spacing:.5px;font-size:11.5px;padding:6px 12px}
+.spec-table tr.note-row td{background:#fef9c3;font-style:italic;color:#713f12;font-size:12.5px}
+.spec-table .num{text-align:right;font-variant-numeric:tabular-nums}
+.spec-table .warn{color:#991b1b;font-weight:600}
+.spec-table .ok{color:#166534;font-weight:600}
+.spec-table a.manual-link{display:inline-block;padding:2px 8px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:4px;font-size:11.5px;color:#1e40af;text-decoration:none;white-space:nowrap;font-weight:500}
+.spec-table a.manual-link:hover{background:#dbeafe;border-color:#3498db;text-decoration:none}
+.spec-table a.manual-link::before{content:"\2197\0020";font-size:10px;opacity:.7}
+.spec-table a.manual-link.none{color:#94a3b8;background:#fff;cursor:default;pointer-events:none;font-style:italic}
+.spec-table a.manual-link.none::before{content:""}
+
+/* Zone color indicators — colored left border + pale row tint for SVG↔table eye-flow */
+/* Prep (teal) */
+.spec-table td.zc-prep{border-left:4px solid #0d9488;background:#ccfbf1}
+.spec-table td.zc-prep ~ td{background:#f0fdfa}
+/* Trash (amber) */
+.spec-table td.zc-trash{border-left:4px solid #f59e0b;background:#fde68a}
+.spec-table td.zc-trash ~ td{background:#fffbeb}
+/* Sink (green) */
+.spec-table td.zc-sink{border-left:4px solid #27ae60;background:#bbf7d0}
+.spec-table td.zc-sink ~ td{background:#f0fdf4}
+/* Ice (cyan) */
+.spec-table td.zc-ice{border-left:4px solid #0891b2;background:#a5f3fc}
+.spec-table td.zc-ice ~ td{background:#ecfeff}
+/* Fridge (blue) */
+.spec-table td.zc-fridge{border-left:4px solid #3498db;background:#bfdbfe}
+.spec-table td.zc-fridge ~ td{background:#eff6ff}
+/* Freezer (navy) */
+.spec-table td.zc-freezer{border-left:4px solid #1e40af;background:#c7d2fe}
+.spec-table td.zc-freezer ~ td{background:#eef2ff}
+/* TV (dark slate) */
+.spec-table td.zc-tv{border-left:4px solid #1e293b;background:#cbd5e1}
+.spec-table td.zc-tv ~ td{background:#f1f5f9}
+/* IR sear (black) */
+.spec-table td.zc-ir{border-left:4px solid #1a1a1a;background:#d4d4d4}
+.spec-table td.zc-ir ~ td{background:#f5f5f5}
+/* Traeger (red) */
+.spec-table td.zc-traeger{border-left:4px solid #e74c3c;background:#fecaca}
+.spec-table td.zc-traeger ~ td{background:#fef2f2}
+/* Blackstone (orange) */
+.spec-table td.zc-blackstone{border-left:4px solid #f39c12;background:#fed7aa}
+.spec-table td.zc-blackstone ~ td{background:#fff7ed}
+/* Coyote (teal-green) */
+.spec-table td.zc-coyote{border-left:4px solid #0d9488;background:#a7f3d0}
+.spec-table td.zc-coyote ~ td{background:#ecfdf5}
+/* LP drop (dark red) */
+.spec-table td.zc-lp{border-left:4px solid #991b1b;background:#fca5a5}
+.spec-table td.zc-lp ~ td{background:#fef2f2}
+/* 6×6 post (brown) */
+.spec-table td.zc-post{border-left:4px solid #7c5c3c;background:#d4c4a8}
+.spec-table td.zc-post ~ td{background:#faf7f2}
+/* Hose bib (green) */
+.spec-table td.zc-hose{border-left:4px solid #16a34a;background:#bbf7d0}
+.spec-table td.zc-hose ~ td{background:#f0fdf4}
+/* Bar cabinet (slate) */
+.spec-table td.zc-bar{border-left:4px solid #94a3b8;background:#e2e8f0}
+.spec-table td.zc-bar ~ td{background:#f8fafc}
+/* East extension (amber) */
+.spec-table td.zc-ext{border-left:4px solid #d97706;background:#fde68a}
+.spec-table td.zc-ext ~ td{background:#fffbeb}
+/* Dog door (amber) */
+.spec-table td.zc-dog{border-left:4px solid #f59e0b;background:#fde68a}
+.spec-table td.zc-dog ~ td{background:#fffbeb}
+/* Drawer (slate) */
+.spec-table td.zc-drawer{border-left:4px solid #94a3b8;background:#e2e8f0}
+.spec-table td.zc-drawer ~ td{background:#f8fafc}
+/* Dead space / overlap / neutral (light gray) */
+.spec-table td.zc-dead{border-left:4px solid #cbd5e1;background:#f1f5f9}
+.spec-table td.zc-dead ~ td{background:#f8fafc}
+
+/* Zone-detail section headings — color-coded to match summary table rows + SVG zones */
+.zone-head{font-size:14px;font-weight:700;margin:16px 0 6px;padding:8px 12px;border-radius:4px}
+.zone-head.zc-prep{background:#ccfbf1;border-left:4px solid #0d9488;color:#0f766e}
+.zone-head.zc-trash{background:#fde68a;border-left:4px solid #f59e0b;color:#92400e}
+.zone-head.zc-sink{background:#bbf7d0;border-left:4px solid #27ae60;color:#166534}
+.zone-head.zc-ice{background:#a5f3fc;border-left:4px solid #0891b2;color:#155e75}
+.zone-head.zc-fridge{background:#bfdbfe;border-left:4px solid #3498db;color:#1e40af}
+.zone-head.zc-freezer{background:#c7d2fe;border-left:4px solid #1e40af;color:#1e3a8a}
+.zone-head.zc-tv{background:#cbd5e1;border-left:4px solid #1e293b;color:#1e293b}
+.zone-head.zc-ir{background:#d4d4d4;border-left:4px solid #1a1a1a;color:#1a1a1a}
+.zone-head.zc-traeger{background:#fecaca;border-left:4px solid #e74c3c;color:#991b1b}
+.zone-head.zc-blackstone{background:#fed7aa;border-left:4px solid #f39c12;color:#92400e}
+.zone-head.zc-coyote{background:#a7f3d0;border-left:4px solid #0d9488;color:#0f766e}
+.zone-head.zc-lp{background:#fca5a5;border-left:4px solid #991b1b;color:#7f1d1d}
+.zone-head.zc-post{background:#d4c4a8;border-left:4px solid #7c5c3c;color:#5c3d2e}
+.zone-head.zc-hose{background:#bbf7d0;border-left:4px solid #16a34a;color:#166534}
+.zone-head.zc-bar{background:#e2e8f0;border-left:4px solid #94a3b8;color:#475569}
+.zone-head.zc-ext{background:#fde68a;border-left:4px solid #d97706;color:#92400e}
+.zone-head.zc-dog{background:#fde68a;border-left:4px solid #f59e0b;color:#92400e}
+.zone-head.zc-drawer{background:#e2e8f0;border-left:4px solid #94a3b8;color:#475569}
+.zone-head.zc-dead{background:#f1f5f9;border-left:4px solid #cbd5e1;color:#475569}
+
+/* Product-name inline links (used in prose, not cells) */
+a.product-link{color:#1e40af;text-decoration:none;border-bottom:1px dotted #93c5fd}
+a.product-link:hover{border-bottom-style:solid}
+
+/* Two-column label/value mini tables for at-a-glance sections */
+.meta-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 20px;background:#fff}
+.meta-table td{padding:9px 12px;border:1px solid #cbd5e1;vertical-align:top;line-height:1.45}
+.meta-table td:first-child{background:#f1f5f9;font-weight:700;width:220px;color:#1e293b}
+
+@media (max-width:640px){
+  .spec-table,.meta-table{font-size:12.5px}
+  .spec-table th,.spec-table td,.meta-table td{padding:8px 8px}
+  .spec-table a.manual-link{font-size:10.5px;padding:1px 6px}
+  .meta-table td:first-child{width:38%}
+}
+
+/* ==================== NAVIGATION ==================== */
+.nav-wrap{margin-bottom:0;position:relative;z-index:20}
+
+/* Mobile native select (shown on viewports <= 640px) */
+.nav-select{display:none;width:100%;padding:12px 40px 12px 16px;font-size:15px;font-weight:600;color:#2c3e50;background:#fff url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%232c3e50' d='M6 8 0 0h12z'/%3E%3C/svg%3E") no-repeat right 14px center;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;appearance:none;-webkit-appearance:none;font-family:inherit}
+.nav-select:focus{outline:none;border-color:#2c3e50}
+
+/* Desktop styled dropdown */
+.nav-dropdown{display:inline-block;position:relative;min-width:260px}
+.nav-trigger{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:#fff;border:2px solid #e0e0e0;border-radius:8px 8px 0 0;cursor:pointer;font-weight:600;font-size:14px;color:#2c3e50;user-select:none;transition:all .15s;min-width:260px}
+.nav-trigger:hover{background:#f8f9fb;border-color:#cbd5e1}
+.nav-trigger.open{border-bottom-color:#fff;border-radius:8px 8px 0 0}
+.nav-trigger .caret{font-size:10px;transition:transform .15s;opacity:.6}
+.nav-trigger.open .caret{transform:rotate(180deg)}
+.nav-trigger .swatch{width:10px;height:10px;border-radius:3px;background:#dde;flex-shrink:0}
+.nav-trigger.v-overview .swatch{background:#94a3b8}
+.nav-trigger.v-wall .swatch{background:#1e40af}
+.nav-trigger.v-sys .swatch{background:#f472b6}
+.nav-trigger.v-sched .swatch{background:#22c55e}
+.nav-menu{position:absolute;top:100%;left:0;right:0;margin:0;padding:6px;background:#fff;border:2px solid #e0e0e0;border-top:none;border-radius:0 0 8px 8px;box-shadow:0 8px 24px rgba(0,0,0,.12);max-height:70vh;overflow-y:auto;display:none;z-index:100}
+.nav-menu.open{display:block}
+.nav-item{padding:9px 12px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;transition:background .1s}
+.nav-item:hover{background:#f1f5f9}
+.nav-item .swatch{width:10px;height:10px;border-radius:3px;background:#dde;flex-shrink:0}
+
+/* Group 1: Project overview (slate) */
+.nav-item.v-overview{color:#334155}
+.nav-item.v-overview .swatch{background:#94a3b8}
+.nav-item.v-overview.active{background:#e2e8f0;color:#1e293b}
+
+/* Group 2: Spatial / walls (navy blue) */
+.nav-item.v-wall{color:#1e3a8a}
+.nav-item.v-wall .swatch{background:#1e40af}
+.nav-item.v-wall.active{background:#c7d2fe;color:#172554}
+
+/* Group 3: Systems & products (pink/light red) */
+.nav-item.v-sys{color:#be185d}
+.nav-item.v-sys .swatch{background:#f472b6}
+.nav-item.v-sys.active{background:#fce7f3;color:#9d174d}
+
+/* Group 4: Schedule (green) */
+.nav-item.v-sched{color:#166534}
+.nav-item.v-sched .swatch{background:#22c55e}
+.nav-item.v-sched.active{background:#dcfce7;color:#14532d}
+
+@media (max-width:640px){
+  .nav-select{display:block}
+  .nav-dropdown{display:none}
+}
+.mat-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.mat-table th{text-align:left;font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.4px;padding:8px 10px;border-bottom:2px solid #e2e8f0;font-weight:700}
+.mat-table td{padding:8px 10px;border-bottom:1px solid #f1f5f9}
+.mat-table .r{text-align:right}
+.mat-table .tot td{font-weight:700;border-top:2px solid #3d2b1f;border-bottom:none;background:#faf5ef}
+.metric-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.metric-row .metric{background:#faf5ef;border:1px solid #d4c4a8}
+.panel{display:none;background:#fff;border:2px solid #e0e0e0;border-radius:0 8px 8px 8px;padding:32px}
+.panel.active{display:block}
+.diagram-wrap{display:flex;justify-content:center;padding:20px 0;overflow-x:auto}
+.callout{background:#fefce8;border:1px solid #fbbf24;border-radius:8px;padding:16px 20px;margin-top:24px;font-size:14px;line-height:1.6}
+.callout strong{color:#92400e}
+.callout-blue{background:#eff6ff;border-color:#93c5fd}
+.callout-blue strong{color:#1e40af}
+.callout-green{background:#f0fdf4;border-color:#86efac}
+.callout-green strong{color:#166534}
+.callout-red{background:#fef2f2;border-color:#fca5a5}
+.callout-red strong{color:#991b1b}
+.section-title{font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:16px}
+.view-subtitle{font-size:14px;color:#666;margin-bottom:8px}
+.appliance-flow{margin-top:16px}
+.flow-item{display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid #f0f0f0}
+.flow-item:last-child{border-bottom:none}
+.flow-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;flex-shrink:0}
+.flow-content h4{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px}
+.flow-content p{font-size:13px;color:#555;line-height:1.5}
+.flow-content .wall-tag{display:inline-block;font-size:11px;background:#f1f5f9;color:#475569;padding:2px 8px;border-radius:4px;margin-bottom:4px;font-weight:600}
+.n-green{background:#27ae60}.n-blue{background:#3498db}.n-red{background:#e74c3c}.n-orange{background:#f39c12}.n-purple{background:#8b5cf6}.n-teal{background:#0d9488}.n-amber{background:#d97706}
+.util-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:16px}
+.util-card{border:1px solid #e5e7eb;border-radius:8px;padding:16px}
+.util-card h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.util-card p{font-size:13px;color:#555;line-height:1.5}
+.app-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;margin-top:8px}
+.app-card p{margin:0;font-size:13px}
+.app-card .label{font-weight:700;margin-bottom:4px;display:block}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:24px}
+.metric{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px}
+.metric .lbl{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.metric .num{font-size:24px;font-weight:700;color:#1a1a2e}
+.metric .num.green{color:#16a34a}
+.metric .num.muted{color:#94a3b8}
+.budget-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.budget-table th{text-align:left;font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.4px;padding:8px 10px;border-bottom:2px solid #e2e8f0;font-weight:700}
+.budget-table td{padding:8px 10px;border-bottom:1px solid #f1f5f9}
+.budget-table .r{text-align:right}
+.budget-table .tot td{font-weight:700;border-top:2px solid #2c3e50;border-bottom:none;background:#f8fafc}
+.budget-table .strike{text-decoration:line-through;opacity:.4}
+.cab-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:16px}
+.cab-card{border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;display:grid;grid-template-columns:60px 1fr 90px;gap:16px;align-items:center}
+.cab-card .zone{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.4px;font-weight:700}
+.cab-card .above{font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:2px}
+.cab-card .below{font-size:12px;color:#555}
+.cab-card .cost{font-size:15px;font-weight:700;text-align:right}
+.open-list{list-style:none;margin:0;padding:0}
+.open-list li{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #f1f5f9;align-items:flex-start}
+.open-list li:last-child{border-bottom:none}
+.open-num{width:28px;height:28px;border-radius:50%;background:#fef3c7;color:#92400e;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.open-num.resolved{background:#d1fae5;color:#166534}
+.open-text{font-size:14px;line-height:1.5;color:#1a1a2e}
+.open-text .who{font-size:11px;color:#64748b;display:block;margin-top:2px}
+
+/* Cross-link bar between Kitchen / Fence / Deck packages */
+.crosslink-bar{display:flex;flex-wrap:wrap;gap:0;background:#fff;border-bottom:1px solid #e2e8f0;padding:0;font-size:13px}
+.crosslink-bar a, .crosslink-bar span.current{padding:10px 16px;color:#64748b;text-decoration:none;font-weight:600;border-right:1px solid #e2e8f0;transition:background .15s}
+.crosslink-bar a:hover{background:#f8fafc;color:#2c3e50}
+.crosslink-bar span.current{background:#2c3e50;color:#fff;cursor:default}
+.crosslink-bar .label{opacity:.6;font-weight:500;padding:10px 16px 10px 16px;color:#94a3b8;font-size:11px;text-transform:uppercase;letter-spacing:.6px;border-right:1px solid #e2e8f0;flex:0 0 auto}
+@media (max-width:640px){
+  .crosslink-bar a, .crosslink-bar span.current{padding:8px 12px;font-size:12px}
+  .crosslink-bar .label{display:none}
+}
+
+</style>
+</head>
+<body>
+<div class="crosslink-bar">
+  <span class="label">Albatross · Sandy Hook</span>
+  <a href="../">Kitchen</a>
+  <a href="../fence/">Fence</a>
+  <span class="current">Deck</span>
+</div>
+<div class="header">
+<h1>Sandy Hook Deck</h1>
+<p class="sub">8133 Sandy Hook Terrace &middot; Clinton, WA 98236 &middot; Deck resurfacing (Trex Hideaway) &middot; <strong style="color:#fca5a5">Tear-off Apr 21–25 &middot; Resurface May 5–16</strong></p>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;font-size:11px">
+<div style="background:rgba(255,255,255,.06);padding:6px 10px;border-radius:6px;flex:1 1 180px;min-width:180px"><span style="opacity:.65;text-transform:uppercase;letter-spacing:.5px;font-size:9px">Owner</span><br>Eddie Mulcahy &middot; 360-914-1789</div>
+<div style="background:rgba(255,255,255,.06);padding:6px 10px;border-radius:6px;flex:1 1 180px;min-width:180px"><span style="opacity:.65;text-transform:uppercase;letter-spacing:.5px;font-size:9px">General Contractor</span><br>Tristan Johnson &middot; 360-969-2659</div>
+</div>
+</div>
+<div class="container">
+<div class="nav-wrap">
+
+<!-- Mobile: native select -->
+<select class="nav-select" onchange="selectNav(this.value)" aria-label="Choose section">
+<option value="deck-layout" selected>Deck layout</option>
+<option value="deck-boards">Board calc</option>
+</select>
+
+<!-- Desktop: styled dropdown -->
+<div class="nav-dropdown">
+<div class="nav-trigger v-overview" onclick="toggleNav(event)" role="button" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+<span class="swatch"></span>
+<span class="nav-label">Deck layout</span>
+<span class="caret">▼</span>
+</div>
+<div class="nav-menu" role="listbox">
+<div class="nav-item v-overview active" data-panel="deck-layout" onclick="selectNav('deck-layout')"><span class="swatch"></span>Deck layout</div>
+<div class="nav-item v-sys" data-panel="deck-boards" onclick="selectNav('deck-boards')"><span class="swatch"></span>Board calc</div>
+</div>
+</div>
+
+</div>
+
+<!-- ============ TAB 1: FLOOR PLAN ============ -->
+<div class="panel active" id="panel-deck-layout">
+<h2 class="section-title">Deck layout &mdash; top-down view</h2>
+<p class="view-subtitle">Looking down at the deck from above. 52' along the house (Kitchen wing 11' + Walkway 25' + Hot tub wing 16'). Full tear-off, joists staying. Trex Enhance Naturals Rocky Harbor 1&times;6 grooved edge with Hideaway hidden fasteners. <strong style="color:#0d9488">Zone 1 Kitchen uses classic 45&deg; herringbone pattern</strong> as a visual centerpiece; all other zones (North Seating, South Seating, Walkway, Zone 5) <strong>run boards N-S</strong> parallel to the compass N-S axis for unified flow. Bar runs 157" along the north edge with 24" east extension.</p>
+
+<div class="diagram-wrap">
+<svg viewBox="0 0 1100 650" xmlns="http://www.w3.org/2000/svg" style="font-family:'Segoe UI',system-ui,sans-serif;width:1100px;max-width:none;height:auto;">
+<defs>
+  <!-- Classic 45° herringbone pattern for Zone 1 Kitchen.
+       32×32 tile with two interlocking plank strokes at +45° and -45°.
+       The planks are long rectangles that cross the tile diagonally and
+       interlock with adjacent tiles to form the classic V-pattern. -->
+  <pattern id="herringbone" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
+    <rect width="32" height="32" fill="#a8b0a5"/>
+    <!-- Plank 1: left-leaning (\ slope), top-right quadrant -->
+    <rect x="16" y="-2" width="22" height="8" rx="1" fill="#7b8a7a" stroke="#5d6c5a" stroke-width="0.5" transform="rotate(-45 16 2)"/>
+    <!-- Plank 2: right-leaning (/ slope), bottom-left quadrant -->
+    <rect x="-6" y="10" width="22" height="8" rx="1" fill="#8a9789" stroke="#5d6c5a" stroke-width="0.5" transform="rotate(45 16 14)"/>
+    <!-- Plank 3: left-leaning, bottom-right quadrant (interlocks with plank 1 of next tile right) -->
+    <rect x="16" y="18" width="22" height="8" rx="1" fill="#8a9789" stroke="#5d6c5a" stroke-width="0.5" transform="rotate(-45 16 22)"/>
+    <!-- Plank 4: right-leaning, top-left (interlocks with plank 2 above) -->
+    <rect x="-6" y="-10" width="22" height="8" rx="1" fill="#7b8a7a" stroke="#5d6c5a" stroke-width="0.5" transform="rotate(45 16 -6)"/>
+  </pattern>
+</defs>
+<rect x="0" y="0" width="1100" height="650" fill="#f8fafc" rx="8"/>
+<rect x="30" y="454" width="936" height="66" rx="3" fill="#d4c4a8" stroke="#7c5c3c" stroke-width="2"/>
+<text x="498" y="494" text-anchor="middle" font-size="14" fill="#5c3d2e" font-weight="700">HOUSE</text>
+<rect x="30" y="328" width="198" height="162" rx="4" fill="#d1fae5" stroke="#0d9488" stroke-width="2.5"/>
+<path d="M30,328 L228,328 L228,490 L30,490 L30,328 Z M68,366 L68,452 L228,452 L228,366 Z" fill="#c9956a" opacity="0.55" stroke="#7c5c3c" stroke-width="2" fill-rule="evenodd"/>
+<text x="129" y="352" text-anchor="middle" font-size="6" fill="#5c3d2e" font-weight="600">COOKING RUN 130" (east)</text>
+<text x="129" y="476" text-anchor="middle" font-size="6" fill="#5c3d2e" font-weight="600">WINDOW WALL 130" (west)</text>
+<text x="49" y="415" text-anchor="middle" font-size="6" fill="#5c3d2e" font-weight="600" transform="rotate(-90,49,415)">FRIDGE 108"</text>
+<!-- Zone 1 Kitchen: herringbone pattern fill -->
+<rect x="68" y="366" width="160" height="86" rx="1" fill="url(#herringbone)" stroke="#0d9488" stroke-width="2.5"/>
+<!-- Label backdrop for readability against pattern -->
+<rect x="96" y="392" width="88" height="32" rx="3" fill="#ffffff" opacity="0.88" stroke="#0d9488" stroke-width="0.8"/>
+<text x="140" y="405" text-anchor="middle" font-size="10" fill="#0d9488" font-weight="700">ZONE 1</text>
+<text x="140" y="417" text-anchor="middle" font-size="8" fill="#0d9488">Herringbone 45°</text>
+<rect x="228" y="382" width="450" height="72" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+<!-- Walkway board-flow stripes: boards run N-S (horizontal on screen, since N=screen-left). -->
+<line x1="230" y1="392" x2="676" y2="392" stroke="#d97706" stroke-width="0.4" opacity="0.5"/>
+<line x1="230" y1="400" x2="676" y2="400" stroke="#d97706" stroke-width="0.4" opacity="0.5"/>
+<line x1="230" y1="408" x2="676" y2="408" stroke="#d97706" stroke-width="0.4" opacity="0.5"/>
+<line x1="230" y1="416" x2="676" y2="416" stroke="#d97706" stroke-width="0.4" opacity="0.5"/>
+<line x1="230" y1="440" x2="676" y2="440" stroke="#d97706" stroke-width="0.4" opacity="0.5"/>
+<line x1="230" y1="448" x2="676" y2="448" stroke="#d97706" stroke-width="0.4" opacity="0.5"/>
+<text x="453" y="413" text-anchor="middle" font-size="12" fill="#92400e" font-weight="700">ZONE 3 — WALKWAY</text>
+<text x="453" y="427" text-anchor="middle" font-size="9" fill="#92400e">289"×37" — N-S boards</text>
+<rect x="228" y="130" width="225" height="252" rx="4" fill="#bfdbfe" stroke="#3498db" stroke-width="2.5"/>
+<!-- North Seating board-flow stripes: horizontal lines = N-S flow (N=screen-left, S=screen-right) -->
+<line x1="230" y1="142" x2="451" y2="142" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="154" x2="451" y2="154" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="166" x2="451" y2="166" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="178" x2="451" y2="178" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="190" x2="451" y2="190" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="202" x2="451" y2="202" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="214" x2="451" y2="214" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="226" x2="451" y2="226" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="286" x2="451" y2="286" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="298" x2="451" y2="298" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="310" x2="451" y2="310" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="322" x2="451" y2="322" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="334" x2="451" y2="334" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="346" x2="451" y2="346" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="358" x2="451" y2="358" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<line x1="230" y1="370" x2="451" y2="370" stroke="#3498db" stroke-width="0.4" opacity="0.45"/>
+<text x="360" y="236" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="700">ZONE 2 — NORTH SEATING</text>
+<text x="360" y="252" text-anchor="middle" font-size="9" fill="#1e40af">114"×157" — N-S boards</text>
+<!-- Bar runs 157" along north edge. Was 235" high (133" scaled), now scale to 157". 
+     Original drawing: x=228, width=38 — represents bar's SOUTH face depth (24" wide in plan view). 
+     Height y=130 to y=365 was 235px for 133". 157/133 = 1.18, so new height = 278px (235 * 1.18). -->
+<rect x="228" y="130" width="38" height="236" rx="2" fill="#c9956a" opacity="0.55" stroke="#7c5c3c" stroke-width="2"/>
+<text x="247" y="248" text-anchor="middle" font-size="7" fill="#3d2b1f" font-weight="700" transform="rotate(-90,247,248)">BAR 157"</text>
+<circle cx="276" cy="153" r="6" fill="#d97706" opacity="0.25" stroke="#92400e" stroke-width="1"/>
+<circle cx="276" cy="185" r="6" fill="#d97706" opacity="0.25" stroke="#92400e" stroke-width="1"/>
+<circle cx="276" cy="217" r="6" fill="#d97706" opacity="0.25" stroke="#92400e" stroke-width="1"/>
+<circle cx="276" cy="249" r="6" fill="#d97706" opacity="0.25" stroke="#92400e" stroke-width="1"/>
+<circle cx="276" cy="281" r="6" fill="#d97706" opacity="0.25" stroke="#92400e" stroke-width="1"/>
+<circle cx="276" cy="313" r="6" fill="#d97706" opacity="0.25" stroke="#92400e" stroke-width="1"/>
+<circle cx="276" cy="345" r="6" fill="#d97706" opacity="0.25" stroke="#92400e" stroke-width="1"/>
+<rect x="453" y="130" width="225" height="252" rx="4" fill="#e0e7ff" stroke="#6366f1" stroke-width="2.5"/>
+<!-- South Seating board-flow stripes: horizontal lines = N-S flow -->
+<line x1="455" y1="142" x2="676" y2="142" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="154" x2="676" y2="154" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="166" x2="676" y2="166" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="178" x2="676" y2="178" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="190" x2="676" y2="190" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="202" x2="676" y2="202" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="214" x2="676" y2="214" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="226" x2="676" y2="226" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="286" x2="676" y2="286" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="298" x2="676" y2="298" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="310" x2="676" y2="310" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="322" x2="676" y2="322" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="334" x2="676" y2="334" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="346" x2="676" y2="346" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="358" x2="676" y2="358" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<line x1="455" y1="370" x2="676" y2="370" stroke="#6366f1" stroke-width="0.4" opacity="0.45"/>
+<text x="565" y="236" text-anchor="middle" font-size="11" fill="#4338ca" font-weight="700">ZONE 4 — SOUTH SEATING</text>
+<text x="565" y="252" text-anchor="middle" font-size="9" fill="#4338ca">139"×157" — N-S boards</text>
+<rect x="318" y="94" width="288" height="36" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="462" y="116" text-anchor="middle" font-size="9" fill="#475569">16' stair span — 5 treads</text>
+<rect x="678" y="292" width="288" height="198" rx="4" fill="#fecaca" stroke="#e74c3c" stroke-width="2.5"/>
+<!-- Zone 5 board-flow stripes: horizontal lines = N-S flow -->
+<line x1="680" y1="308" x2="964" y2="308" stroke="#e74c3c" stroke-width="0.4" opacity="0.45"/>
+<line x1="680" y1="320" x2="964" y2="320" stroke="#e74c3c" stroke-width="0.4" opacity="0.45"/>
+<line x1="680" y1="332" x2="964" y2="332" stroke="#e74c3c" stroke-width="0.4" opacity="0.45"/>
+<line x1="680" y1="344" x2="964" y2="344" stroke="#e74c3c" stroke-width="0.4" opacity="0.45"/>
+<line x1="680" y1="356" x2="964" y2="356" stroke="#e74c3c" stroke-width="0.4" opacity="0.45"/>
+<line x1="680" y1="368" x2="964" y2="368" stroke="#e74c3c" stroke-width="0.4" opacity="0.45"/>
+<line x1="680" y1="380" x2="964" y2="380" stroke="#e74c3c" stroke-width="0.4" opacity="0.45"/>
+<line x1="680" y1="432" x2="964" y2="432" stroke="#e74c3c" stroke-width="0.4" opacity="0.45"/>
+<line x1="680" y1="444" x2="964" y2="444" stroke="#e74c3c" stroke-width="0.4" opacity="0.45"/>
+<line x1="680" y1="456" x2="964" y2="456" stroke="#e74c3c" stroke-width="0.4" opacity="0.45"/>
+<line x1="680" y1="468" x2="964" y2="468" stroke="#e74c3c" stroke-width="0.4" opacity="0.45"/>
+<rect x="705" y="140" width="234" height="144" rx="8" fill="rgba(100,160,220,0.12)" stroke="#1e40af" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="822" y="205" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="700" opacity="0.5">HOT TUB</text>
+<text x="822" y="220" text-anchor="middle" font-size="9" fill="#1e40af" opacity="0.4">(off-deck)</text>
+<text x="822" y="400" text-anchor="middle" font-size="13" fill="#991b1b" font-weight="700">ZONE 5</text>
+<text x="822" y="415" text-anchor="middle" font-size="10" fill="#991b1b">181"×121" — N-S</text>
+
+<!-- ============ BENCH SEATS ============ -->
+<!-- Bench is 18" high, Trex boards, along deck outer edges only, stops at stairs and at bar.
+     Drawn as a teal-green filled band ~8px wide to represent the bench seat width.
+     Small brown squares = 4x8 posts at 48" o.c. -->
+
+<!-- N Seating bench: north edge only (full 157", x=228 to 318 before stairs on east side).
+     NO bench on west edge — that's where the Bar peninsula is built. -->
+<rect x="228" y="130" width="90" height="10" fill="#2d5a4a" opacity="0.85" stroke="#1a3d2f" stroke-width="0.5"/>
+<!-- N Seating bench posts along east edge (the short run north of stairs) -->
+<rect x="232" y="132" width="6" height="4" fill="#5c3d2e"/>
+<rect x="270" y="132" width="6" height="4" fill="#5c3d2e"/>
+<rect x="308" y="132" width="6" height="4" fill="#5c3d2e"/>
+
+<!-- S Seating bench: south edge (from north stair end down to where Zone 5 starts at y=292)
+     + east edge portion (x=606 to 678, after stairs) -->
+<rect x="668" y="130" width="10" height="162" fill="#2d5a4a" opacity="0.85" stroke="#1a3d2f" stroke-width="0.5"/>
+<rect x="606" y="130" width="72" height="10" fill="#2d5a4a" opacity="0.85" stroke="#1a3d2f" stroke-width="0.5"/>
+<!-- S Seating bench posts along south edge (y=130 to y=292, ~162px) -->
+<rect x="670" y="138" width="4" height="6" fill="#5c3d2e"/>
+<rect x="670" y="182" width="4" height="6" fill="#5c3d2e"/>
+<rect x="670" y="226" width="4" height="6" fill="#5c3d2e"/>
+<rect x="670" y="270" width="4" height="6" fill="#5c3d2e"/>
+<!-- S Seating bench posts along east edge (north of stairs, x=606 to 678) -->
+<rect x="620" y="132" width="6" height="4" fill="#5c3d2e"/>
+<rect x="658" y="132" width="6" height="4" fill="#5c3d2e"/>
+
+<!-- Zone 5 bench: L-shape along outer perimeter — north edge (hot tub border) connects S Seating south-edge bench, then turns south to east edge.
+     NO bench on south edge — that's in front of the house wall.
+     North-edge bench extended left to x=668 to close the corner gap with S Seating south bench. -->
+<rect x="668" y="292" width="298" height="10" fill="#2d5a4a" opacity="0.85" stroke="#1a3d2f" stroke-width="0.5"/>
+<rect x="956" y="292" width="10" height="198" fill="#2d5a4a" opacity="0.85" stroke="#1a3d2f" stroke-width="0.5"/>
+<!-- Zone 5 bench posts along north edge (connecting segment, x=678 to 966) -->
+<rect x="686" y="294" width="6" height="4" fill="#5c3d2e"/>
+<rect x="734" y="294" width="6" height="4" fill="#5c3d2e"/>
+<rect x="782" y="294" width="6" height="4" fill="#5c3d2e"/>
+<rect x="830" y="294" width="6" height="4" fill="#5c3d2e"/>
+<rect x="878" y="294" width="6" height="4" fill="#5c3d2e"/>
+<rect x="926" y="294" width="6" height="4" fill="#5c3d2e"/>
+<!-- Zone 5 bench posts along east edge (x=956) -->
+<rect x="958" y="300" width="4" height="6" fill="#5c3d2e"/>
+<rect x="958" y="344" width="4" height="6" fill="#5c3d2e"/>
+<rect x="958" y="388" width="4" height="6" fill="#5c3d2e"/>
+<rect x="958" y="432" width="4" height="6" fill="#5c3d2e"/>
+<rect x="958" y="476" width="4" height="6" fill="#5c3d2e"/>
+
+<!-- Legend callout — Bench, posts, board flow -->
+<rect x="760" y="50" width="210" height="52" rx="4" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+<!-- Row 1: bench swatch -->
+<rect x="772" y="61" width="18" height="5" rx="1" fill="#2d5a4a"/>
+<text x="796" y="67" font-size="9" fill="#1a3d2f" font-weight="600">Bench seat — Trex, 18" h</text>
+<!-- Row 2: post marker -->
+<rect x="776" y="75" width="5" height="7" fill="#5c3d2e"/>
+<text x="796" y="82" font-size="9" fill="#5c3d2e" font-weight="600">4×8 posts @ 48" o.c.</text>
+<!-- Row 3: board flow stripes -->
+<line x1="772" y1="91" x2="790" y2="91" stroke="#94a3b8" stroke-width="0.5"/>
+<line x1="772" y1="93" x2="790" y2="93" stroke="#94a3b8" stroke-width="0.5"/>
+<line x1="772" y1="95" x2="790" y2="95" stroke="#94a3b8" stroke-width="0.5"/>
+<text x="796" y="95" font-size="9" fill="#334155" font-weight="600">Board flow — N→S all zones</text>
+<line x1="30" y1="540" x2="966" y2="540" stroke="#64748b" stroke-width="1"/>
+<line x1="30" y1="534" x2="30" y2="546" stroke="#64748b" stroke-width="1"/>
+<line x1="966" y1="534" x2="966" y2="546" stroke="#64748b" stroke-width="1"/>
+<text x="498" y="558" text-anchor="middle" font-size="12" fill="#334155" font-weight="700">52' total along house</text>
+<g transform="translate(1030,70)">
+<circle cx="0" cy="0" r="32" fill="white" stroke="#94a3b8" stroke-width="1.2"/>
+<circle cx="0" cy="0" r="2" fill="#475569"/>
+<text x="0" y="-18" text-anchor="middle" font-size="11" fill="#334155" font-weight="700">E</text>
+<text x="0" y="26" text-anchor="middle" font-size="11" fill="#334155" font-weight="700">W</text>
+<text x="-22" y="4" text-anchor="middle" font-size="11" fill="#334155" font-weight="700">N</text>
+<text x="22" y="4" text-anchor="middle" font-size="11" fill="#334155" font-weight="700">S</text>
+</g>
+</svg>
+</div>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:24px 0 12px">At-a-glance specs</h3>
+<table class="meta-table">
+<tr><td>Total length along house</td><td>52' (Kitchen wing 11' + Walkway 25' + Hot tub wing 16')</td></tr>
+<tr><td>Deckable area</td><td>~665 sq ft across 6 zones</td></tr>
+<tr><td>Decking product</td><td>Trex Enhance Naturals 'Rocky Harbor' 1&times;6 grooved edge <a class="manual-link" data-model="Trex-Enhance"></a></td></tr>
+<tr><td>Fastener system</td><td>Trex Hideaway UNIVCOMBOCLIP01 hidden fasteners <a class="manual-link" data-model="Trex-Hideaway"></a></td></tr>
+<tr><td>Pattern (Zone 1 only)</td><td>Classic 45&deg; herringbone &mdash; boards mitered at 45&deg; meeting at a center seam. Short-length planks (likely 12&ndash;18" cuts from 12' stock). Picture frame border in contrast color recommended.</td></tr>
+<tr><td>Pattern (Zones 2&ndash;6)</td><td>Straight-lay, <strong>all boards flow N-S</strong> (parallel to the compass N-S axis). Walkway, North Seating, South Seating, and Zone 5 all run boards in the same direction for unified visual flow &mdash; herringbone in Zone 1 provides the contrasting centerpiece.</td></tr>
+<tr><td>Bench seats</td><td><strong>N Seating:</strong> 3 Trex boards wide (~17" deep seat) along east edge north of stairs only (~46" linear). <strong>NO bench along west edge &mdash; that's where the bar peninsula sits.</strong> <strong>S Seating:</strong> 2 Trex boards wide (~11" deep seat) along south edge (~82") + east edge after stairs (~37"); total ~119" linear. <strong>Zone 5:</strong> 3 Trex boards wide forming L-shape along outer perimeter &mdash; north edge/hot tub border (~146") + east edge (~100"); total ~246" linear. <strong>NO bench along Zone 5 south edge &mdash; that edge is in front of the house wall.</strong> All benches 18" standard seat height. Total ~411" (~34 linear ft).</td></tr>
+<tr><td>Bench structure</td><td>4&times;8 wood posts at 48" o.c., built into joists (integral with framing). ~13 posts total. Trex Rocky Harbor seat boards match decking. Additional bench material estimate: ~4&times; 16' + ~3&times; 12' Trex boards (seat surface) + ~5&times; 8' 4&times;8 posts.</td></tr>
+<tr><td>Boards ordered</td><td>151 (126&times;16' + 25&times;12') &mdash; Home Depot orders WN54641427 + WN54779681. <strong class="warn">Herringbone (~+2) + benches (~+7) may require additional stock &mdash; see Board calc for revised totals.</strong></td></tr>
+<tr><td>Fasteners ordered</td><td>5 packs (250 sq ft coverage) &mdash; <strong class="warn">~6 more packs needed. Herringbone in Zone 1 increases fastener density slightly.</strong></td></tr>
+<tr><td>Joist spacing</td><td>16" o.c. &mdash; verify during tear-off. Zone 1 herringbone requires blocking between joists at 45&deg; miter seams for clip support.</td></tr>
+<tr><td>Schedule window</td><td>Tear-off Apr 21&ndash;25 &middot; Resurface May 5&ndash;16 (parallel with kitchen framing)</td></tr>
+</table>
+
+<div class="metric-row" style="margin-top:16px">
+<div class="metric"><div class="lbl">Deckable area</div><div class="num">~665 sq ft</div></div>
+<div class="metric"><div class="lbl">Zones</div><div class="num">6</div></div>
+<div class="metric"><div class="lbl">Fastener system</div><div class="num">Hideaway hidden</div></div>
+<div class="metric"><div class="lbl">Boards ordered</div><div class="num" style="color:#16a34a">151 &check;</div></div>
+</div>
+
+<div class="callout callout-blue"><strong>Zone breakdown (decked surface):</strong> <strong style="color:#0d9488">Zone 1 Kitchen 96"&times;47" (classic 45&deg; herringbone &mdash; ~39 sq ft inside counters; board count + material TBD pending mitered-cut calc)</strong> &middot; Walkway 289"&times;37" (E-W, 51 boards, 8' cuts) &middot; North Seating 114"&times;157" (E-W, 20 boards, 16' stock, <strong>bar 157" on north edge with 24" east extension</strong>) &middot; South Seating 139"&times;157" (E-W, 25 boards, 16' stock) &middot; Zone 5 Hot Tub 181"&times;121" (N-S, 22 boards, 16' stock) &middot; Stairs 192"&times;~11" (N-S, 5 treads &times; 2 boards = 10, 16' stock). Wings run N-S for directional contrast against the E-W center. Picture frames with directional contrast on all zones. <strong style="color:#991b1b">Herringbone in Zone 1 changes material math &mdash; see Board calc panel for revised count.</strong></div>
+
+<div class="callout callout-green" style="margin-top:12px"><strong>Bench seats (continuous outer perimeter, 3 zones):</strong> Built-in Trex Rocky Harbor bench seats, 18" standard seat height, built into joists with 4&times;8 wood posts at 48" o.c. <strong>N Seating:</strong> 3 boards wide seat along the east edge north of stairs only (~46" linear). No bench along the west edge &mdash; that's where the bar peninsula is built. <strong>S Seating + Zone 5 (continuous):</strong> S Seating south edge (~82") + S Seating east edge after stairs (~37") + Zone 5 north edge/hot tub border (~146") + Zone 5 east edge (~100") = ~365" continuous L-shape along outer perimeter. <strong>No bench along Zone 5 south edge &mdash; that edge is in front of the house wall.</strong> Total bench seating: ~411" (~34 linear ft). Adds ~7 Trex boards + ~5&times; 8' 4&times;8 posts to the material list. See Board calc panel for detailed math.</div>
+</div>
+
+
+
+
+
+
+
+
+<!-- ============ FENCE TAB ============ -->
+<div class="panel" id="panel-deck-boards">
+<h2 class="section-title">Board calculations — actual order vs plan</h2>
+<p style="font-size:14px;color:#666;margin-bottom:16px">Coverage per board: 5.75" (5.5" board + 0.25" gap). Grooved edge with Trex Hideaway hidden fasteners. <strong style="color:#0d9488">Zone 1 Kitchen = classic 45&deg; herringbone (short mitered planks).</strong> All other zones = straight-lay with directional contrast.</p>
+
+<h3 style="font-size:16px;font-weight:700;color:#0d9488;margin-bottom:12px">Zone 1 herringbone math</h3>
+<p style="font-size:13px;color:#64748b;margin-bottom:12px"><em>Classic 45&deg; herringbone uses short planks with 45&deg; miter cuts on both ends. Each plank body length is typically ~2&times; the board width = ~11" usable (from a 1&times;6 Trex = 5.5" actual). Below is the working estimate &mdash; Tristan to confirm actual plank length during layout.</em></p>
+<table class="spec-table">
+<thead><tr><th>Line item</th><th class="num">Value</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Field area</td><td class="num">~31.3 sq ft</td><td>96"&times;47" kitchen interior (4,512 sq in)</td></tr>
+<tr><td>Target plank body</td><td class="num">11" long</td><td>Short cut from 12' stock; 5.5" wide (1&times;6 board width)</td></tr>
+<tr><td>Miter waste per plank</td><td class="num">~18%</td><td>Two 45&deg; miter cuts per plank &mdash; typical field waste for herringbone</td></tr>
+<tr><td>Useful coverage per plank</td><td class="num">~55 sq in</td><td>After miter cuts, accounting for interlock geometry</td></tr>
+<tr><td>Planks needed (field)</td><td class="num">~82</td><td>4,512 sq in &divide; 55 = 82 interlocking planks</td></tr>
+<tr><td>Waste buffer (~18%)</td><td class="num">+15</td><td>Bad cuts, off-cuts at perimeter, pattern-matching at picture frame edge</td></tr>
+<tr><td style="font-weight:700"><strong>Total planks needed</strong></td><td class="num" style="font-weight:700">~97</td><td>Subject to Tristan's actual layout plan</td></tr>
+<tr><td>Planks per 12' board</td><td class="num">~12</td><td>12' = 144" &divide; 11" plank = 13 cuts, minus end-of-board waste = 12</td></tr>
+<tr><td style="font-weight:700;background:#ccfbf1"><strong>Field boards of 12' stock</strong></td><td class="num" style="font-weight:700;background:#ccfbf1">~9</td><td>97 planks &divide; 12 per board</td></tr>
+<tr><td>Picture frame border (Zone 1 perimeter)</td><td class="num">+2</td><td>Contrast-color straight-lay border framing the herringbone field &mdash; 2&times; 12' boards</td></tr>
+<tr style="background:#e2e8f0;font-weight:700"><td><strong>Zone 1 total: 12' boards</strong></td><td class="num"><strong>~11</strong></td><td>Prior straight-lay plan was 9 boards; herringbone adds ~2 boards</td></tr>
+</tbody>
+</table>
+<div class="callout callout-blue" style="margin-top:12px"><strong>Why herringbone uses more material:</strong> The 18% miter-cut waste is unavoidable, but the short-plank approach actually makes the 1&times;6 board stock <em>more efficient</em> than straight-lay in some ways &mdash; no 8' or 16' pieces needed for Zone 1, all usable from 12' stock. Expect ~2 extra 12' boards vs. the original straight-lay plan, plus the picture-frame border material.</div>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:24px 0 12px">Zone board requirements</h3>
+<table class="spec-table">
+<thead><tr><th>Zone</th><th>Field area</th><th>Board dir. / pattern</th><th>Board length</th><th class="num">Boards</th><th>Stock</th></tr></thead>
+<tbody>
+<tr><td style="color:#0d9488;font-weight:600">Zone 1 &mdash; Kitchen</td><td>96"&times;47"</td><td><strong>45&deg; herringbone</strong></td><td>~11" planks (mitered)</td><td class="num">~11*</td><td>12'</td></tr>
+<tr><td style="color:#92400e;font-weight:600">Walkway</td><td>289"&times;37"</td><td>E-W straight</td><td>37" (3.1')</td><td class="num">51</td><td>8' cuts</td></tr>
+<tr><td style="color:#1e40af;font-weight:600">North Seating</td><td>114"&times;157"</td><td>E-W straight</td><td>157" (13.1')</td><td class="num">20</td><td>16'</td></tr>
+<tr><td style="color:#4338ca;font-weight:600">South Seating</td><td>139"&times;157"</td><td>E-W straight</td><td>157" (13.1')</td><td class="num">25</td><td>16'</td></tr>
+<tr><td style="color:#991b1b;font-weight:600">Zone 5 &mdash; Hot Tub</td><td>181"&times;121"</td><td>N-S straight</td><td>181" (15.1')</td><td class="num">22</td><td>16'</td></tr>
+<tr><td style="color:#475569;font-weight:600">Stairs (5 treads)</td><td>192"&times;~11"</td><td>N-S straight</td><td>192" (16')</td><td class="num">10</td><td>16'</td></tr>
+<tr style="background:#e2e8f0;font-weight:700"><td colspan="4">Total field + stairs</td><td class="num">~139</td><td></td></tr>
+</tbody>
+</table>
+<p style="font-size:12px;color:#64748b;margin-top:6px"><em>*Zone 1 herringbone: 9 field-pattern boards + 2 picture-frame border boards. See herringbone math table above.</em></p>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:24px 0 12px">Actual order vs. original plan</h3>
+<table class="spec-table">
+<thead><tr><th>Length</th><th class="num">Planned</th><th class="num">Ordered</th><th class="num">Delta</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>8'</strong></td><td class="num">29</td><td class="num">0</td><td class="num">-29</td><td>Cut from 16' stock instead</td></tr>
+<tr><td><strong>12'</strong></td><td class="num">19</td><td class="num">25</td><td class="num">+6</td><td><strong>Need +2 more for Zone 1 herringbone.</strong> Current 25 may be short by 2 boards.</td></tr>
+<tr><td><strong>16'</strong></td><td class="num">102</td><td class="num">126</td><td class="num">+24</td><td>Replaces 8' + 20' needs</td></tr>
+<tr><td><strong>20'</strong></td><td class="num">4</td><td class="num">0</td><td class="num">-4</td><td>25' frames spliced from 16'</td></tr>
+<tr style="background:#e2e8f0;font-weight:700"><td>Total</td><td class="num">154</td><td class="num">151</td><td class="num">-3</td><td>Extra length compensates on non-Zone-1; <strong class="warn">Zone 1 needs herringbone-specific recalc before tear-off</strong></td></tr>
+</tbody>
+</table>
+
+<h3 style="font-size:16px;font-weight:700;color:#2d5a4a;margin:24px 0 12px">Bench seat math</h3>
+<p style="font-size:13px;color:#64748b;margin-bottom:12px"><em>Built-in Trex bench seats along outer deck edges, 18" seat height. 4&times;8 wood posts built into joists at 48" o.c. carry both bench load and tie into deck framing. Bench geometry: <strong>NO bench where the Bar peninsula sits. NO bench along Zone 5 south edge (in front of house wall).</strong> S Seating south edge + Zone 5 north + east edges form a continuous L-shape along outer deck boundary. Working estimate &mdash; Tristan to confirm exact post count during framing.</em></p>
+<table class="spec-table">
+<thead><tr><th>Location</th><th>Boards wide</th><th>Seat depth</th><th>Linear run</th><th class="num">Trex boards</th><th>Stock mix</th></tr></thead>
+<tbody>
+<tr><td style="color:#1e40af;font-weight:600">N Seating bench</td><td>3</td><td>~17" (3&times;5.5" + 2&times;0.25" gaps)</td><td>~46" (east edge, north of stairs only &mdash; no west edge: bar peninsula is there)</td><td class="num">~1</td><td>1&times; 16' (covers 3 boards of 46")</td></tr>
+<tr><td style="color:#4338ca;font-weight:600">S Seating bench</td><td>2</td><td>~11" (2&times;5.5" + 1&times;0.25" gap)</td><td>~119" (south edge 82" + east edge 37")</td><td class="num">~2</td><td>2&times; 12'</td></tr>
+<tr><td style="color:#991b1b;font-weight:600">Zone 5 bench (L-shape)</td><td>3</td><td>~17"</td><td>~246" (north edge/hot tub border 146" + east edge 100")</td><td class="num">~4</td><td>3&times; 16' (north edge) + 1&times; 12' (east edge)</td></tr>
+<tr style="background:#e2e8f0;font-weight:700"><td colspan="3">Total bench seat material</td><td colspan="2" class="num">~7 Trex boards</td><td>~4&times; 16' + 3&times; 12'</td></tr>
+</tbody>
+</table>
+
+<h4 style="font-size:14px;font-weight:600;color:#5c3d2e;margin:16px 0 8px">4&times;8 posts (structural, built into joists)</h4>
+<table class="spec-table">
+<thead><tr><th>Line item</th><th class="num">Value</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Total bench linear run</td><td class="num">~411" (34.3 ft)</td><td>N Seating 46" + S Seating 119" + Zone 5 L-shape 246"</td></tr>
+<tr><td>Posts at 48" o.c.</td><td class="num">~9</td><td>411" &divide; 48" = 8.6 posts along bench runs</td></tr>
+<tr><td>Corner + termination posts</td><td class="num">+4</td><td>S Seating L-corner + Zone 5 NW corner (connecting to S Seating) + Zone 5 NE corner + bench-end terminations</td></tr>
+<tr><td style="font-weight:700"><strong>Total 4&times;8 posts</strong></td><td class="num" style="font-weight:700"><strong>~13</strong></td><td>Pressure-treated wood (not Trex) &mdash; structural, encased or wrapped as finish dictates</td></tr>
+<tr><td>Post length per piece</td><td class="num">~34"</td><td>18" above deck (seat height) + 16" below deck (into joist framing)</td></tr>
+<tr><td>Posts from 8' 4&times;8 stock</td><td class="num">2.8 / 8' piece</td><td>8' = 96" &divide; 34" = 2.8 useful pieces per 8' stick</td></tr>
+<tr style="background:#d4c4a8;font-weight:700"><td colspan="2"><strong>Total 8' 4&times;8 lumber</strong></td><td><strong>~5 pieces</strong> &mdash; source from lumber yard (not Home Depot; Trex HD order doesn't include framing stock)</td></tr>
+</tbody>
+</table>
+
+<div class="callout callout-blue" style="margin-top:12px"><strong>Bench structure note:</strong> 4&times;8 posts tie directly into joist framing &mdash; this means posts must be located and positioned <strong>during Phase 4 framing (May 2&ndash;9)</strong>, not added afterward. Tristan to mark post locations on joist layout before deck boards go down. Post penetrations through the decking are a one-shot cut &mdash; measure twice.</div>
+
+<div class="metrics">
+<div class="metric"><div class="lbl">Ordered</div><div class="num">250 sq ft</div></div>
+<div class="metric"><div class="lbl">Deck area</div><div class="num">~550 sq ft</div></div>
+<div class="metric"><div class="lbl">Shortfall</div><div class="num" style="color:#d97706">~300 sq ft</div></div>
+<div class="metric"><div class="lbl">Packs needed</div><div class="num" style="color:#d97706">~11&ndash;12 total</div><div style="font-size:11px;color:#64748b;margin-top:2px">have 5, buy 6&ndash;7 more</div></div>
+</div>
+<div class="callout"><strong>Action &mdash; Eddie by May 1:</strong> Order 6&ndash;7 more Trex Hideaway UNIVCOMBOCLIP01 packs (50 sq ft/pack, 16" o.c. spacing: 1 clip per joist = ~9 clips per 12' board, ~12 clips per 16' board). <strong>Home Depot SKU 513114.</strong> <strong style="color:#0d9488">Zone 1 herringbone needs ~1 extra pack &mdash; denser fastener pattern along the 45&deg; miter seams + clips on shorter planks.</strong> Alternative: screw-down under kitchen counter footprint (those areas won't show fasteners), which could close the gap without needing the full 7 packs. <a class="manual-link" data-model="Trex-Hideaway"></a></div>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:24px 0 12px">Deck-specific open items</h3>
+<table class="spec-table">
+<thead><tr><th>Item</th><th>Detail</th><th>Owner</th></tr></thead>
+<tbody>
+<tr><td><strong class="warn">Zone 1 herringbone layout plan</strong></td><td><strong>Tristan to confirm plank length (currently estimated at 11" / ~2&times; board width) and layout direction before cutting.</strong> Actual layout determines picture-frame border dimensions, blocking locations, and final board count. Recommend dry-lay first row to visualize before committing to cuts.</td><td class="warn">TRISTAN &mdash; before Phase 5 (May 5)</td></tr>
+<tr><td><strong class="warn">Zone 1 joist blocking for herringbone</strong></td><td>Herringbone's 45&deg; miter seams don't line up with 16" o.c. joists. Additional blocking between joists required at each miter seam to give Hideaway clips something to bite. Estimate: 1 block per 2 sq ft of herringbone = ~15 extra blocks in Zone 1 alone.</td><td class="warn">TRISTAN &mdash; Phase 4 blocking</td></tr>
+<tr><td><strong>Additional 12' boards for Zone 1</strong></td><td>Current order has 25&times; 12'; herringbone needs ~11 for Zone 1 (9 field + 2 border), leaving only ~14 for all other 12' needs. Confirm buffer or order ~2 more.</td><td>EDDIE &mdash; verify by April 28</td></tr>
+<tr><td><strong>Picture frame border color</strong></td><td>Herringbone in Zone 1 reads best with a contrast-color border. Options: same Rocky Harbor (subtle), or a contrast Trex color. Current order is all Rocky Harbor &mdash; decide whether to add contrast SKU.</td><td>EDDIE &mdash; decide by April 28</td></tr>
+<tr><td><strong>Fascia perimeter</strong></td><td>Measure during tear-off; wood fascia quantity TBD until exposed edges are measured.</td><td>TRISTAN &mdash; Phase 2</td></tr>
+<tr><td><strong>Stair tread count</strong></td><td>Assumed 5 treads &times; 2 boards = 10; verify during tear-off.</td><td>TRISTAN &mdash; Phase 2</td></tr>
+<tr><td><strong>Joist spacing</strong></td><td>Confirm 16" o.c. across all sections; affects Hideaway fastener spacing.</td><td>TRISTAN &mdash; Phase 2</td></tr>
+<tr><td><strong>Fastener shortfall decision</strong></td><td>Order 6&ndash;7 more packs OR screw-down under kitchen counters.</td><td>EDDIE + TRISTAN &mdash; Phase 5</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============ OPEN ITEMS ============ -->
+</div>
+
+<script>
+// Product manual URL registry — single source of truth for manual links
+var PRODUCT_MANUALS = {
+  'BIB10IRPMK': 'https://www.napoleon.com/sites/default/files/products/N415-0601-Built-In-Series-Manual-RevH.pdf',
+  'BI-3024-2D': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'BI-3624-2D': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'BI-1824-1W': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'BI-1824-1D': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'BI-1808-1DR': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'BI-1816-2DR': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'N370-1091-SER': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'Blackstone 6332': 'https://blackstoneproducts.com/pages/product-manuals',
+  'Blackstone 6228': 'https://blackstoneproducts.com/pages/product-manuals',
+  'TBB86RLG': 'https://cdn.shocho.co/sc-specsheets/Yosemite-Timberline-Build-In-Instructionsv04.pdf',
+  'BAC682': 'https://support.traeger.com/hc/en-us/articles/7650399651355-Timberline-Built-In-Trim-Kit-for-Outdoor-Kitchens',
+  'KBU56ASD': 'https://www.kingsbottle.com',
+  'SPFF51OS2D': 'https://www.summitappliance.com/document/273',
+  'SRCG065A-1SS': 'https://www.scotsman-ice.com/service/User%20Manuals/SRC065_user.pdf',
+  'C3PBLP': 'https://assets.ajmadison.com/ajmadison/itemdocs/coyote-burner-C3PBLP-use.pdf',
+  'C1SLV': 'https://coyotegrill.com/products/coyote-asado-smoker-insert-sleeve-c1slv',
+  'C1SLV-install': 'https://cdn.shocho.co/sc-specsheets/C3PB-Install-Guide.pdf',
+  'CJAKTC1PB': 'https://coyoteoutdoor.com/manuals-guides',
+  'RVH8310': 'https://www.ruvati.com/wp-content/uploads/C_Undermount_Workstation-6.pdf',
+  'KPF-1610SFS': 'https://www.kraususa.com/media/catalog/product/documentation/KPF-1610-FF-100-IM.pdf',
+  'SB-V3-55-4KHDR-BL': 'https://www.sunbritetv.com/content/Veranda3_Manual.pdf',
+  'SB-WM-ART2-L-BL': 'https://www.sunbritetv.com/manuals/',
+  'PD-6WCL': 'https://pdf.lowes.com/productdocuments/0214cf24-9a2f-494b-9c08-90ff33d807fb/66179110.pdf',
+  'RibbonFlex-Pro': 'https://manuals.plus/m/cebdef283081c91045da68f705b208626c7d74c33b4589ff84c2af90721539d9',
+  'M150L24DC-AR': 'https://manuals.plus/m/cebdef283081c91045da68f705b208626c7d74c33b4589ff84c2af90721539d9',
+  'Trex-Enhance': 'https://www.trex.com/academy/how-to-guides/all-guides/how-to-fasten-trex-enhance-decking/',
+  'Trex-Hideaway': 'https://documents.trex.com/is/content/Trex/trex-hideaway-universal-fasteners-aluminum-framing-install-instructionspdf.pdf'
+};
+
+// On page load, wire all .manual-link elements with data-model attribute to their manual URL
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('a.manual-link[data-model]').forEach(function(a){
+    var m = a.dataset.model;
+    var url = PRODUCT_MANUALS[m];
+    if(url){
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      if(!a.textContent.trim()) a.textContent = 'Manual';
+    } else {
+      a.classList.add('none');
+      a.textContent = '—';
+      a.removeAttribute('href');
+    }
+  });
+  document.querySelectorAll('a.product-link[data-model]').forEach(function(a){
+    var m = a.dataset.model;
+    var url = PRODUCT_MANUALS[m];
+    if(url){ a.href = url; a.target = '_blank'; a.rel = 'noopener'; }
+    else { a.classList.remove('product-link'); a.removeAttribute('href'); }
+  });
+});
+</script>
+
+<script>
+function selectNav(id){
+  // Swap active panel
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  var panel=document.getElementById('panel-'+id);
+  if(panel) panel.classList.add('active');
+
+  // Sync mobile <select>
+  var sel=document.querySelector('.nav-select');
+  if(sel && sel.value!==id) sel.value=id;
+
+  // Sync desktop dropdown — highlight active menu item
+  var items=document.querySelectorAll('.nav-item');
+  var activeItem=null;
+  items.forEach(function(it){
+    if(it.dataset.panel===id){ it.classList.add('active'); activeItem=it; }
+    else it.classList.remove('active');
+  });
+
+  // Update trigger label + variant color
+  if(activeItem){
+    var trigger=document.querySelector('.nav-trigger');
+    trigger.querySelector('.nav-label').textContent=activeItem.textContent.trim();
+    trigger.classList.remove('v-overview','v-wall','v-sys','v-sched');
+    if(activeItem.classList.contains('v-overview')) trigger.classList.add('v-overview');
+    if(activeItem.classList.contains('v-wall'))     trigger.classList.add('v-wall');
+    if(activeItem.classList.contains('v-sys'))      trigger.classList.add('v-sys');
+    if(activeItem.classList.contains('v-sched'))    trigger.classList.add('v-sched');
+  }
+
+  // Close dropdown
+  closeNav();
+  // Scroll active panel into view on mobile for nicer UX
+  if(window.innerWidth<=640 && panel) panel.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function toggleNav(e){
+  if(e) e.stopPropagation();
+  var menu=document.querySelector('.nav-menu');
+  var trigger=document.querySelector('.nav-trigger');
+  var isOpen=menu.classList.contains('open');
+  if(isOpen) closeNav();
+  else{
+    menu.classList.add('open');
+    trigger.classList.add('open');
+    trigger.setAttribute('aria-expanded','true');
+  }
+}
+
+function closeNav(){
+  var menu=document.querySelector('.nav-menu');
+  var trigger=document.querySelector('.nav-trigger');
+  if(menu) menu.classList.remove('open');
+  if(trigger){ trigger.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); }
+}
+
+// Click outside to close
+document.addEventListener('click',function(e){
+  var dd=document.querySelector('.nav-dropdown');
+  if(dd && !dd.contains(e.target)) closeNav();
+});
+
+// Keyboard: Escape closes, Enter/Space on trigger opens
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closeNav();
+});
+document.addEventListener('DOMContentLoaded',function(){
+  var trigger=document.querySelector('.nav-trigger');
+  if(trigger){
+    trigger.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleNav(e); }
+    });
+  }
+});
+
+// Back-compat shim: if anything still calls showTab(el,id), forward it.
+function showTab(el,id){ selectNav(id); }
+</script>
+</body>
+</html>
