@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albatross Kitchen — Contractor Package</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f2f5;color:#1a1a2e}
+.header{background:linear-gradient(135deg,#1a1a2e,#2c3e50);color:#fff;padding:18px 24px}
+.header h1{font-size:22px;font-weight:700;margin-bottom:2px;line-height:1.25}
+.header .sub{font-size:13px;opacity:.85}
+@media (min-width:641px){
+  .header{padding:22px 40px}
+  .header h1{font-size:26px}
+  .header .sub{font-size:14px}
+}
+.container{max-width:1500px;margin:0 auto;padding:32px 24px}
+
+/* ==================== DOCX-STYLE SPEC TABLES ==================== */
+.spec-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 20px;background:#fff}
+.spec-table caption{caption-side:top;text-align:left;font-size:14px;font-weight:700;color:#2c3e50;padding:0 0 8px;letter-spacing:.2px}
+.spec-table th,.spec-table td{padding:10px 12px;border:1px solid #cbd5e1;vertical-align:top;text-align:left;line-height:1.45}
+.spec-table th{background:#f1f5f9;font-weight:700;color:#1e293b;font-size:12.5px;text-transform:uppercase;letter-spacing:.4px}
+.spec-table td strong{color:#0f172a}
+.spec-table tbody tr:nth-child(even) td{background:#fafbfc}
+.spec-table tr.section-row td{background:#e2e8f0;font-weight:700;color:#1e293b;text-transform:uppercase;letter-spacing:.5px;font-size:11.5px;padding:6px 12px}
+.spec-table tr.note-row td{background:#fef9c3;font-style:italic;color:#713f12;font-size:12.5px}
+.spec-table .num{text-align:right;font-variant-numeric:tabular-nums}
+.spec-table .warn{color:#991b1b;font-weight:600}
+.spec-table .ok{color:#166534;font-weight:600}
+.spec-table a.manual-link{display:inline-block;padding:2px 8px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:4px;font-size:11.5px;color:#1e40af;text-decoration:none;white-space:nowrap;font-weight:500}
+.spec-table a.manual-link:hover{background:#dbeafe;border-color:#3498db;text-decoration:none}
+.spec-table a.manual-link::before{content:"\2197\0020";font-size:10px;opacity:.7}
+.spec-table a.manual-link.none{color:#94a3b8;background:#fff;cursor:default;pointer-events:none;font-style:italic}
+.spec-table a.manual-link.none::before{content:""}
+
+/* Zone color indicators */
+.spec-table td.zc-prep{border-left:4px solid #0d9488;background:#ccfbf1}
+.spec-table td.zc-prep ~ td{background:#f0fdfa}
+.spec-table td.zc-trash{border-left:4px solid #f59e0b;background:#fde68a}
+.spec-table td.zc-trash ~ td{background:#fffbeb}
+.spec-table td.zc-sink{border-left:4px solid #27ae60;background:#bbf7d0}
+.spec-table td.zc-sink ~ td{background:#f0fdf4}
+.spec-table td.zc-ice{border-left:4px solid #0891b2;background:#a5f3fc}
+.spec-table td.zc-ice ~ td{background:#ecfeff}
+.spec-table td.zc-fridge{border-left:4px solid #3498db;background:#bfdbfe}
+.spec-table td.zc-fridge ~ td{background:#eff6ff}
+.spec-table td.zc-freezer{border-left:4px solid #1e40af;background:#c7d2fe}
+.spec-table td.zc-freezer ~ td{background:#eef2ff}
+.spec-table td.zc-tv{border-left:4px solid #1e293b;background:#cbd5e1}
+.spec-table td.zc-tv ~ td{background:#f1f5f9}
+.spec-table td.zc-ir{border-left:4px solid #1a1a1a;background:#d4d4d4}
+.spec-table td.zc-ir ~ td{background:#f5f5f5}
+.spec-table td.zc-traeger{border-left:4px solid #e74c3c;background:#fecaca}
+.spec-table td.zc-traeger ~ td{background:#fef2f2}
+.spec-table td.zc-flattop{border-left:4px solid #0d9488;background:#a7f3d0}
+.spec-table td.zc-flattop ~ td{background:#ecfdf5}
+.spec-table td.zc-coyote{border-left:4px solid #0f766e;background:#5eead4}
+.spec-table td.zc-coyote ~ td{background:#ccfbf1}
+.spec-table td.zc-lp{border-left:4px solid #991b1b;background:#fca5a5}
+.spec-table td.zc-lp ~ td{background:#fef2f2}
+.spec-table td.zc-post{border-left:4px solid #7c5c3c;background:#d4c4a8}
+.spec-table td.zc-post ~ td{background:#faf7f2}
+.spec-table td.zc-hose{border-left:4px solid #16a34a;background:#bbf7d0}
+.spec-table td.zc-hose ~ td{background:#f0fdf4}
+.spec-table td.zc-bar{border-left:4px solid #94a3b8;background:#e2e8f0}
+.spec-table td.zc-bar ~ td{background:#f8fafc}
+.spec-table td.zc-ext{border-left:4px solid #d97706;background:#fde68a}
+.spec-table td.zc-ext ~ td{background:#fffbeb}
+.spec-table td.zc-dog{border-left:4px solid #f59e0b;background:#fde68a}
+.spec-table td.zc-dog ~ td{background:#fffbeb}
+.spec-table td.zc-drawer{border-left:4px solid #94a3b8;background:#e2e8f0}
+.spec-table td.zc-drawer ~ td{background:#f8fafc}
+.spec-table td.zc-dead{border-left:4px solid #cbd5e1;background:#f1f5f9}
+.spec-table td.zc-dead ~ td{background:#f8fafc}
+
+/* Zone-detail section headings */
+.zone-head{font-size:14px;font-weight:700;margin:16px 0 6px;padding:8px 12px;border-radius:4px}
+.zone-head.zc-prep{background:#ccfbf1;border-left:4px solid #0d9488;color:#0f766e}
+.zone-head.zc-trash{background:#fde68a;border-left:4px solid #f59e0b;color:#92400e}
+.zone-head.zc-sink{background:#bbf7d0;border-left:4px solid #27ae60;color:#166534}
+.zone-head.zc-ice{background:#a5f3fc;border-left:4px solid #0891b2;color:#155e75}
+.zone-head.zc-fridge{background:#bfdbfe;border-left:4px solid #3498db;color:#1e40af}
+.zone-head.zc-freezer{background:#c7d2fe;border-left:4px solid #1e40af;color:#1e3a8a}
+.zone-head.zc-tv{background:#cbd5e1;border-left:4px solid #1e293b;color:#1e293b}
+.zone-head.zc-ir{background:#d4d4d4;border-left:4px solid #1a1a1a;color:#1a1a1a}
+.zone-head.zc-traeger{background:#fecaca;border-left:4px solid #e74c3c;color:#991b1b}
+.zone-head.zc-flattop{background:#a7f3d0;border-left:4px solid #0d9488;color:#0f766e}
+.zone-head.zc-coyote{background:#5eead4;border-left:4px solid #0f766e;color:#115e59}
+.zone-head.zc-lp{background:#fca5a5;border-left:4px solid #991b1b;color:#7f1d1d}
+.zone-head.zc-post{background:#d4c4a8;border-left:4px solid #7c5c3c;color:#5c3d2e}
+.zone-head.zc-hose{background:#bbf7d0;border-left:4px solid #16a34a;color:#166534}
+.zone-head.zc-bar{background:#e2e8f0;border-left:4px solid #94a3b8;color:#475569}
+.zone-head.zc-ext{background:#fde68a;border-left:4px solid #d97706;color:#92400e}
+.zone-head.zc-dog{background:#fde68a;border-left:4px solid #f59e0b;color:#92400e}
+.zone-head.zc-drawer{background:#e2e8f0;border-left:4px solid #94a3b8;color:#475569}
+.zone-head.zc-dead{background:#f1f5f9;border-left:4px solid #cbd5e1;color:#475569}
+
+a.product-link{color:#1e40af;text-decoration:none;border-bottom:1px dotted #93c5fd}
+a.product-link:hover{border-bottom-style:solid}
+
+.meta-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 20px;background:#fff}
+.meta-table td{padding:9px 12px;border:1px solid #cbd5e1;vertical-align:top;line-height:1.45}
+.meta-table td:first-child{background:#f1f5f9;font-weight:700;width:220px;color:#1e293b}
+
+@media (max-width:640px){
+  .spec-table,.meta-table{font-size:12.5px}
+  .spec-table th,.spec-table td,.meta-table td{padding:8px 8px}
+  .spec-table a.manual-link{font-size:10.5px;padding:1px 6px}
+  .meta-table td:first-child{width:38%}
+}
+
+/* ==================== NAVIGATION ==================== */
+.nav-wrap{margin-bottom:0;position:relative;z-index:20}
+.nav-select{display:none;width:100%;padding:12px 40px 12px 16px;font-size:15px;font-weight:600;color:#2c3e50;background:#fff url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%232c3e50' d='M6 8 0 0h12z'/%3E%3C/svg%3E") no-repeat right 14px center;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;appearance:none;-webkit-appearance:none;font-family:inherit}
+.nav-select:focus{outline:none;border-color:#2c3e50}
+
+.nav-dropdown{display:inline-block;position:relative;min-width:260px}
+.nav-trigger{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:#fff;border:2px solid #e0e0e0;border-radius:8px 8px 0 0;cursor:pointer;font-weight:600;font-size:14px;color:#2c3e50;user-select:none;transition:all .15s;min-width:260px}
+.nav-trigger:hover{background:#f8f9fb;border-color:#cbd5e1}
+.nav-trigger.open{border-bottom-color:#fff;border-radius:8px 8px 0 0}
+.nav-trigger .caret{font-size:10px;transition:transform .15s;opacity:.6}
+.nav-trigger.open .caret{transform:rotate(180deg)}
+.nav-trigger .swatch{width:10px;height:10px;border-radius:3px;background:#dde;flex-shrink:0}
+.nav-trigger.v-overview .swatch{background:#94a3b8}
+.nav-trigger.v-wall .swatch{background:#1e40af}
+.nav-trigger.v-sys .swatch{background:#f472b6}
+.nav-trigger.v-sched .swatch{background:#22c55e}
+.nav-menu{position:absolute;top:100%;left:0;right:0;margin:0;padding:6px;background:#fff;border:2px solid #e0e0e0;border-top:none;border-radius:0 0 8px 8px;box-shadow:0 8px 24px rgba(0,0,0,.12);max-height:70vh;overflow-y:auto;display:none;z-index:100}
+.nav-menu.open{display:block}
+.nav-item{padding:9px 12px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;transition:background .1s}
+.nav-item:hover{background:#f1f5f9}
+.nav-item .swatch{width:10px;height:10px;border-radius:3px;background:#dde;flex-shrink:0}
+
+.nav-item.v-overview{color:#334155}
+.nav-item.v-overview .swatch{background:#94a3b8}
+.nav-item.v-overview.active{background:#e2e8f0;color:#1e293b}
+.nav-item.v-wall{color:#1e3a8a}
+.nav-item.v-wall .swatch{background:#1e40af}
+.nav-item.v-wall.active{background:#c7d2fe;color:#172554}
+.nav-item.v-sys{color:#be185d}
+.nav-item.v-sys .swatch{background:#f472b6}
+.nav-item.v-sys.active{background:#fce7f3;color:#9d174d}
+.nav-item.v-sched{color:#166534}
+.nav-item.v-sched .swatch{background:#22c55e}
+.nav-item.v-sched.active{background:#dcfce7;color:#14532d}
+
+@media (max-width:640px){
+  .nav-select{display:block}
+  .nav-dropdown{display:none}
+}
+
+.panel{display:none;background:#fff;border:2px solid #e0e0e0;border-radius:0 8px 8px 8px;padding:32px}
+.panel.active{display:block}
+.diagram-wrap{display:flex;justify-content:center;padding:20px 0;overflow-x:auto}
+.callout{background:#fefce8;border:1px solid #fbbf24;border-radius:8px;padding:16px 20px;margin-top:24px;font-size:14px;line-height:1.6}
+.callout strong{color:#92400e}
+.callout-blue{background:#eff6ff;border-color:#93c5fd}
+.callout-blue strong{color:#1e40af}
+.callout-green{background:#f0fdf4;border-color:#86efac}
+.callout-green strong{color:#166534}
+.callout-red{background:#fef2f2;border-color:#fca5a5}
+.callout-red strong{color:#991b1b}
+.section-title{font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:16px}
+.view-subtitle{font-size:14px;color:#666;margin-bottom:8px}
+.metric-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.metric{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px}
+.metric .lbl{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.metric .num{font-size:24px;font-weight:700;color:#1a1a2e}
+
+.crosslink-bar{display:flex;flex-wrap:wrap;gap:0;background:#fff;border-bottom:1px solid #e2e8f0;padding:0;font-size:13px}
+.crosslink-bar a, .crosslink-bar span.current{padding:10px 16px;color:#64748b;text-decoration:none;font-weight:600;border-right:1px solid #e2e8f0;transition:background .15s}
+.crosslink-bar a:hover{background:#f8fafc;color:#2c3e50}
+.crosslink-bar span.current{background:#2c3e50;color:#fff;cursor:default}
+.crosslink-bar .label{opacity:.6;font-weight:500;padding:10px 16px 10px 16px;color:#94a3b8;font-size:11px;text-transform:uppercase;letter-spacing:.6px;border-right:1px solid #e2e8f0;flex:0 0 auto}
+@media (max-width:640px){
+  .crosslink-bar a, .crosslink-bar span.current{padding:8px 12px;font-size:12px}
+  .crosslink-bar .label{display:none}
+}
+</style>
+</head>
+<body>
+<div class="crosslink-bar">
+  <span class="label">Albatross · Sandy Hook</span>
+  <span class="current">Kitchen</span>
+  <a href="fence/">Fence</a>
+  <a href="deck/">Deck</a>
+</div>
+<div class="header">
+<h1>Albatross Bar &amp; Grill &middot; Kitchen Build</h1>
+<p class="sub">8133 Sandy Hook Terrace &middot; Clinton, WA 98236 &middot; <strong style="color:#fca5a5">Hard Deadline: June 1, 2026</strong> &middot; <strong style="color:#fcd34d">All-Coyote cooking run (updated 4/30)</strong></p>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;font-size:11px">
+<div style="background:rgba(255,255,255,.06);padding:6px 10px;border-radius:6px;flex:1 1 180px;min-width:180px"><span style="opacity:.65;text-transform:uppercase;letter-spacing:.5px;font-size:9px">Owner</span><br>Eddie Mulcahy &middot; 360-914-1789</div>
+<div style="background:rgba(255,255,255,.06);padding:6px 10px;border-radius:6px;flex:1 1 180px;min-width:180px"><span style="opacity:.65;text-transform:uppercase;letter-spacing:.5px;font-size:9px">General Contractor</span><br>Tristan Johnson &middot; 360-969-2659</div>
+<div style="background:rgba(255,255,255,.06);padding:6px 10px;border-radius:6px;flex:1 1 180px;min-width:180px"><span style="opacity:.65;text-transform:uppercase;letter-spacing:.5px;font-size:9px">Electrician</span><br>Ryder Mulcahy &middot; 360-787-8920</div>
+</div>
+</div>
+<div class="container">
+<div class="nav-wrap">
+<select class="nav-select" onchange="selectNav(this.value)" aria-label="Choose section">
+<option value="layout" selected>Project overview</option>
+<option value="elev-west">Window wall</option>
+<option value="elev-north">Fridge wall</option>
+<option value="elev-east">Cooking run</option>
+<option value="elev-bar">Bar</option>
+<option value="utilities">Utilities</option>
+<option value="cabinets">Cabinets</option>
+<option value="electrical">Electrical</option>
+<option value="products">Products</option>
+<option value="schedule">Schedule</option>
+</select>
+
+<div class="nav-dropdown">
+<div class="nav-trigger v-overview" onclick="toggleNav(event)" role="button" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+<span class="swatch"></span>
+<span class="nav-label">Project overview</span>
+<span class="caret">▼</span>
+</div>
+<div class="nav-menu" role="listbox">
+<div class="nav-item v-overview active" data-panel="layout" onclick="selectNav('layout')"><span class="swatch"></span>Project overview</div>
+<div class="nav-item v-wall" data-panel="elev-west" onclick="selectNav('elev-west')"><span class="swatch"></span>Window wall</div>
+<div class="nav-item v-wall" data-panel="elev-north" onclick="selectNav('elev-north')"><span class="swatch"></span>Fridge wall</div>
+<div class="nav-item v-wall" data-panel="elev-east" onclick="selectNav('elev-east')"><span class="swatch"></span>Cooking run</div>
+<div class="nav-item v-wall" data-panel="elev-bar" onclick="selectNav('elev-bar')"><span class="swatch"></span>Bar</div>
+<div class="nav-item v-sys" data-panel="utilities" onclick="selectNav('utilities')"><span class="swatch"></span>Utilities</div>
+<div class="nav-item v-sys" data-panel="cabinets" onclick="selectNav('cabinets')"><span class="swatch"></span>Cabinets</div>
+<div class="nav-item v-sys" data-panel="electrical" onclick="selectNav('electrical')"><span class="swatch"></span>Electrical</div>
+<div class="nav-item v-sys" data-panel="products" onclick="selectNav('products')"><span class="swatch"></span>Products</div>
+<div class="nav-item v-sched" data-panel="schedule" onclick="selectNav('schedule')"><span class="swatch"></span>Schedule</div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB 1: FLOOR PLAN ============ -->
+<div class="panel active" id="panel-layout">
+<h2 class="section-title">Project overview — top-down floor plan</h2>
+<p class="view-subtitle">Looking straight down at the deck. North at the top of the page, south at the bottom; east is toward open deck/yard, west is toward the house. Shows the L-shaped kitchen on three walls (window wall / fridge wall / cooking run) plus the 157" bar peninsula running along the south deck edge, with the 6&times;6 post at the SW corner and the LP stub-out on the 55" house wall.</p>
+
+<div class="callout callout-blue" style="margin:0 0 20px"><strong>Update — April 30, 2026:</strong> Cooking run is now <strong>all-Coyote</strong>. Blackstone 28" XL griddle replaced with Coyote C3FTG30LP 30" flat top + C3JAKTFT jacket. Coyote C3PBLP power burner re-sourced to Coyote-direct as C1PB (same physical unit, Gen 1 SKU). New LP load: <strong>104K BTU</strong> on the east branch (was 95K). Cooking run gap budget improved by ~2" thanks to smaller flat top footprint.</div>
+
+<div class="diagram-wrap">
+<svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg" style="font-family:'Segoe UI',system-ui,sans-serif;width:100%;height:auto;">
+<rect x="0" y="0" width="900" height="700" fill="#f8fafc" rx="8"/>
+<line x1="100" y1="55" x2="100" y2="110" stroke="#7c5c3c" stroke-width="6"/>
+<line x1="100" y1="110" x2="100" y2="290" stroke="#7c5c3c" stroke-width="3.5" stroke-dasharray="8,5" opacity="0.45"/>
+<line x1="100" y1="290" x2="100" y2="345" stroke="#7c5c3c" stroke-width="6"/>
+<line x1="100" y1="55" x2="220" y2="55" stroke="#7c5c3c" stroke-width="6"/>
+<text x="185" y="48" text-anchor="middle" font-size="8" fill="#a0845c">55" wall</text>
+<line x1="220" y1="55" x2="380" y2="55" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,3"/>
+<line x1="100" y1="345" x2="190" y2="345" stroke="#7c5c3c" stroke-width="6"/>
+<line x1="380" y1="55" x2="380" y2="345" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,3"/>
+<path d="M103,58 L377,58 L377,342 L190,345 L103,345Z" fill="#faf5ef" opacity="0.2"/>
+<rect x="103" y="58" width="52" height="284" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="107" y="62" width="44" height="57" rx="2" fill="#cbd5e1"/>
+<text x="129" y="93" text-anchor="middle" font-size="5" fill="#475569">Fridge overlap</text>
+<rect x="107" y="122" width="44" height="33" rx="2" fill="#a5f3fc" stroke="#0891b2" stroke-width="1.2"/>
+<text x="129" y="142" text-anchor="middle" font-size="6" fill="#155e75" font-weight="600">Ice 15"</text>
+<rect x="107" y="162" width="44" height="65" rx="2" fill="#bbf7d0" stroke="#27ae60" stroke-width="1.2"/>
+<text x="129" y="198" text-anchor="middle" font-size="7" fill="#166534" font-weight="700">Sink</text>
+<rect x="107" y="234" width="44" height="39" rx="2" fill="#fde68a" stroke="#f59e0b" stroke-width="1.2"/>
+<text x="129" y="257" text-anchor="middle" font-size="6" fill="#92400e" font-weight="600">Trash</text>
+<rect x="107" y="280" width="44" height="52" rx="2" fill="#fafaf5" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="129" y="305" text-anchor="middle" font-size="6" fill="#64748b" font-weight="600">Open</text>
+<text x="129" y="316" text-anchor="middle" font-size="5" fill="#64748b">prep counter</text>
+<text x="80" y="200" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600" transform="rotate(-90,80,200)">130" window wall</text>
+<rect x="155" y="58" width="158" height="52" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="165" y="63" width="75" height="42" rx="2" fill="#bfdbfe" stroke="#3498db" stroke-width="1.5"/>
+<text x="202" y="84" text-anchor="middle" font-size="7" fill="#1e40af" font-weight="600">KB 36"</text>
+<rect x="244" y="63" width="52" height="42" rx="2" fill="#bfdbfe" stroke="#3498db" stroke-width="1.5"/>
+<text x="270" y="84" text-anchor="middle" font-size="7" fill="#1e40af" font-weight="600">Summit 24"</text>
+<text x="240" y="35" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600">108" fridge wall</text>
+<rect x="264" y="56" width="16" height="3" rx="1" fill="#1e293b"/>
+<text x="272" y="53" text-anchor="middle" font-size="5" fill="#1e293b" font-weight="600">TV (east end)</text>
+<rect x="318" y="58" width="52" height="284" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="322" y="62" width="44" height="52" rx="2" fill="#cbd5e1"/>
+<text x="344" y="72" text-anchor="middle" font-size="5" fill="#475569">24" overlap</text>
+<rect x="324" y="80" width="40" height="22" rx="1" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="1"/>
+<text x="344" y="89" text-anchor="middle" font-size="4" fill="#e5e5e5" font-weight="700">IR</text>
+<text x="344" y="97" text-anchor="middle" font-size="3" fill="#b0b0b0">sunk in</text>
+<!-- Coyote C3FTG30 flat top (replaces Blackstone) -->
+<rect x="322" y="222" width="44" height="68" rx="2" fill="#a7f3d0" stroke="#0d9488" stroke-width="1.5"/>
+<text x="344" y="252" text-anchor="middle" font-size="6" fill="#0f766e" font-weight="700">Coyote</text>
+<text x="344" y="263" text-anchor="middle" font-size="5" fill="#0d9488">C3FTG30</text>
+<text x="344" y="273" text-anchor="middle" font-size="5" fill="#0d9488">flat top</text>
+<!-- Coyote C1PB power burner + C1SLV (Gen 1 SKU) -->
+<rect x="322" y="298" width="44" height="42" rx="2" fill="#5eead4" stroke="#0f766e" stroke-width="1.5"/>
+<text x="344" y="315" text-anchor="middle" font-size="6" fill="#115e59" font-weight="700">Coyote</text>
+<text x="344" y="326" text-anchor="middle" font-size="5" fill="#0f766e">C1PB+C1SLV</text>
+<text x="344" y="335" text-anchor="middle" font-size="5" fill="#0f766e">power brnr</text>
+<rect x="322" y="123" width="44" height="86" rx="2" fill="#fecaca" stroke="#e74c3c" stroke-width="1.5"/>
+<text x="344" y="158" text-anchor="middle" font-size="7" fill="#991b1b" font-weight="700">Traeger</text>
+<text x="344" y="170" text-anchor="middle" font-size="5" fill="#991b1b">Timberline</text>
+<text x="400" y="200" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600" transform="rotate(90,400,200)">130" cooking run</text>
+<rect x="310" y="340" width="14" height="14" rx="1" fill="#7c5c3c" stroke="#5c3d2e" stroke-width="2"/>
+<text x="317" y="350" text-anchor="middle" font-size="4" fill="white" font-weight="700">6×6</text>
+<text x="200" y="368" text-anchor="middle" font-size="8" fill="#475569" font-weight="600">45" wall — dog door</text>
+<rect x="324" y="345" width="411" height="52" rx="3" fill="#fdf3e8" stroke="#f39c12" stroke-width="2"/>
+<line x1="672" y1="345" x2="672" y2="397" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="498" y="371" text-anchor="middle" font-size="10" fill="#b7791f" font-weight="700">BAR COUNTER — 157"</text>
+<text x="498" y="384" text-anchor="middle" font-size="6" fill="#b7791f">25" deep · 3×30"+1×18" cabinets + 24" east extension · 42" bar height</text>
+<text x="703" y="392" text-anchor="middle" font-size="5" fill="#d97706" font-weight="600">24" ext</text>
+<circle cx="358" cy="420" r="11" fill="#f39c12" opacity="0.25" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="427" cy="420" r="11" fill="#f39c12" opacity="0.25" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="495" cy="420" r="11" fill="#f39c12" opacity="0.25" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="564" cy="420" r="11" fill="#f39c12" opacity="0.25" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="632" cy="420" r="11" fill="#f39c12" opacity="0.25" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="701" cy="420" r="11" fill="#f39c12" opacity="0.25" stroke="#d97706" stroke-width="1.5"/>
+<text x="530" y="457" text-anchor="middle" font-size="7" fill="#b7791f" font-style="italic">6 stools, evenly distributed — guests face yard</text>
+<text x="250" y="155" text-anchor="middle" font-size="16" fill="#e2e8f0" font-weight="700" opacity="0.4">OPEN</text>
+<text x="250" y="175" text-anchor="middle" font-size="16" fill="#e2e8f0" font-weight="700" opacity="0.4">DECK</text>
+<line x1="103" y1="28" x2="380" y2="28" stroke="#64748b" stroke-width="1"/>
+<line x1="103" y1="22" x2="103" y2="34" stroke="#64748b" stroke-width="1"/>
+<line x1="380" y1="22" x2="380" y2="34" stroke="#64748b" stroke-width="1"/>
+<text x="241" y="22" text-anchor="middle" font-size="10" fill="#334155" font-weight="700">108"</text>
+<line x1="42" y1="55" x2="42" y2="345" stroke="#64748b" stroke-width="1"/>
+<line x1="36" y1="55" x2="48" y2="55" stroke="#64748b" stroke-width="1"/>
+<line x1="36" y1="345" x2="48" y2="345" stroke="#64748b" stroke-width="1"/>
+<text x="32" y="200" text-anchor="middle" font-size="9" fill="#334155" font-weight="700" transform="rotate(-90,32,200)">130"</text>
+<line x1="392" y1="55" x2="392" y2="345" stroke="#64748b" stroke-width="1"/>
+<line x1="386" y1="55" x2="398" y2="55" stroke="#64748b" stroke-width="1"/>
+<line x1="386" y1="345" x2="398" y2="345" stroke="#64748b" stroke-width="1"/>
+<text x="405" y="200" text-anchor="middle" font-size="8" fill="#334155" font-weight="600" transform="rotate(90,405,200)">130"</text>
+<line x1="100" y1="375" x2="190" y2="375" stroke="#64748b" stroke-width="0.8"/>
+<line x1="100" y1="370" x2="100" y2="380" stroke="#64748b" stroke-width="0.8"/>
+<line x1="190" y1="370" x2="190" y2="380" stroke="#64748b" stroke-width="0.8"/>
+<text x="145" y="385" text-anchor="middle" font-size="8" fill="#334155" font-weight="600">45"</text>
+<line x1="324" y1="434" x2="735" y2="434" stroke="#b7791f" stroke-width="0.8"/>
+<line x1="324" y1="428" x2="324" y2="440" stroke="#b7791f" stroke-width="0.8"/>
+<line x1="735" y1="428" x2="735" y2="440" stroke="#b7791f" stroke-width="0.8"/>
+<text x="530" y="450" text-anchor="middle" font-size="9" fill="#b7791f" font-weight="600">157" bar (133" cabinets + 24" east extension)</text>
+<line x1="745" y1="345" x2="745" y2="397" stroke="#b7791f" stroke-width="0.8"/>
+<line x1="739" y1="345" x2="751" y2="345" stroke="#b7791f" stroke-width="0.8"/>
+<line x1="739" y1="397" x2="751" y2="397" stroke="#b7791f" stroke-width="0.8"/>
+<text x="763" y="374" text-anchor="middle" font-size="7" fill="#b7791f" font-weight="600">25" deep</text>
+<rect x="30" y="460" width="840" height="80" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+<text x="450" y="478" text-anchor="middle" font-size="10" fill="#334155" font-weight="700">Legend</text>
+<line x1="50" y1="496" x2="72" y2="496" stroke="#7c5c3c" stroke-width="4"/>
+<text x="78" y="500" font-size="9" fill="#444">House wall</text>
+<line x1="145" y1="496" x2="167" y2="496" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,2"/>
+<text x="173" y="500" font-size="9" fill="#444">Deck edge</text>
+<rect x="240" y="491" width="14" height="9" rx="2" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+<text x="260" y="500" font-size="9" fill="#444">Counter</text>
+<rect x="310" y="491" width="14" height="9" rx="2" fill="#fdf3e8" stroke="#f39c12" stroke-width="1"/>
+<text x="330" y="500" font-size="9" fill="#444">Bar cabinet</text>
+<rect x="390" y="491" width="14" height="9" rx="2" fill="#bfdbfe" stroke="#3498db" stroke-width="1"/>
+<text x="410" y="500" font-size="9" fill="#444">Fridge</text>
+<rect x="450" y="491" width="14" height="9" rx="2" fill="#a7f3d0" stroke="#0d9488" stroke-width="1"/>
+<text x="470" y="500" font-size="9" fill="#444">Coyote flat top</text>
+<rect x="530" y="491" width="14" height="9" rx="2" fill="#fecaca" stroke="#e74c3c" stroke-width="1"/>
+<text x="550" y="500" font-size="9" fill="#444">Pellet grill</text>
+<rect x="610" y="491" width="14" height="9" rx="2" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="1"/>
+<text x="630" y="500" font-size="9" fill="#444">IR sear</text>
+<rect x="680" y="491" width="14" height="9" rx="2" fill="#5eead4" stroke="#0f766e" stroke-width="1"/>
+<text x="700" y="500" font-size="9" fill="#444">Coyote pwr brnr</text>
+<rect x="780" y="491" width="14" height="9" rx="2" fill="#7c5c3c" stroke="#5c3d2e" stroke-width="1"/>
+<text x="800" y="500" font-size="9" fill="#444">6×6 post</text>
+<text x="450" y="530" text-anchor="middle" font-size="9" fill="#94a3b8">Counter: 40" ht, 25" deep | Bar: 42" ht, 157" total | LP: 104K BTU east drop (2× 100-gal tanks) | All-Coyote cooking run</text>
+</svg>
+</div>
+
+<p style="font-size:14px;line-height:1.65;color:#334155;margin:20px 0 8px"><strong>The Albatross</strong> is an L-shaped outdoor kitchen + 157" bar peninsula on the existing east-facing deck at 8133 Sandy Hook Terrace. Three working walls (sink/prep/ice on the west, dual coolers + TV on the north, four heat sources on the east) wrap around an open deck; the bar runs south along the deck edge. All four heat sources (Napoleon IR, Traeger pellet, Coyote C3FTG30 flat top, Coyote C1PB power burner) are consolidated on the east cooking run from a single 104K BTU LP drop. Framing is steel-stud + cement board throughout &mdash; non-combustible assembly, zero clearance to combustibles &mdash; with a thermal break at the IR-over-cooler overlap. Full deck is resurfaced in Trex Enhance underneath.</p>
+
+<p style="font-size:13px;line-height:1.6;color:#64748b;margin-bottom:8px">Contractor-facing reference for Tristan (GC), Ryder (electrician), Marcelino (plumbing/countertops), and Barron (LP gas). Pairs with the printed Contractor Package PDF &mdash; same section structure in both. Hard deadline: <strong style="color:#991b1b">June 1, 2026.</strong></p>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:24px 0 12px">At-a-glance specs</h3>
+<table class="meta-table">
+<tr><td>Layout shape</td><td>L-shaped outdoor kitchen on existing east-facing deck, with 157" bar peninsula running south along the deck edge</td></tr>
+<tr><td>Overall footprint</td><td>130" window wall (W) + 108" fridge wall (N) + 130" cooking run (E) + 157" bar (S) + 45" connecting wall (SW)</td></tr>
+<tr><td>Counter height / depth</td><td>40" &middot; 25" deep</td></tr>
+<tr><td>Bar height / length</td><td>42" &middot; 157" total (includes 24" east extension past Cabinet 4)</td></tr>
+<tr><td>LP supply</td><td>Two 100-gal tanks &rarr; 3/4" black iron main &rarr; single east drop (<strong>104K BTU</strong>) feeding Coyote C3FTG30 flat top, Napoleon IR, and Coyote C1PB power burner</td></tr>
+<tr><td>Framing</td><td>3-5/8" 20-gauge steel studs at 16" o.c. + cement board throughout &mdash; non-combustible assembly</td></tr>
+<tr><td>6&times;6 post</td><td>SW corner: north face flush with cooking run south end (130" line); east face 26" from east deck edge</td></tr>
+</table>
+</div>
+
+<!-- ============ TAB 2: WEST WALL ELEVATION (UNCHANGED — west wall doesn't touch the swap) ============ -->
+<div class="panel" id="panel-elev-west">
+<h2 class="section-title">130" Window wall (west) — elevation view</h2>
+<p class="view-subtitle">Standing on deck, looking west toward the house. Left = 45" wall corner (south). Right = 108" wall corner (north). No changes from previous version — west wall is unaffected by the cooking run swap.</p>
+
+<table class="spec-table">
+<caption>Window wall (west) &mdash; sink, trash, ice, open prep</caption>
+<thead><tr><th>Zone</th><th>Item</th><th>Width</th><th>Utilities</th><th>Key spec</th><th>Manual</th></tr></thead>
+<tbody>
+<tr><td class="zc-prep">1 (south)</td><td>Open prep counter</td><td>~27.25"</td><td>None</td><td>Sink-side landing for prep/plating/ice service. Counter continues unbroken from trash cabinet south to 45" SW wall.</td><td><a class="manual-link none"></a></td></tr>
+<tr><td class="zc-trash">2</td><td><strong>Napoleon BI-1824-1W</strong> trash pull-out</td><td>18"</td><td>None</td><td>Full-height pull-out 19.75"W &times; 21.5"D &times; ~24"H. Dual waste bins + 8" paper towel drawer. Soft-close built in.</td><td><a class="manual-link" data-model="BI-1824-1W"></a></td></tr>
+<tr><td class="zc-sink">3</td><td><strong>Ruvati RVH8310</strong> sink + <strong>KRAUS KPF-1610SFS</strong> faucet + <strong>BI-3024-2D</strong> door</td><td>30"</td><td>Hot/cold supply + drain (through house wall)</td><td>Cutout 29"W &times; 21"D, centered on 79" window. Faucet: 1-3/8" hole behind basin. Winterization drain petcocks required.</td><td><a class="manual-link" data-model="RVH8310"></a> <a class="manual-link" data-model="KPF-1610SFS"></a></td></tr>
+<tr><td class="zc-ice">4</td><td><strong>Scotsman SRCG065A-1SS</strong> ice maker</td><td>15"</td><td>Dedicated 15A/115V; 1/4" OD cold-water supply; 3/4" OD drain</td><td>Front-venting, 0" side/rear clearance. 33.375"H + 1.625" handle = 35"H. ~115 lbs empty.</td><td><a class="manual-link" data-model="SRCG065A-1SS"></a></td></tr>
+<tr><td class="zc-dead">5 (north)</td><td>Fridge wall overlap + corner</td><td>~32"</td><td>None</td><td>Dead space at NE corner. No appliances, no openings. ~4" radius/filler at the NE corner; stone veneer wraps (miter or bullnose).</td><td><a class="manual-link none"></a></td></tr>
+</tbody>
+</table>
+
+<div class="callout callout-green" style="margin-top:16px">
+<strong>Pre-install checklist — window wall:</strong><br><br>
+&#9744; <strong>Verify 79" window center point</strong> — sink cutout must align. One-shot measurement before countertop template.<br>
+&#9744; <strong>Verify dog door arc clearance</strong> against framing + adjacent cabinets during Phase 4 (open item).<br>
+&#9744; <strong>Template countertop only AFTER all rough-ins are complete</strong> — sink + faucet + ice maker + drain pipe + petcocks all in place before Bayview Concrete templates.
+</div>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 12px">Zone detail</h3>
+
+<h4 class="zone-head zc-prep">Zone 1 — Open prep counter (~27.25"W)</h4>
+<table class="meta-table">
+<tr><td>Design intent</td><td>Open prep counter — sink-side landing for prep, plating, and ice service.</td></tr>
+<tr><td>Construction</td><td>Solid counter over framed steel-stud base. No appliance, no cabinet doors. Optional open shelf below.</td></tr>
+<tr><td>Utilities</td><td>None. No LP drop on this wall.</td></tr>
+</table>
+
+<h4 class="zone-head zc-sink">Zone 3 — Ruvati RVH8310 sink + KRAUS Bolden faucet + BI-3024-2D door (30"W)</h4>
+<table class="meta-table">
+<tr><td>Sink</td><td><strong>RVH8310</strong> — Roma workstation undermount, 30"W. Cutout: 29"W &times; 21"D. Centered on 79" window.</td></tr>
+<tr><td>Faucet</td><td><strong>KRAUS Bolden KPF-1610SFS</strong> — single hole, 1-3/8" hole.</td></tr>
+<tr><td>Plumbing</td><td>Hot/cold + drain through house wall. Shutoffs behind doors. Ice maker tee off cold with inline filter.</td></tr>
+<tr><td><span class="warn">Winterization</span></td><td>Drain petcocks on hot/cold lines. Annual blowout required before first freeze.</td></tr>
+</table>
+
+<h4 class="zone-head zc-ice">Zone 4 — Scotsman SRCG065A-1SS ice maker (15"W)</h4>
+<table class="meta-table">
+<tr><td>Electrical</td><td>Dedicated 15A / 115V outlet. Max 126V. GFCI protected.</td></tr>
+<tr><td>Water/Drain</td><td>1/4" OD cold supply with shutoff + filter. 3/4" OD gravity drain, freeze-protected through wall cavity.</td></tr>
+<tr><td>Clearances</td><td>Front-venting / 0" side/rear clearance.</td></tr>
+</table>
+</div>
+
+<!-- ============ TAB 3: NORTH WALL ELEVATION (UNCHANGED) ============ -->
+<div class="panel" id="panel-elev-north">
+<h2 class="section-title">108" Fridge wall (north) — elevation view</h2>
+<p class="view-subtitle">Standing on deck, looking north. Coolers + TV. No changes from previous version.</p>
+
+<table class="spec-table">
+<caption>Fridge wall (north) &mdash; coolers, TV, LP stub-out</caption>
+<thead><tr><th>Zone</th><th>Item</th><th>Width</th><th>Utilities</th><th>Key spec</th><th>Manual</th></tr></thead>
+<tbody>
+<tr><td class="zc-dead">1 (west)</td><td>Window wall overlap</td><td>~19"</td><td>None</td><td>Dead space at NW corner.</td><td><a class="manual-link none"></a></td></tr>
+<tr><td class="zc-fridge">2</td><td><strong>Kingsbottle KBU56ASD</strong> 36" beverage cooler</td><td>35.4"</td><td>Dedicated 20A circuit</td><td>Dual-zone, ~185 lbs loaded. Front-venting, 0" side clearance. 2" filler strip to Summit.</td><td><a class="manual-link" data-model="KBU56ASD"></a></td></tr>
+<tr><td class="zc-freezer">3</td><td><strong>Summit SPFF51OS2D</strong> outdoor freezer drawers</td><td>23.63"</td><td>Dedicated 20A circuit</td><td>140 lbs. Front-venting, 0" side clearance.</td><td><a class="manual-link" data-model="SPFF51OS2D"></a></td></tr>
+<tr><td class="zc-tv">TV</td><td><strong>SunBrite Veranda 3 SB-V3-55</strong> on <strong>SB-WM-ART2-L-BL</strong> articulating mount</td><td>—</td><td>Recessed outlet 60" AFF, 6" from east edge; HDMI via arm</td><td>EAST end of 55" house wall. Base center 60" AFF. 3/4" plywood backer panel 12&times;16" required before cement board.</td><td><a class="manual-link" data-model="SB-V3-55-4KHDR-BL"></a> <a class="manual-link" data-model="SB-WM-ART2-L-BL"></a></td></tr>
+<tr><td class="zc-lp">LP stub-out</td><td>Two 100-gal tanks &rarr; 3/4" black iron main</td><td>—</td><td>Accessible shutoff at stub + per-appliance shutoffs</td><td>Stub-out at deck level on 55" house wall. Single east branch to flat top 34K + IR 10K + power burner 60K = <strong>104K BTU total</strong>.</td><td><a class="manual-link none"></a></td></tr>
+<tr><td class="zc-dead">4 (east)</td><td>Cooking run overlap</td><td>~19"</td><td>None</td><td>Dead space at NE corner.</td><td><a class="manual-link none"></a></td></tr>
+</tbody>
+</table>
+
+<div class="callout callout-green" style="margin-top:16px">
+<strong>Pre-install checklist — fridge wall:</strong><br><br>
+&#9744; <strong>Install 3/4" plywood backer panel (~12" &times; 16")</strong> at EAST end of 55" wall for articulating TV mount — BEFORE cement board.<br>
+&#9744; <strong>Install blocking under fridge wall</strong> — heaviest sustained load (~335 lbs combined coolers).<br>
+&#9744; <strong>Sister 2&ndash;3 joists under fridge wall</strong> before framing goes up.
+</div>
+</div>
+
+<!-- ============ TAB 4: EAST WALL ELEVATION — REBUILT FOR ALL-COYOTE COOKING RUN ============ -->
+<div class="panel" id="panel-elev-east">
+<h2 class="section-title">130" Cooking run (east) — elevation view</h2>
+<p class="view-subtitle">Standing inside the kitchen, looking east toward open deck/yard. Left = fridge corner (north). Right = bar post (south). <strong>Updated 4/30: all-Coyote cooking run.</strong> Blackstone 28" XL replaced with Coyote C3FTG30LP 30" flat top + C3JAKTFT jacket.</p>
+
+<div class="diagram-wrap">
+<svg viewBox="0 0 1060 580" xmlns="http://www.w3.org/2000/svg" style="font-family:'Segoe UI',system-ui,sans-serif;width:1060px;max-width:none;height:auto;">
+<rect x="0" y="0" width="1060" height="580" fill="#f8fafc" rx="8"/>
+<text x="515" y="28" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="700">130" Cooking Run (East) — All-Coyote Lineup</text>
+<text x="515" y="44" text-anchor="middle" font-size="11" fill="#64748b">Looking east toward yard | Left = north (fridge) | Right = south (bar post) | LP 104K BTU east drop</text>
+<rect x="60" y="56" width="910" height="18" rx="2" fill="#e8f4f8" stroke="#94a3b8" stroke-width="1"/>
+<text x="515" y="68" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600">OPEN DECK EDGE — smoke vents east toward yard</text>
+<rect x="60" y="248" width="910" height="9" rx="2" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
+<text x="40" y="255" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600">40"</text>
+<rect x="60" y="420" width="910" height="5" rx="1" fill="#d4c4a8" stroke="#a0845c" stroke-width="1"/>
+<text x="40" y="425" text-anchor="middle" font-size="8" fill="#a0845c" font-weight="600">0"</text>
+<rect x="60" y="257" width="910" height="163" rx="0" fill="#f5f0e8" stroke="none"/>
+
+<rect x="62" y="82" width="320" height="32" rx="4" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+<text x="222" y="95" text-anchor="middle" font-size="8" fill="#166534" font-weight="600">✓ All walls: 3-5/8" 20-gauge steel studs + cement board</text>
+<text x="222" y="107" text-anchor="middle" font-size="7" fill="#166534">Non-combustible throughout — zero clearance to combustibles required</text>
+
+<text x="770" y="98" text-anchor="middle" font-size="8" fill="#e74c3c" font-weight="600">LP 104K BTU (single east drop)</text>
+<text x="770" y="110" text-anchor="middle" font-size="7" fill="#e74c3c">IR 10K + Coyote flat top 34K + Coyote PB 60K | Traeger = electric</text>
+
+<!-- Cooking run layout — UPDATED:
+     130" / 910 px = 7.0 px/in
+     Z1: Fridge overlap+IR 24"  → 168px  → x=60..228
+     Gap: 1" = 7px              → x=228..235
+     Z2: Traeger 39.3"          → 275px  → x=235..510
+     Gap: 1" = 7px              → x=510..517
+     Z3: Coyote C3FTG30 jacket cavity 30.75" → 215px → x=517..732
+     Gap: 1" = 7px              → x=732..739
+     Z4: Coyote C1PB+C1SLV 27.25" → 191px → x=739..930
+     Gap: ~2" = 14px (NEW BUDGET — Tristan flexibility) → x=930..944
+     Post: 3" = 21px            → x=944..965
+     Sum: 24+1+39.3+1+30.75+1+27.25+2+3 = 129.3" — ~0.7" residual for finishing
+-->
+
+<!-- ZONE 1: Fridge overlap with IR -->
+<rect x="108" y="155" width="100" height="14" rx="7" fill="#1a1a1a" opacity="0.85"/>
+<text x="158" y="165" text-anchor="middle" font-size="8" fill="white" font-weight="700">IR (in overlap)</text>
+<rect x="125" y="175" width="70" height="28" rx="2" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="2"/>
+<text x="160" y="188" text-anchor="middle" font-size="7" fill="#e5e5e5" font-weight="700">Napoleon IR</text>
+<text x="160" y="200" text-anchor="middle" font-size="6" fill="#b0b0b0">BIB10IRPMK · 1800°F · 10K BTU</text>
+<rect x="126" y="245" width="68" height="14" rx="7" fill="#94a3b8" opacity="0.85"/>
+<text x="160" y="255" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 1</text>
+<rect x="95" y="259" width="130" height="161" rx="3" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="160" y="280" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">FRIDGE OVERLAP</text>
+<text x="160" y="296" text-anchor="middle" font-size="7" fill="#64748b">~24" counter (with IR cutout)</text>
+<rect x="135" y="303" width="50" height="40" rx="2" fill="#fef2f2" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="160" y="320" text-anchor="middle" font-size="6" fill="#991b1b" font-weight="600">IR housing</text>
+<text x="160" y="332" text-anchor="middle" font-size="5" fill="#991b1b">6"H below counter</text>
+<rect x="98" y="345" width="124" height="4" rx="1" fill="#d97706" stroke="#92400e" stroke-width="0.5"/>
+<text x="160" y="358" text-anchor="middle" font-size="6" fill="#92400e" font-weight="700">thermal break shelf</text>
+<text x="160" y="367" text-anchor="middle" font-size="5" fill="#92400e">cement board + ceramic fiber</text>
+<rect x="98" y="373" width="124" height="45" rx="2" fill="#bfdbfe" stroke="#3498db" stroke-width="1.5"/>
+<text x="160" y="390" text-anchor="middle" font-size="6" fill="#1e40af" font-weight="600">Kingsbottle KBU56ASD</text>
+<text x="160" y="402" text-anchor="middle" font-size="5" fill="#1e40af">36" cooler below (fridge wall)</text>
+<text x="160" y="440" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">24"</text>
+<rect x="225" y="257" width="7" height="163" fill="#faf8f4" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+<!-- ZONE 2: Traeger -->
+<rect x="338" y="126" width="68" height="14" rx="7" fill="#e74c3c" opacity="0.85"/>
+<text x="372" y="136" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 2</text>
+<rect x="238" y="140" width="269" height="280" rx="5" fill="#fecaca" stroke="#e74c3c" stroke-width="2"/>
+<rect x="245" y="146" width="255" height="115" rx="4" fill="#fca5a5" stroke="#dc2626" stroke-width="1"/>
+<text x="372" y="180" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="700">Traeger Timberline</text>
+<text x="372" y="195" text-anchor="middle" font-size="8" fill="#991b1b">TBB86RLG — 880 sq in</text>
+<text x="372" y="209" text-anchor="middle" font-size="8" fill="#991b1b">WiFi + MEATER | Super Smoke</text>
+<text x="372" y="223" text-anchor="middle" font-size="8" fill="#991b1b">165-500°F pellet grill</text>
+<text x="372" y="237" text-anchor="middle" font-size="7" fill="#991b1b">ELECTRIC — no LP · 120V GFCI CKT 4</text>
+<rect x="245" y="279" width="255" height="70" rx="3" fill="#fee2e2" stroke="#dc2626" stroke-width="1" stroke-dasharray="4,2"/>
+<text x="372" y="305" text-anchor="middle" font-size="9" fill="#991b1b" font-weight="600">SELF-CONTAINED BASE</text>
+<text x="372" y="320" text-anchor="middle" font-size="8" fill="#991b1b">built-in storage doors</text>
+<text x="372" y="334" text-anchor="middle" font-size="7" fill="#64748b">no external cabinet needed</text>
+<rect x="245" y="355" width="255" height="25" rx="2" fill="#fecdd3" stroke="#dc2626" stroke-width="1"/>
+<text x="372" y="371" text-anchor="middle" font-size="7" fill="#991b1b">BAC682 trim kit — kickplate + leveling feet</text>
+<rect x="245" y="383" width="255" height="37" rx="2" fill="#fee2e2" stroke="#dc2626" stroke-width="0.8"/>
+<text x="372" y="400" text-anchor="middle" font-size="7" fill="#991b1b">pellet hopper + EZ-Clean ash keg</text>
+<text x="372" y="412" text-anchor="middle" font-size="7" fill="#64748b">access from front</text>
+<text x="372" y="440" text-anchor="middle" font-size="9" fill="#e74c3c" font-weight="700">39.3"</text>
+<rect x="510" y="257" width="7" height="163" fill="#faf8f4" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+<!-- ZONE 3: Coyote C3FTG30 flat top (REPLACES BLACKSTONE) -->
+<rect x="589" y="146" width="71" height="14" rx="7" fill="#0d9488" opacity="0.85"/>
+<text x="624" y="156" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 3</text>
+<rect x="521" y="160" width="207" height="88" rx="4" fill="#a7f3d0" stroke="#0d9488" stroke-width="2"/>
+<rect x="528" y="165" width="193" height="35" rx="6" fill="#5eead4" stroke="#0f766e" stroke-width="1"/>
+<text x="624" y="186" text-anchor="middle" font-size="9" fill="#0f766e" font-weight="600">SS lid (included)</text>
+<text x="624" y="210" text-anchor="middle" font-size="11" fill="#0f766e" font-weight="700">Coyote C3FTG30LP</text>
+<text x="624" y="224" text-anchor="middle" font-size="8" fill="#0f766e">30" Flat Top — 400 sq in, dual zone</text>
+<text x="624" y="237" text-anchor="middle" font-size="7" fill="#0f766e">2× 17K BTU = 34K total · 3/8" flare LP</text>
+<rect x="521" y="259" width="207" height="50" rx="3" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5" opacity="0.85"/>
+<text x="624" y="278" text-anchor="middle" font-size="8" fill="#0f766e" font-weight="600">Coyote C3JAKTFT insulating jacket</text>
+<text x="624" y="291" text-anchor="middle" font-size="7" fill="#0f766e">Cavity: 30¾"W × 22⅛"D × 11"H — 304 SS</text>
+<text x="624" y="302" text-anchor="middle" font-size="7" fill="#0f766e" font-style="italic">required for non-combustible install</text>
+<rect x="521" y="313" width="207" height="107" rx="3" fill="#e8e0d4" stroke="#94a3b8" stroke-width="2"/>
+<line x1="624" y1="317" x2="624" y2="416" stroke="#94a3b8" stroke-width="1"/>
+<circle cx="618" cy="367" r="3" fill="#94a3b8" opacity="0.5"/>
+<circle cx="631" cy="367" r="3" fill="#94a3b8" opacity="0.5"/>
+<text x="624" y="350" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">BI-3024-2D</text>
+<text x="624" y="365" text-anchor="middle" font-size="8" fill="#475569">30" double door</text>
+<text x="624" y="385" text-anchor="middle" font-size="7" fill="#64748b">storage + GFCI E4 inside</text>
+<text x="624" y="440" text-anchor="middle" font-size="9" fill="#0d9488" font-weight="700">30.75"</text>
+<rect x="730" y="257" width="7" height="163" fill="#faf8f4" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+<!-- ZONE 4: Coyote C1PB power burner + C1SLV -->
+<rect x="803" y="146" width="73" height="14" rx="7" fill="#0f766e" opacity="0.85"/>
+<text x="839" y="156" text-anchor="middle" font-size="8" fill="white" font-weight="700">ZONE 4</text>
+<rect x="739" y="160" width="191" height="88" rx="4" fill="#5eead4" stroke="#0f766e" stroke-width="2"/>
+<rect x="746" y="165" width="177" height="35" rx="4" fill="#2dd4bf" stroke="#115e59" stroke-width="1"/>
+<text x="835" y="186" text-anchor="middle" font-size="10" fill="#115e59" font-weight="700">Coyote C1PB</text>
+<text x="835" y="210" text-anchor="middle" font-size="9" fill="#115e59" font-weight="700">60K BTU power burner</text>
+<text x="835" y="224" text-anchor="middle" font-size="8" fill="#0f766e">Gen 1 SKU (=C3PB) · 24"W head · LP 3/8"</text>
+<text x="835" y="237" text-anchor="middle" font-size="7" fill="#e74c3c" font-weight="600">LP 60K · east drop · CJAKTC1PB jacket</text>
+<rect x="739" y="259" width="191" height="50" rx="3" fill="#5eead4" stroke="#0f766e" stroke-width="1.5"/>
+<text x="835" y="278" text-anchor="middle" font-size="8" fill="#115e59" font-weight="700">C1SLV insert sleeve</text>
+<text x="835" y="291" text-anchor="middle" font-size="7" fill="#0f766e">27.25"W × 29.6"H × 25.2"D · 304 SS</text>
+<text x="835" y="302" text-anchor="middle" font-size="7" fill="#0f766e">integrated soft-close drawer</text>
+<rect x="739" y="313" width="191" height="107" rx="3" fill="#e8e0d4" stroke="#94a3b8" stroke-width="2"/>
+<text x="835" y="345" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">C1SLV storage drawer</text>
+<text x="835" y="360" text-anchor="middle" font-size="8" fill="#475569">soft-close · full-extension</text>
+<text x="835" y="380" text-anchor="middle" font-size="7" fill="#64748b">integrated with sleeve</text>
+<text x="835" y="440" text-anchor="middle" font-size="9" fill="#0f766e" font-weight="700">27.25"</text>
+<rect x="930" y="257" width="14" height="163" fill="#fef9c3" stroke="#facc15" stroke-width="0.8" stroke-dasharray="2,2"/>
+<text x="937" y="345" text-anchor="middle" font-size="6" fill="#a16207" font-weight="600" transform="rotate(-90,937,345)">~2" gap</text>
+
+<rect x="944" y="248" width="22" height="177" rx="2" fill="#7c5c3c" stroke="#5c3d2e" stroke-width="1.5"/>
+<text x="955" y="330" text-anchor="middle" font-size="5" fill="white" font-weight="700" transform="rotate(-90,955,330)">6×6 POST</text>
+
+<line x1="60" y1="458" x2="970" y2="458" stroke="#64748b" stroke-width="1"/>
+<line x1="60" y1="452" x2="60" y2="464" stroke="#64748b" stroke-width="1"/>
+<line x1="970" y1="452" x2="970" y2="464" stroke="#64748b" stroke-width="1"/>
+<text x="515" y="476" text-anchor="middle" font-size="12" fill="#334155" font-weight="700">130" total</text>
+<line x1="48" y1="253" x2="48" y2="420" stroke="#64748b" stroke-width="1"/>
+<line x1="42" y1="253" x2="54" y2="253" stroke="#64748b" stroke-width="1"/>
+<line x1="42" y1="420" x2="54" y2="420" stroke="#64748b" stroke-width="1"/>
+<text x="34" y="342" text-anchor="middle" font-size="8" fill="#64748b" font-weight="600" transform="rotate(-90,34,342)">40" counter ht</text>
+
+<rect x="60" y="492" width="910" height="80" rx="6" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+<text x="515" y="508" text-anchor="middle" font-size="10" fill="#64748b" font-weight="600">North → South | All-Coyote cooking run | ~2" residual gap south of C1SLV (improvement vs prior 0.7") | Smoke vents east</text>
+<rect x="70" y="520" width="12" height="10" rx="2" fill="#2d2d2d" stroke="#1a1a1a" stroke-width="1"/>
+<text x="88" y="529" font-size="9" fill="#444">IR sear (in overlap)</text>
+<rect x="190" y="520" width="12" height="10" rx="2" fill="#fecaca" stroke="#e74c3c" stroke-width="1"/>
+<text x="208" y="529" font-size="9" fill="#444">Pellet grill</text>
+<rect x="275" y="520" width="12" height="10" rx="2" fill="#a7f3d0" stroke="#0d9488" stroke-width="1"/>
+<text x="293" y="529" font-size="9" fill="#444">Coyote flat top + jacket</text>
+<rect x="410" y="520" width="12" height="10" rx="2" fill="#5eead4" stroke="#0f766e" stroke-width="1"/>
+<text x="428" y="529" font-size="9" fill="#444">Coyote pwr brnr + C1SLV</text>
+<rect x="565" y="520" width="12" height="10" rx="2" fill="#e8e0d4" stroke="#94a3b8" stroke-width="1"/>
+<text x="583" y="529" font-size="9" fill="#444">Cabinet</text>
+<rect x="640" y="520" width="12" height="10" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+<text x="658" y="529" font-size="9" fill="#444">Overlap</text>
+<rect x="715" y="520" width="12" height="10" rx="2" fill="#7c5c3c" stroke="#5c3d2e" stroke-width="1"/>
+<text x="733" y="529" font-size="9" fill="#444">Post</text>
+<text x="515" y="548" text-anchor="middle" font-size="9" fill="#334155" font-weight="600">Cooking run: IR · Traeger · Coyote flat top · Coyote pwr brnr — all-Coyote cooking line, 104K BTU LP, single east drop</text>
+<text x="515" y="562" text-anchor="middle" font-size="8" fill="#0f766e" font-style="italic">Visual & functional cohesion: matched Coyote knobs, bezels, gradient lighting across both Coyote heat sources</text>
+</svg>
+</div>
+
+<div class="callout callout-blue" style="margin-top:16px">
+<strong>What changed (4/30 swap):</strong> Blackstone 28" XL griddle (32.75"W appliance, 38.75"W jacket cavity) → Coyote C3FTG30LP 30" flat top (30"W appliance, 30¾"W jacket cavity). <strong>Net width recovered: ~8".</strong> Allocated to a more comfortable ~2" gap between the C1SLV sleeve and the 6&times;6 post. LP load stepped up from 25K → 34K on this zone, total east branch now 104K BTU (still well within 3/4" black iron capacity). Cabinet under the flat top down-sized from BI-3624-2D 36" → BI-3024-2D 30" to align with the smaller appliance footprint.
+</div>
+
+<div class="callout callout-green" style="margin-top:16px">
+<strong>Pre-install checklist — cooking run:</strong><br><br>
+&#9744; <strong>Tristan to optimize gapping in the field</strong> — ~5" total gap budget across 4 gaps + 2" residual south of C1SLV (much improved vs prior plan).<br>
+&#9744; <strong>Install island ventilation panels — propane vents go LOW</strong> (LP is heavier than air).<br>
+&#9744; <strong>Install blocking under all bottom track runs</strong> — heaviest zone is Traeger (252 lbs). Coyote flat top is 120 lbs.<br>
+&#9744; <strong>Confirm post location:</strong> 6&times;6 wood, north face at 130" line, east face 26" from east deck edge.<br>
+&#9744; <strong>Template countertop only AFTER all rough-ins AND both jacket installs complete</strong> — C3JAKTFT (flat top) + C1SLV (power burner) must both be in place before Bayview templates.<br>
+&#9744; <strong>Confirm both Coyote jackets on hand before framing closes:</strong> C3JAKTFT (Coyote BDRCG#3348) + CJAKTC1PB (separate Coyote-direct order).
+</div>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 16px">Appliance zones (north to south)</h3>
+
+<table class="spec-table">
+<caption>Cooking run — 4 heat sources on the east wall (all-Coyote)</caption>
+<thead>
+<tr><th>Zone</th><th>Appliance</th><th>Width</th><th>Gas</th><th>Electrical</th><th>Key spec</th><th>Manual</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td class="zc-ir">1 (north, in fridge overlap)</td>
+  <td><strong>Napoleon BIB10IRPMK</strong> matte black IR sear</td>
+  <td>13.5" (10" cutout)</td>
+  <td>LP 3/8" flare, 10K BTU</td>
+  <td>110V for SafetyGlow knobs (N370-1091-SER power supply)</td>
+  <td>Sunk into fridge overlap counter, thermal break assembly above KBU56ASD</td>
+  <td><a class="manual-link" data-model="BIB10IRPMK"></a></td>
+</tr>
+<tr>
+  <td class="zc-traeger">2 (middle-north)</td>
+  <td><strong>Traeger Timberline TBB86RLG</strong> pellet grill</td>
+  <td>39.3"</td>
+  <td>None — 100% electric</td>
+  <td>Dedicated 120V GFCI</td>
+  <td>Self-contained base + BAC682 trim kit. No Napoleon cabinets. 252 lbs — sister joists required.</td>
+  <td><a class="manual-link" data-model="TBB86RLG"></a></td>
+</tr>
+<tr>
+  <td class="zc-flattop">3 (middle-south)</td>
+  <td><strong>Coyote C3FTG30LP</strong> 30" flat top + <strong>C3JAKTFT</strong> jacket</td>
+  <td>30" appliance / 30.75" jacket cavity</td>
+  <td>LP 3/8" flare, 34K BTU (2× 17K dual-burner)</td>
+  <td>120V (low-amp, ~50W for lit knobs only)</td>
+  <td>Cutout 27¼"W × 20½"D × 10¼"H. Jacket cavity 30¾"W × 22⅛"D × 11"H. 304 SS, included SS lid, 120 lbs.</td>
+  <td><a class="manual-link" data-model="C3FTG30"></a> <a class="manual-link" data-model="C3JAKTFT"></a></td>
+</tr>
+<tr>
+  <td class="zc-coyote">4 (south, bar-adjacent)</td>
+  <td><strong>Coyote C1PB</strong> power burner in <strong>C1SLV</strong> sleeve + <strong>CJAKTC1PB</strong> jacket</td>
+  <td>27.25" sleeve; 24" appliance</td>
+  <td>LP 3/8" flare, 60K BTU (8K simmer floor)</td>
+  <td>120V GFCI for ignition</td>
+  <td>C1PB = Gen 1 SKU; same physical unit as C3PB/C3PBLP. C1SLV cutout 26.25"W × 29.5"H × 24"D. CJAKTC1PB jacket cavity 11"H × 22⅛"W × 21⅞"D.</td>
+  <td><a class="manual-link" data-model="C1PB"></a> <a class="manual-link" data-model="C1SLV"></a> <a class="manual-link" data-model="CJAKTC1PB"></a></td>
+</tr>
+</tbody>
+</table>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 12px">Zone detail</h3>
+
+<h4 class="zone-head zc-ir">Zone 1 — Napoleon BIB10IRPMK IR sear (in fridge overlap)</h4>
+<table class="meta-table">
+<tr><td>Gas</td><td>LP 3/8" flare with individual shutoff. 10K BTU.</td></tr>
+<tr><td>Electrical</td><td>110V for SafetyGlow knobs via N370-1091-SER power supply kit.</td></tr>
+<tr><td>Heat shield</td><td>Steel-stud + cement-board walls = non-combustible assembly. Zero clearance to combustibles.</td></tr>
+<tr><td>Thermal break (required)</td><td>Cement board shelf on steel angle brackets + 1" ceramic fiber blanket + 2-3" air gap above cooler top, venting rearward through a 4"&times;12" rear-wall slot to open deck air.</td></tr>
+<tr><td>Below-counter</td><td>Thermal break assembly above KBU56ASD cooler. N370-1091-SER power supply mounts inside the KB cabinet below the shelf.</td></tr>
+</table>
+
+<h4 class="zone-head zc-traeger">Zone 2 — Traeger Timberline TBB86RLG (39.3"W)</h4>
+<table class="meta-table">
+<tr><td>Gas</td><td>NONE — 100% electric (pellet). No LP connection.</td></tr>
+<tr><td>Electrical</td><td>Dedicated 120V GFCI for the pellet grill.</td></tr>
+<tr><td>Self-contained base</td><td>Built-in double-wall storage doors, pellet hopper, EZ-Clean ash keg. No external Napoleon cabinets needed. BAC682 trim kit for built-in placement.</td></tr>
+<tr><td>Weight</td><td>252 lbs. Blocking and sistered joists required.</td></tr>
+</table>
+
+<h4 class="zone-head zc-flattop">Zone 3 — Coyote C3FTG30LP flat top grill + C3JAKTFT jacket (30.75"W jacket cavity)</h4>
+<table class="meta-table">
+<tr><td>Replaces</td><td><strong>Replaces Blackstone 28" XL griddle</strong> (cancelled from BBQGuys order N219266020C on 4/30). Functional equivalent — flat-top griddle for breakfast, smash burgers, fajitas, stir-fry.</td></tr>
+<tr><td>Appliance</td><td>Coyote C3FTG30LP — 30"W &times; 25.5"D &times; 13.5"H. 400 sq in cooking surface. 304 SS body + included SS lid. 120 lbs. Dual independent heat zones (2 burners).</td></tr>
+<tr><td>Gas</td><td>LP from east wall drop. <strong>3/8" flare</strong> at the stub. <strong>Note:</strong> Coyote uses standard 3/8" flare — simpler than the Blackstone-specific QCC-cord situation that previously required plumber coordination. Total dual-burner output: 34,000 BTU (2 &times; 17K).</td></tr>
+<tr><td>Electrical</td><td>120V low-amp circuit (~50W) for lit knobs / gradient bezels only. The burners themselves are not electric. Shared circuit OK.</td></tr>
+<tr><td>Jacket</td><td><strong>Coyote C3JAKTFT insulated jacket REQUIRED.</strong> 304 SS. Cavity (framing opening): <strong>30¾"W &times; 22⅛"D &times; 11"H</strong>. Appliance cutout (within jacket): 27¼"W &times; 20½"D &times; 10¼"H. Frame opening to jacket dimensions; jacket creates the appliance cutout.</td></tr>
+<tr><td>Safety</td><td>Built-in thermocouple safety valve — gas auto-shuts off if flame goes out.</td></tr>
+<tr><td>Cabinet below</td><td>Napoleon BI-3024-2D 30" double door (down-sized from BI-3624-2D to align with the smaller 30" appliance footprint).</td></tr>
+</table>
+
+<h4 class="zone-head zc-coyote">Zone 4 — Coyote C1PB power burner in C1SLV insert sleeve + CJAKTC1PB jacket (south, bar-adjacent)</h4>
+<table class="meta-table">
+<tr><td>Note on SKU</td><td><strong>C1PB</strong> is the Gen 1 SKU for the same physical 24" 60K BTU dual-valve power burner that ships under the <strong>C3PB / C3PBLP</strong> SKU. Resellers conflate the two. Re-sourced to Coyote-direct (BDRCG#3349) when the BBQGuys C3PBLP shipped late (May 29) and was at risk for the June 1 deadline.</td></tr>
+<tr><td>Location</td><td>South end of the east cooking run, between the Coyote C3FTG30 flat top and the 6&times;6 post.</td></tr>
+<tr><td>Gas</td><td>LP 3/8" flare fitting with individual shutoff. Tees from east wall 104K BTU supply. East branch: flat top 34K + IR 10K + power burner 60K = 104K BTU total.</td></tr>
+<tr><td>Electrical</td><td>120V GFCI outlet for electronic ignition. Share circuit with C3FTG30 lit knobs if amp budget allows.</td></tr>
+<tr><td>Enclosure</td><td><strong>C1SLV insert sleeve</strong> — 304 SS complete enclosure with integrated soft-close storage drawer. Overall 27.25"W &times; 29.6"H &times; 25.2"D. Cutout 26.25"W &times; 29.5"H &times; 24"D.</td></tr>
+<tr><td>Jacket</td><td><strong>CJAKTC1PB power burner jacket</strong> — required for non-combustible install. Overall 11"H &times; 24⅞"W &times; 22¾"D. Jacket cavity 11"H &times; 22⅛"W &times; 21⅞"D. Compatible with both C1PB and C3PB.</td></tr>
+<tr><td>Framing + clearance</td><td>Steel-stud + cement-board walls satisfy zero-clearance spec. Gap to flat top jacket on north side ~1". Gap to 6&times;6 post on south side ~2" (improved from prior 0.7").</td></tr>
+<tr><td><span class="warn">Counter seam planning</span></td><td>Coordinate with Bayview Concrete during template session — multiple jacket cutouts in close proximity on this zone.</td></tr>
+</table>
+</div>
+
+<!-- ============ TAB 5: BAR ELEVATION (UNCHANGED — bar doesn't touch the cooking run swap) ============ -->
+<div class="panel" id="panel-elev-bar">
+<h2 class="section-title">157" Bar peninsula — elevation view</h2>
+<p class="view-subtitle">Standing inside the kitchen, looking south at the bar's kitchen side. 25" overlap + 3×30" cabinets + 18" hose bib cabinet + 24" east extension = 157" total. No changes from previous version — bar doesn't touch the cooking run swap.</p>
+
+<table class="spec-table">
+<caption>Bar peninsula (south) — 157" total</caption>
+<thead><tr><th>Zone</th><th>Item</th><th>Width</th><th>Contents / purpose</th><th>Manual</th></tr></thead>
+<tbody>
+<tr><td class="zc-post">1 (west)</td><td>Overlap (6&times;6 post corner)</td><td>25"</td><td>Dead space at post end. No cutouts, no doors.</td><td><a class="manual-link none"></a></td></tr>
+<tr><td class="zc-bar">2</td><td><strong>Napoleon BI-3024-2D</strong> Cabinet 1</td><td>30"</td><td>Dry storage — bar tools, serving trays, towels.</td><td><a class="manual-link" data-model="BI-3024-2D"></a></td></tr>
+<tr><td class="zc-bar">3</td><td><strong>Napoleon BI-3024-2D</strong> Cabinet 2</td><td>30"</td><td>Bottles, mixers, glassware.</td><td><a class="manual-link" data-model="BI-3024-2D"></a></td></tr>
+<tr><td class="zc-bar">4</td><td><strong>Napoleon BI-3024-2D</strong> Cabinet 3</td><td>30"</td><td>Cleaning supplies, extra paper towels.</td><td><a class="manual-link" data-model="BI-3024-2D"></a></td></tr>
+<tr><td class="zc-hose">5</td><td><strong>Napoleon BI-1824-1D</strong> Cabinet 4</td><td>18"</td><td>Hose bib cabinet (east end). Cold water, shutoff, petcock, coiled hose.</td><td><a class="manual-link" data-model="BI-1824-1D"></a></td></tr>
+<tr><td class="zc-ext">6 (east)</td><td>East extension</td><td>24"</td><td>Open counter, no cabinet below. Final guest-side seat position.</td><td><a class="manual-link none"></a></td></tr>
+</tbody>
+</table>
+
+<div class="callout callout-green" style="margin-top:16px">
+<strong>Pre-install checklist — bar peninsula:</strong><br><br>
+&#9744; <strong>Anchoring:</strong> Bottom track through-bolted to deck at each partition, into joists.<br>
+&#9744; <strong>Internal vertical steel posts</strong> inside cabinet walls at each partition for lateral rigidity.<br>
+&#9744; <strong>Hose bib cabinet (Zone 5) floor pitched or drilled with drain hole.</strong><br>
+&#9744; <strong>Cantilever brackets/corbels under the 11" guest-side overhang at 24" o.c.</strong>
+</div>
+</div>
+
+<!-- ============ TAB: UTILITIES (UPDATED LP LOAD) ============ -->
+<div class="panel" id="panel-utilities">
+<h2 class="section-title">Utilities and structure</h2>
+
+<table class="meta-table">
+<tr><td>Propane (LP) — <strong>104K BTU</strong>, 3/4" black iron from two 100-gal tanks</td><td><strong>Tanks:</strong> Two 100-gallon LP tanks feed a 3/4" black iron main line to the deck stub-out.<br><strong>Sizing:</strong> 104K BTU total is well under 3/4" pipe capacity at any practical run length — no sizing concerns.<br><strong>East branch (single drop):</strong> Coyote C3FTG30 flat top 34K + Napoleon IR 10K + Coyote C1PB power burner 60K = <strong>104K BTU</strong>. All three appliances on the cooking run. No LP on the west wall.<br>Traeger = electric pellet grill (no LP).<br><br><em>Updated 4/30: was 95K BTU when Blackstone griddle was at 25K. Coyote C3FTG30 brings 34K, raising east branch to 104K. Same 3/4" pipe handles it cleanly.</em></td></tr>
+<tr><td>Water / drain</td><td>Through west wall at window center. Hot/cold + drain for Ruvati RVH8310 sink. Scotsman tees off cold with accessible shutoff + inline 1/4" water filter (change every 6 months). Ice maker drain: 3/4" OD flexible tubing, min 1/4"/ft slope, freeze-protected. Hose bib on bar east end (cold only, Cabinet 4).</td></tr>
+<tr><td>Electrical — 4 dedicated circuits</td><td>1. KB 36" — 20A ded. 2. Summit freezer — 20A ded. 3. Scotsman — 15A ded. 4. Traeger pellet grill — 120V GFCI ded.<br><strong>Shared/non-dedicated:</strong> Coyote C3FTG30 — 120V (~50W lit knobs). Coyote C1PB — 120V GFCI ignition. Napoleon IR — 110V SafetyGlow. TV outlet (recessed, east end). GFCI work zones. LED strips (CKT on W4 with Cas&eacute;ta dimmer).</td></tr>
+<tr><td>Framing</td><td><strong>3-5/8" 20-gauge steel studs at 16" o.c. throughout, all walls.</strong> Cement board sheathing. Non-combustible assembly. Coyote C3JAKTFT jacket installed in flat top zone, C1SLV insert sleeve + CJAKTC1PB jacket installed in power burner zone.</td></tr>
+<tr><td>LED under-bar lighting</td><td>Armacost RibbonFlex Pro 24VDC IP65 outdoor warm-white. 61 linear ft total. 2&times; Magnitude M150L24DC-AR TRIAC-dimmable 24V/150W IP67 drivers. Lutron Cas&eacute;ta PD-6WCL at W4.</td></tr>
+<tr><td>Post position</td><td>6&times;6 wood post at SW corner. North face at 130" line. East face 26" from east deck edge. Through-bolted to stringers.</td></tr>
+<tr><td>Deck loading</td><td>Traeger: 252 lbs. Coyote C3FTG30: ~120 lbs (was Blackstone at ~150 lbs — slight load reduction). KB 36" + Summit freezer = ~335 lbs combined on fridge wall. Blocking under all bottom tracks. Sister 2-3 joists under fridge wall.</td></tr>
+<tr><td>TV mount (articulating)</td><td>SunBriteTV SB-WM-ART2-L-BL — dual-arm, 30" extension, 180&deg; swivel, 150-lb capacity. EAST end of 55" house wall. Base center 60" AFF. 3/4" plywood backer panel before cement board.</td></tr>
+</table>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:24px 0 12px">Utility product manuals</h3>
+<table class="spec-table">
+<thead><tr><th>Product</th><th>Model</th><th>Manual</th></tr></thead>
+<tbody>
+<tr><td>LED strip</td><td>Armacost RibbonFlex Pro 24VDC IP65</td><td><a class="manual-link" data-model="RibbonFlex-Pro"></a></td></tr>
+<tr><td>LED driver</td><td>Magnitude M150L24DC-AR</td><td><a class="manual-link" data-model="M150L24DC-AR"></a></td></tr>
+<tr><td>Dimmer</td><td>Lutron Cas&eacute;ta PD-6WCL</td><td><a class="manual-link" data-model="PD-6WCL"></a></td></tr>
+<tr><td>TV</td><td>SunBrite Veranda 3 SB-V3-55-4KHDR-BL</td><td><a class="manual-link" data-model="SB-V3-55-4KHDR-BL"></a></td></tr>
+<tr><td>TV mount</td><td>SunBriteTV SB-WM-ART2-L-BL</td><td><a class="manual-link" data-model="SB-WM-ART2-L-BL"></a></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============ TAB: CABINETS (UPDATED — flat top + cabinet swap) ============ -->
+<div class="panel" id="panel-cabinets">
+<h2 class="section-title">Below-counter cabinet plan — all walls</h2>
+<p class="view-subtitle">Below-counter cabinets by wall. <strong>Updated 4/30:</strong> Cabinet under flat top zone down-sized from BI-3624-2D (36") to BI-3024-2D (30") to align with Coyote C3FTG30 30" appliance. Coyote C1SLV insert sleeve + CJAKTC1PB jacket at the south end of the east cooking run.</p>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin-bottom:12px">Window wall (west) — below-counter</h3>
+<table class="spec-table">
+<thead><tr><th>Width</th><th>Zone</th><th>Cabinet</th><th>Notes</th><th>Manual</th></tr></thead>
+<tbody>
+<tr><td class="zc-prep">24"</td><td>Open prep counter (south end)</td><td>—</td><td>No appliance, no cabinet doors. Solid counter over framed steel-stud base.</td><td><a class="manual-link none"></a></td></tr>
+<tr><td class="zc-trash">18"</td><td>Trash pull-out</td><td><strong>Napoleon BI-1824-1W</strong></td><td>Full-height pull-out. Dual bins + paper towel drawer.</td><td><a class="manual-link" data-model="BI-1824-1W"></a></td></tr>
+<tr><td class="zc-sink">30"</td><td>Ruvati RVH8310 Roma workstation sink</td><td><strong>Napoleon BI-3024-2D</strong></td><td>30" double door. Plumbing access.</td><td><a class="manual-link" data-model="BI-3024-2D"></a></td></tr>
+<tr><td class="zc-ice">15"</td><td>Scotsman SRCG065A-1SS</td><td>—</td><td>Self-closing unit door. 15" opening.</td><td><a class="manual-link" data-model="SRCG065A-1SS"></a></td></tr>
+</tbody>
+</table>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 12px">Cooking run (east) — below-counter <em style="font-weight:400;color:#0d9488">(all-Coyote, updated 4/30)</em></h3>
+<table class="spec-table">
+<thead><tr><th>Width</th><th>Zone</th><th>Cabinet</th><th>Notes</th><th>Manual</th></tr></thead>
+<tbody>
+<tr><td class="zc-dead">24"</td><td>Fridge overlap — counter only</td><td>—</td><td>Blocked. KBU56ASD sits on fridge wall below. Napoleon IR sunk into this overlap counter (thermal break assembly required).</td><td><a class="manual-link none"></a></td></tr>
+<tr><td class="zc-traeger">39.3"</td><td>Traeger Timberline TBB86RLG</td><td>Self-contained base</td><td>BAC682 trim kit. No Napoleon doors needed.</td><td><a class="manual-link" data-model="TBB86RLG"></a></td></tr>
+<tr><td class="zc-flattop">30"</td><td><strong>Coyote C3FTG30LP</strong> flat top + <strong>C3JAKTFT</strong> jacket</td><td><strong>Napoleon BI-3024-2D</strong></td><td><strong>Down-sized from BI-3624-2D (36").</strong> 30" double door aligns cleanly with 30" appliance footprint. Houses GFCI convenience outlet <strong>E4</strong> on rear wall for small appliances.</td><td><a class="manual-link" data-model="BI-3024-2D"></a></td></tr>
+<tr><td class="zc-ir">13.5"</td><td>Napoleon IR (in fridge overlap)</td><td>—</td><td>No dedicated cabinet. IR sinks into the fridge-overlap counter. Thermal break assembly above KBU56ASD cooler. Napoleon N370-1091-SER power supply mounts inside the KB cabinet below the shelf.</td><td><a class="manual-link" data-model="BIB10IRPMK"></a></td></tr>
+<tr><td class="zc-coyote">27.25"</td><td>Coyote C1PB + C1SLV sleeve + CJAKTC1PB jacket</td><td>C1SLV integrated drawer</td><td>C1SLV sleeve integrated storage drawer — soft-close, full-extension, 304 SS. Built into sleeve.</td><td><a class="manual-link" data-model="C1SLV"></a> <a class="manual-link" data-model="CJAKTC1PB"></a></td></tr>
+</tbody>
+</table>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 12px">Bar peninsula (south) — below-counter (157" total)</h3>
+<table class="spec-table">
+<thead><tr><th>Width</th><th>Zone</th><th>Cabinet</th><th>Notes</th><th>Manual</th></tr></thead>
+<tbody>
+<tr><td class="zc-post">25"</td><td>West overlap (post corner)</td><td>—</td><td>Counter only. 6&times;6 post at west edge.</td><td><a class="manual-link none"></a></td></tr>
+<tr><td class="zc-bar">30"</td><td>Cabinet 1</td><td><strong>Napoleon BI-3024-2D</strong></td><td>Dry storage — bar tools, serving trays.</td><td><a class="manual-link" data-model="BI-3024-2D"></a></td></tr>
+<tr><td class="zc-bar">30"</td><td>Cabinet 2</td><td><strong>Napoleon BI-3024-2D</strong></td><td>Bottles, mixers, glassware.</td><td><a class="manual-link" data-model="BI-3024-2D"></a></td></tr>
+<tr><td class="zc-bar">30"</td><td>Cabinet 3</td><td><strong>Napoleon BI-3024-2D</strong></td><td>Cleaning supplies.</td><td><a class="manual-link" data-model="BI-3024-2D"></a></td></tr>
+<tr><td class="zc-hose">18"</td><td>Cabinet 4 (east end)</td><td><strong>Napoleon BI-1824-1D</strong></td><td>Hose bib + shutoff + petcock.</td><td><a class="manual-link" data-model="BI-1824-1D"></a></td></tr>
+<tr><td class="zc-ext">24"</td><td>East extension</td><td>—</td><td>Open counter, no cabinet below.</td><td><a class="manual-link none"></a></td></tr>
+</tbody>
+</table>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 12px">Connecting wall (SW, 45") — below-counter</h3>
+<table class="spec-table">
+<thead><tr><th>Width</th><th>Zone</th><th>Cabinet</th><th>Notes</th><th>Manual</th></tr></thead>
+<tbody>
+<tr><td class="zc-dog">~27"</td><td>Dog door (existing, built into wall)</td><td>—</td><td>Swings north and up. Barkley's path from house to deck.</td><td><a class="manual-link none"></a></td></tr>
+<tr><td class="zc-drawer">18"</td><td>Single drawer above dog door</td><td><strong>Napoleon BI-1808-1DR</strong></td><td>18"W × 8"H single drawer.</td><td><a class="manual-link" data-model="BI-1808-1DR"></a></td></tr>
+</tbody>
+</table>
+
+<div class="callout callout-blue" style="margin-top:24px"><strong>Net cabinet change (4/30):</strong> One cabinet swap on the cooking run — BI-3624-2D 36" → BI-3024-2D 30" under the new Coyote flat top. This means the BI-3624-2D originally ordered for that zone is now surplus and either (a) returns to BBQGuys for credit on the original N219266020C order, or (b) gets repurposed for storage somewhere else (the 30" run already has 4× BI-3024-2D in inventory between the bar and sink zones).</div>
+</div>
+
+<!-- ============ TAB: ELECTRICAL (UPDATED — flat top E1 spec) ============ -->
+<div class="panel" id="panel-electrical">
+<h2 class="section-title">Electrical Rough-In Plan</h2>
+<p class="view-subtitle">For Ryder Mulcahy · Electrician. <strong>Updated 4/30 to reflect Coyote C3FTG30 swap</strong> — E1 (flat top circuit) now feeds a Coyote unit with low-amp lit-knob load (~50W), not a Blackstone with electronic ignition + LED knobs + puddle lights.</p>
+
+<div class="metric-row" style="margin-top:16px">
+<div class="metric"><div class="lbl">Dedicated circuits</div><div class="num">4</div></div>
+<div class="metric"><div class="lbl">Total runs</div><div class="num">9</div></div>
+<div class="metric"><div class="lbl">240V circuits</div><div class="num">0</div></div>
+<div class="metric"><div class="lbl">Devices to place</div><div class="num">12</div></div>
+</div>
+
+<div class="callout callout-red" style="margin-top:8px"><strong>KEY RULE:</strong> All outdoor outlets must be GFCI protected per NEC. Weather-resistant in-use covers on all exposed outlets. All wiring rated for wet locations. Whidbey Island is coastal — use UV-resistant or marine-rated conduit.</div>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:28px 0 12px">Master circuit schedule</h3>
+<table class="spec-table">
+<thead><tr><th>CKT</th><th>Wall</th><th>Appliance</th><th>V</th><th>A</th><th>Type</th><th>GFCI</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Fridge (N)</td><td>Kingsbottle KBU56ASD 36" cooler</td><td>120V</td><td>20A</td><td>DED</td><td>Yes</td><td>Behind unit, 12" AFF</td></tr>
+<tr><td>2</td><td>Fridge (N)</td><td>Summit SPFF51OS2D freezer drawers</td><td>120V</td><td>20A</td><td>DED</td><td>Yes</td><td>Behind unit, 12" AFF</td></tr>
+<tr><td>3</td><td>Window (W)</td><td>Scotsman SRCG065A-1SS ice maker</td><td>115V</td><td>15A</td><td>DED</td><td>Yes</td><td>Max 126V. Behind unit, 12" AFF</td></tr>
+<tr><td>4</td><td>Cook Run (E)</td><td>Traeger Timberline pellet grill</td><td>120V</td><td>15A</td><td>DED</td><td>GFCI</td><td>12" AFF, 9.25" from L inside wall of Traeger bay</td></tr>
+<tr><td>5</td><td>Cook Run (E)</td><td><strong>Coyote C3FTG30LP flat top</strong></td><td>120V</td><td>Low (~50W)</td><td>Shared OK</td><td>Yes</td><td><strong>Updated 4/30:</strong> lit knobs + gradient bezels only. No electronic ignition (uses thermocouple safety valve). Behind jacket, 18" AFF.</td></tr>
+<tr><td>6</td><td>Cook Run — fridge overlap (N end)</td><td>Napoleon IR BIB10IRPMK</td><td>110V</td><td>Low</td><td>Shared OK</td><td>Yes</td><td>N370-1091-SER power supply mounts inside KBU56ASD cabinet below thermal break shelf.</td></tr>
+<tr><td>7</td><td>House (N)</td><td>SunBrite Veranda 3 55" TV</td><td>120V</td><td>Low</td><td>Shared</td><td>—</td><td>In-wall power kit. 60" AFF.</td></tr>
+<tr><td>8</td><td>All walls</td><td>LED strip lighting (~61 lin ft)</td><td>120V</td><td>Low</td><td>Shared</td><td>GFCI</td><td>Transformer in bar cab 1. Dimmer on W wall (W4).</td></tr>
+<tr><td>9</td><td>Multiple</td><td>GFCI convenience outlets</td><td>120V</td><td>Code</td><td>Per code</td><td>Yes</td><td>Weather covers.</td></tr>
+<tr><td>Shr</td><td>Cook Run (E)</td><td><strong>Coyote C1PB power burner ignition</strong></td><td>120V</td><td>Low</td><td>Shared OK</td><td>Yes</td><td>Shares with Coyote flat top circuit if amp budget allows; otherwise dedicated.</td></tr>
+</tbody>
+</table>
+<p style="font-size:12px;color:#666;margin-top:8px"><em>AFF = Above Finished Floor. DED = dedicated home run to panel. Both Coyote appliances on shared 120V — much lower combined load than the prior Blackstone (which had electronic ignition + LED knobs + dimmable puddle lights all running off CKT 5).</em></p>
+</div>
+
+<!-- ============ TAB: PRODUCTS (UPDATED) ============ -->
+<div class="panel" id="panel-products">
+<h2 class="section-title">Products — quick reference</h2>
+<p class="view-subtitle">Every appliance, cabinet, and material by location, with direct links to manuals. <strong>Updated 4/30:</strong> Cooking run is now all-Coyote.</p>
+
+<table class="spec-table">
+<thead><tr><th>Wall</th><th>Products (W→E / S→N)</th><th>Manuals</th></tr></thead>
+<tbody>
+<tr><td>Window wall (west)</td><td>Open prep counter · <strong>BI-1824-1W</strong> trash · <strong>Ruvati RVH8310</strong> sink + <strong>KRAUS KPF-1610SFS</strong> · <strong>BI-3024-2D</strong> · <strong>Scotsman SRCG065A-1SS</strong></td><td><a class="manual-link" data-model="BI-1824-1W"></a> <a class="manual-link" data-model="RVH8310"></a> <a class="manual-link" data-model="KPF-1610SFS"></a> <a class="manual-link" data-model="BI-3024-2D"></a> <a class="manual-link" data-model="SRCG065A-1SS"></a></td></tr>
+<tr><td>Fridge wall (north)</td><td><strong>Kingsbottle KBU56ASD</strong> · <strong>Summit SPFF51OS2D</strong> · <strong>SunBrite SB-V3-55</strong> on <strong>SB-WM-ART2-L-BL</strong> mount · LP stub-out</td><td><a class="manual-link" data-model="KBU56ASD"></a> <a class="manual-link" data-model="SPFF51OS2D"></a> <a class="manual-link" data-model="SB-V3-55-4KHDR-BL"></a> <a class="manual-link" data-model="SB-WM-ART2-L-BL"></a></td></tr>
+<tr><td>Cooking run (east) — <strong>all-Coyote (4/30)</strong></td><td><strong>Napoleon BIB10IRPMK</strong> + <strong>N370-1091-SER</strong> · <strong>Traeger TBB86RLG</strong> + <strong>BAC682</strong> · <strong>Coyote C3FTG30LP</strong> + <strong>C3JAKTFT</strong> jacket · <strong>Coyote C1PB</strong> + <strong>C1SLV</strong> sleeve + <strong>CJAKTC1PB</strong> jacket</td><td><a class="manual-link" data-model="BIB10IRPMK"></a> <a class="manual-link" data-model="N370-1091-SER"></a> <a class="manual-link" data-model="TBB86RLG"></a> <a class="manual-link" data-model="BAC682"></a> <a class="manual-link" data-model="C3FTG30"></a> <a class="manual-link" data-model="C3JAKTFT"></a> <a class="manual-link" data-model="C1PB"></a> <a class="manual-link" data-model="C1SLV"></a> <a class="manual-link" data-model="CJAKTC1PB"></a></td></tr>
+<tr><td>Bar peninsula (south)</td><td>3× <strong>BI-3024-2D</strong> cabinets · <strong>BI-1824-1D</strong> hose bib cabinet · 24" east extension</td><td><a class="manual-link" data-model="BI-3024-2D"></a> <a class="manual-link" data-model="BI-1824-1D"></a></td></tr>
+<tr><td>Connecting wall (SW)</td><td>Existing dog door · <strong>BI-1808-1DR</strong> drawer above dog door</td><td><a class="manual-link" data-model="BI-1808-1DR"></a></td></tr>
+<tr><td>LED lighting</td><td>Armacost <strong>RibbonFlex Pro</strong> · 2× Magnitude <strong>M150L24DC-AR</strong> drivers · Lutron <strong>PD-6WCL</strong> dimmer</td><td><a class="manual-link" data-model="RibbonFlex-Pro"></a> <a class="manual-link" data-model="M150L24DC-AR"></a> <a class="manual-link" data-model="PD-6WCL"></a></td></tr>
+<tr><td>Deck</td><td><strong>Trex Enhance</strong> Naturals 'Rocky Harbor' decking + <strong>Trex Hideaway</strong> fasteners</td><td><a class="manual-link" data-model="Trex-Enhance"></a> <a class="manual-link" data-model="Trex-Hideaway"></a></td></tr>
+</tbody>
+</table>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:24px 0 12px">Supplier contacts</h3>
+<table class="meta-table">
+<tr><td>BBQGuys</td><td>877-743-2269 · Original order #N219266020C (Napoleon, Summit, Scotsman). <strong>Blackstone items + C3PBLP cancelled 4/30.</strong></td></tr>
+<tr><td>Coyote-direct (CoyoteGrill.com / Brandster)</td><td>800-357-5044 · Order BDRCG#3349 (C1PB power burner, $1,764.82) · Order BDRCG#3348 (C3JAKTFT jacket, $783.72) · CJAKTC1PB power burner jacket re-ordered direct after BBQGuys cancellation. <strong>48-hour damage inspection window — open all crates immediately.</strong></td></tr>
+<tr><td>BBQGuys (additional Coyote order)</td><td>Order #N219374890C — Coyote C3FTG30LP flat top grill ($2,399). Ships 1-3 business days.</td></tr>
+<tr><td>Kingsbottle</td><td>562-464-7428 · Order KU24283 (KBU56ASD 36" cooler pre-order)</td></tr>
+<tr><td>Traeger</td><td>Amazon order · TBB86RLG + BAC682 trim kit</td></tr>
+<tr><td>SunBrite</td><td>SB-V3-55-4KHDR-BL 55" TV + SB-WM-ART2-L-BL articulating mount</td></tr>
+<tr><td>Bayview Concrete</td><td>Countertop vendor — template scheduled by May 12-13 (7-10 day fabrication)</td></tr>
+</table>
+</div>
+
+<!-- ============ SCHEDULE TAB (UPDATED ORDER STATUS + OPEN ITEMS) ============ -->
+<div class="panel" id="panel-schedule">
+<h2 class="section-title">Combined build schedule — June 1 hard deadline</h2>
+<p class="view-subtitle">Albatross outdoor kitchen + Sandy Hook deck resurfacing. <strong>Updated 4/30:</strong> All-Coyote cooking run swap reflected in order tracker and open items.</p>
+
+<style>
+.sched-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.sched-table th{text-align:left;font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.4px;padding:10px 12px;border-bottom:2px solid #e2e8f0;font-weight:700}
+.sched-table td{padding:10px 12px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+.sched-table .phase{font-weight:700;color:#1e40af;background:#eff6ff;border-left:3px solid #3b82f6}
+.sched-table .phase td{border-bottom:2px solid #bfdbfe}
+.sched-table .crit{color:#991b1b;font-weight:600}
+.sched-week{display:inline-block;font-size:10px;background:#f1f5f9;color:#475569;padding:2px 8px;border-radius:4px;font-weight:600;white-space:nowrap}
+.sched-week.crit{background:#fef2f2;color:#991b1b}
+.sched-week.done{background:#dcfce7;color:#166534}
+</style>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:24px 0 12px">Order Status Tracker — UPDATED 4/30</h3>
+<table class="spec-table">
+<thead><tr><th>Supplier</th><th>Key Items</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>BBQGuys (N219266020C)</td><td>Napoleon cabinets, Summit freezer, Scotsman ice maker</td><td class="ok">✓ ORDERED · partial cancellations 4/30 (see below)</td></tr>
+<tr><td><strong>BBQGuys cancellations 4/30</strong></td><td>Blackstone 28" XL griddle ($1,899) + Blackstone 6228 jacket ($499) + Blackstone cover ($130) + Coyote C3PBLP ($1,799) + CJAKTC1PB jacket ($449)</td><td class="warn">✓ CANCELLED · ~$4,776 refund processing</td></tr>
+<tr><td>BBQGuys (N219374890C)</td><td><strong>Coyote C3FTG30LP</strong> 30" flat top grill</td><td class="ok">✓ ORDERED 4/28 · $2,399 · ships 1-3 business days</td></tr>
+<tr><td>Coyote-direct (BDRCG#3349)</td><td><strong>Coyote C1PB</strong> power burner LP (Gen 1 SKU)</td><td class="ok">✓ ORDERED 4/30 · $1,764.82</td></tr>
+<tr><td>Coyote-direct (BDRCG#3348)</td><td><strong>Coyote C3JAKTFT</strong> insulated jacket (for flat top)</td><td class="ok">✓ ORDERED 4/30 · $783.72</td></tr>
+<tr><td>Coyote-direct (separate)</td><td><strong>Coyote CJAKTC1PB</strong> jacket (for power burner)</td><td class="ok">✓ ORDERED Coyote-direct · ships next week</td></tr>
+<tr><td>Kingsbottle (KU24283)</td><td>KBU56ASD 36" cooler</td><td class="warn">PRE-ORDER · no ETA — call 562-464-7428</td></tr>
+<tr><td>Home Depot (Deck)</td><td>151 Trex boards + Hideaway fasteners</td><td class="ok">✓ DELIVERED Apr 14</td></tr>
+<tr><td>Home Depot (Kitchen)</td><td>Ruvati RVH8310 + KRAUS faucet</td><td class="ok">✓ ORDERED · ⚠️ duplicate RVH8030 sink to cancel</td></tr>
+<tr><td>Traeger</td><td>TBB86RLG + BAC682 trim kit</td><td class="ok">✓ DELIVERED Apr 23</td></tr>
+<tr><td>SunBrite</td><td>55" Veranda 3 TV + SB-WM-ART2-L-BL articulating mount</td><td class="ok">✓ ORDERED</td></tr>
+<tr><td>Armacost / Magnitude / Lutron</td><td>LED system: RibbonFlex Pro 61 lf + 2× M150L24DC-AR drivers + PD-6WCL dimmer</td><td class="ok">✓ ORDERED</td></tr>
+</tbody>
+</table>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:32px 0 12px">Albatross Kitchen — open items <em style="font-weight:400;color:#64748b">(updated 4/30)</em></h3>
+<table class="spec-table">
+<thead><tr><th style="width:40px">#</th><th>Item</th><th>Detail</th><th>Owner · When</th></tr></thead>
+<tbody>
+<tr><td><strong class="warn">1</strong></td><td><strong>Confirm BBQGuys refunds posted</strong></td><td>Verify ~$4,776 in cancellations from N219266020C credit back to Mastercard ••0346 within 5-7 business days. If not posted by May 7, follow up.</td><td class="warn">EDDIE — by May 7</td></tr>
+<tr><td><strong class="warn">2</strong></td><td><strong>Inspect all Coyote-direct deliveries within 48 hours of receipt</strong></td><td>Brandster terms (CoyoteGrill.com) give only a 48-hour damage inspection window — much shorter than BBQGuys' 7 days. Open every crate immediately on delivery, photograph any dents/damage, file claims same-day. Affects: C3FTG30 (BBQGuys N219374890C), C1PB, C3JAKTFT jacket, CJAKTC1PB jacket.</td><td class="warn">EDDIE / TRISTAN — at delivery</td></tr>
+<tr><td><strong class="warn">3</strong></td><td><strong>Both Coyote jackets must be on-hand before framing closes</strong></td><td>C3JAKTFT (flat top jacket — cavity 30¾"W × 22⅛"D × 11"H) and CJAKTC1PB (power burner jacket — cavity 22⅛"W × 21⅞"D × 11"H) are both required for framing. Tristan can't close cement board until both are physically on site for fit verification.</td><td class="warn">EDDIE / TRISTAN — by May 5 (Phase 4 framing)</td></tr>
+<tr><td><strong class="warn">4</strong></td><td><strong>Cabinet swap on cooking run</strong></td><td>Down-size from BI-3624-2D (36") to BI-3024-2D (30") under flat top. Original BI-3624-2D either credit-back to BBQGuys or repurpose. Decide before Phase 8 appliance install.</td><td class="warn">EDDIE — decide by May 22</td></tr>
+<tr><td>5</td><td><strong>Coyote C1PB cutout — Tristan field confirmation</strong></td><td>C1SLV sleeve cutout: 26.25"W × 29.5"H × 24"D. CJAKTC1PB jacket cavity: 22⅛"W × 21⅞"D × 11"H. Stack the two correctly during framing.</td><td>TRISTAN — Phase 4</td></tr>
+<tr><td>6</td><td><strong>Cancel Ruvati RVH8030 (drop-in sink, duplicate)</strong></td><td>HD order WN55126788 contains both the duplicate drop-in RVH8030 ($449.10) and the KRAUS faucet ($214.95). Cancel just the sink line, keep the faucet — or cancel the whole order and re-order faucet separately.</td><td>EDDIE — this week</td></tr>
+<tr><td>7</td><td><strong>Dog door arc clearance — physical verification</strong></td><td>Tristan to verify arc clearance against framing during Phase 4.</td><td>TRISTAN — Phase 4</td></tr>
+<tr><td>8</td><td><strong>Countertop template — Bayview Concrete</strong></td><td>Vendor: Bayview Concrete. Template by May 12-13 for June 1 deadline (7-10 day fabrication). Coordinate jacket cutouts during template session.</td><td>EDDIE + TRISTAN — schedule by May 12</td></tr>
+<tr><td>9</td><td><strong>Kingsbottle KBU56ASD ship date</strong></td><td>Pre-order with no ETA. Call 562-464-7428 to push for freight schedule. Could become June 1 problem if not shipped by mid-May.</td><td>EDDIE — call this week</td></tr>
+</tbody>
+</table>
+
+<h3 style="font-size:16px;font-weight:700;color:#2c3e50;margin:32px 0 12px">What changed 4/30 — summary</h3>
+<table class="meta-table">
+<tr><td>Cooking run lineup</td><td>Was: IR + Traeger + Blackstone griddle + Coyote C3PBLP. Now: IR + Traeger + Coyote C3FTG30 flat top + Coyote C1PB power burner. <strong>All-Coyote.</strong></td></tr>
+<tr><td>LP load</td><td>Was: 95K BTU east branch (25K + 10K + 60K). Now: <strong>104K BTU</strong> (34K + 10K + 60K). Same 3/4" pipe.</td></tr>
+<tr><td>Cooking run gap budget</td><td>Was: ~3.7" total across 4 gaps (tight). Now: ~5" + 2" residual south of C1SLV (much improved).</td></tr>
+<tr><td>Cabinet under griddle zone</td><td>Was: BI-3624-2D 36". Now: BI-3024-2D 30".</td></tr>
+<tr><td>Plumbing simplification</td><td>Coyote uses standard 3/8" flare. Eliminates the Blackstone-specific QCC-cord workaround and built-in flex line negotiation with Marcelino.</td></tr>
+<tr><td>Net cost change</td><td>+$172 (new Coyote orders ~$4,948 minus ~$4,776 in BBQGuys cancellations — see Order Status Tracker above for line items).</td></tr>
+<tr><td>Aesthetic</td><td>Cooking run now visually + functionally cohesive — matched Coyote knobs, bezels, gradient lighting on both heat sources.</td></tr>
+<tr><td>Schedule risk</td><td><strong>Reduced.</strong> BBQGuys C3PBLP was at risk for May 29 ship date vs June 1 deadline. Coyote-direct C1PB (in stock) shipping Coyote-direct removes that risk. Coyote C3FTG30 ships 1-3 business days from BBQGuys.</td></tr>
+</table>
+</div>
+
+<script>
+var PRODUCT_MANUALS = {
+  'BIB10IRPMK': 'https://www.napoleon.com/sites/default/files/products/N415-0601-Built-In-Series-Manual-RevH.pdf',
+  'BI-3024-2D': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'BI-3624-2D': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'BI-1824-1W': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'BI-1824-1D': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'BI-1808-1DR': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'BI-1816-2DR': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'N370-1091-SER': 'https://napoleonproducts.com/outdoor-kitchen-components',
+  'TBB86RLG': 'https://cdn.shocho.co/sc-specsheets/Yosemite-Timberline-Build-In-Instructionsv04.pdf',
+  'BAC682': 'https://support.traeger.com/hc/en-us/articles/7650399651355-Timberline-Built-In-Trim-Kit-for-Outdoor-Kitchens',
+  'KBU56ASD': 'https://www.kingsbottle.com',
+  'SPFF51OS2D': 'https://www.summitappliance.com/document/273',
+  'SRCG065A-1SS': 'https://www.scotsman-ice.com/service/User%20Manuals/SRC065_user.pdf',
+  'C3FTG30': 'https://coyotegrill.com/products/coyote-30-flat-top-built-in-grill-c3ftg30',
+  'C3JAKTFT': 'https://coyotegrill.com/products/coyote-insulated-jacket-for-30-flat-top-grill-c3jaktft',
+  'C1PB': 'https://store.coyoteoutdoor.com/product/coyote-built-in-power-burner-c1pb/',
+  'C1SLV': 'https://coyotegrill.com/products/coyote-asado-smoker-insert-sleeve-c1slv',
+  'CJAKTC1PB': 'https://coyotegrill.com/products/coyote-insulated-jacket-for-24-power-burner-cjaktc1pb',
+  'C3PBLP': 'https://assets.ajmadison.com/ajmadison/itemdocs/coyote-burner-C3PBLP-use.pdf',
+  'RVH8310': 'https://www.ruvati.com/wp-content/uploads/C_Undermount_Workstation-6.pdf',
+  'KPF-1610SFS': 'https://www.kraususa.com/media/catalog/product/documentation/KPF-1610-FF-100-IM.pdf',
+  'SB-V3-55-4KHDR-BL': 'https://www.sunbritetv.com/content/Veranda3_Manual.pdf',
+  'SB-WM-ART2-L-BL': 'https://www.sunbritetv.com/manuals/',
+  'PD-6WCL': 'https://pdf.lowes.com/productdocuments/0214cf24-9a2f-494b-9c08-90ff33d807fb/66179110.pdf',
+  'RibbonFlex-Pro': 'https://manuals.plus/m/cebdef283081c91045da68f705b208626c7d74c33b4589ff84c2af90721539d9',
+  'M150L24DC-AR': 'https://manuals.plus/m/cebdef283081c91045da68f705b208626c7d74c33b4589ff84c2af90721539d9',
+  'Trex-Enhance': 'https://www.trex.com/academy/how-to-guides/all-guides/how-to-fasten-trex-enhance-decking/',
+  'Trex-Hideaway': 'https://documents.trex.com/is/content/Trex/trex-hideaway-universal-fasteners-aluminum-framing-install-instructionspdf.pdf'
+};
+
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('a.manual-link[data-model]').forEach(function(a){
+    var m = a.dataset.model;
+    var url = PRODUCT_MANUALS[m];
+    if(url){
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      if(!a.textContent.trim()) a.textContent = 'Manual';
+    } else {
+      a.classList.add('none');
+      a.textContent = '—';
+      a.removeAttribute('href');
+    }
+  });
+});
+
+function selectNav(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  var panel=document.getElementById('panel-'+id);
+  if(panel) panel.classList.add('active');
+  var sel=document.querySelector('.nav-select');
+  if(sel && sel.value!==id) sel.value=id;
+  var items=document.querySelectorAll('.nav-item');
+  var activeItem=null;
+  items.forEach(function(it){
+    if(it.dataset.panel===id){ it.classList.add('active'); activeItem=it; }
+    else it.classList.remove('active');
+  });
+  if(activeItem){
+    var trigger=document.querySelector('.nav-trigger');
+    trigger.querySelector('.nav-label').textContent=activeItem.textContent.trim();
+    trigger.classList.remove('v-overview','v-wall','v-sys','v-sched');
+    if(activeItem.classList.contains('v-overview')) trigger.classList.add('v-overview');
+    if(activeItem.classList.contains('v-wall'))     trigger.classList.add('v-wall');
+    if(activeItem.classList.contains('v-sys'))      trigger.classList.add('v-sys');
+    if(activeItem.classList.contains('v-sched'))    trigger.classList.add('v-sched');
+  }
+  closeNav();
+  if(window.innerWidth<=640 && panel) panel.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function toggleNav(e){
+  if(e) e.stopPropagation();
+  var menu=document.querySelector('.nav-menu');
+  var trigger=document.querySelector('.nav-trigger');
+  var isOpen=menu.classList.contains('open');
+  if(isOpen) closeNav();
+  else{
+    menu.classList.add('open');
+    trigger.classList.add('open');
+    trigger.setAttribute('aria-expanded','true');
+  }
+}
+function closeNav(){
+  var menu=document.querySelector('.nav-menu');
+  var trigger=document.querySelector('.nav-trigger');
+  if(menu) menu.classList.remove('open');
+  if(trigger){ trigger.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); }
+}
+document.addEventListener('click',function(e){
+  var dd=document.querySelector('.nav-dropdown');
+  if(dd && !dd.contains(e.target)) closeNav();
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closeNav();
+});
+document.addEventListener('DOMContentLoaded',function(){
+  var trigger=document.querySelector('.nav-trigger');
+  if(trigger){
+    trigger.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleNav(e); }
+    });
+  }
+});
+function showTab(el,id){ selectNav(id); }
+</script>
+
+</div>
+</body>
+</html>
